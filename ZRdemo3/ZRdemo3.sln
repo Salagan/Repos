@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZRdemo3", "ZRdemo3\ZRdemo3.csproj", "{E7887033-F7DF-48F6-8DEC-15AA4D053C88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZRdemoData", "ZRdemoData\ZRdemoData.csproj", "{0D759DD6-8D89-4773-8D49-5E6E10DBB953}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7887033-F7DF-48F6-8DEC-15AA4D053C88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7887033-F7DF-48F6-8DEC-15AA4D053C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7887033-F7DF-48F6-8DEC-15AA4D053C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7887033-F7DF-48F6-8DEC-15AA4D053C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D759DD6-8D89-4773-8D49-5E6E10DBB953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D759DD6-8D89-4773-8D49-5E6E10DBB953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D759DD6-8D89-4773-8D49-5E6E10DBB953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D759DD6-8D89-4773-8D49-5E6E10DBB953}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B7A0BAF-D360-4C0E-AF31-4DF5B0D0DED6}
+	EndGlobalSection
+EndGlobal

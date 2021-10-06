@@ -1,0 +1,15 @@
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\bin\Debug\net5.0\ZRdemo.Data.deps.json
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\bin\Debug\net5.0\ZRdemo.Data.runtimeconfig.json
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\bin\Debug\net5.0\ZRdemo.Data.runtimeconfig.dev.json
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\bin\Debug\net5.0\ZRdemo.Data.dll
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\bin\Debug\net5.0\ref\ZRdemo.Data.dll
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\bin\Debug\net5.0\ZRdemo.Data.pdb
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\obj\Debug\net5.0\ZRdemo.Data.csproj.AssemblyReference.cache
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\obj\Debug\net5.0\ZRdemo.Data.GeneratedMSBuildEditorConfig.editorconfig
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\obj\Debug\net5.0\ZRdemo.Data.AssemblyInfoInputs.cache
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\obj\Debug\net5.0\ZRdemo.Data.AssemblyInfo.cs
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\obj\Debug\net5.0\ZRdemo.Data.csproj.CoreCompileInputs.cache
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\obj\Debug\net5.0\ZRdemo.Data.dll
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\obj\Debug\net5.0\ref\ZRdemo.Data.dll
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\obj\Debug\net5.0\ZRdemo.Data.pdb
+G:\dell\Repos\ZRdemo3\ZRdemo.Data\obj\Debug\net5.0\ZRdemo.Data.genruntimeconfig.cache
