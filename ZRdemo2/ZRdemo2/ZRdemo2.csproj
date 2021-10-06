@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="Models\Coach.cs" />
     <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\Gym.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\TrainingDays.cs" />
