@@ -28,11 +28,9 @@ namespace ZRdemo3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddDbContext<ZRdemoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ZRdemo3ConnStr"),
                 b => b.MigrationsAssembly(typeof(ZRdemoContext).Assembly.FullName)));
-          
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ZRdemo3", Version = "v1" });

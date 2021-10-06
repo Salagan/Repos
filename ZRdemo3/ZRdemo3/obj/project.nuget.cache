@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9Y0K4VsxYkoNOhaBZGIjuY/ySlC6dZ01vCWP98dscbyGtMW3XGWY+UEcEUn3WhgHyZS+gc8F8YcNAYr0xcMTXA==",
+  "dgSpecHash": "5hKQgKWbZ/vm8jtGinNyc1phBu8lb76KIlXgjv26q+a8hbOpWSiBxAQ5UYCNdUG8gaS34Xx+4TXU38nPLuIurw==",
   "success": true,
   "projectFilePath": "G:\\dell\\Repos\\ZRdemo3\\ZRdemo3\\ZRdemo3.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,7 @@
     "C:\\Users\\andri\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
+    "C:\\Users\\andri\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
