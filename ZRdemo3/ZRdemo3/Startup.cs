@@ -1,18 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
+using ZRdemoData.Repositories;
 
 namespace ZRdemo3
 {
@@ -35,6 +37,14 @@ namespace ZRdemo3
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ZRdemo3", Version = "v1" });
             });
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<ICoachRepository, CoachRepository>();
+            services.AddTransient<IStudentRepository, StudentRepository>();
+            services.AddTransient<IGymRepository, GymRepository>();
+            services.AddTransient<IMemberRepository, MemberRepository>();
+            services.AddTransient<IGroupOfStudentsRepository, GroupOfStudentsRepository>();
+            services.AddTransient<ITrainingRepository, TrainingRepository>();
+            services.AddTransient<ITrainingDayRepository, TrainingDayRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

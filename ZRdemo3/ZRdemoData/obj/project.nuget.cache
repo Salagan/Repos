@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7O3tvqVkFd3PSMZs5qT0U2ifcUL5D+RLv3/E+VHoY1rLAWj1rPYHJ7HD8dRh/skR/n3R8ZLlcuP3vdJn+tKVsA==",
+  "dgSpecHash": "IypkSh5y+rCc4NnzW8bkcjoJ8cHAkNQBVtijZAhZCoNEYbvRe+ripJqwvCCY5YAqeomGsoVHYieDlFYrqVXFhA==",
   "success": true,
   "projectFilePath": "G:\\dell\\Repos\\ZRdemo3\\ZRdemoData\\ZRdemoData.csproj",
   "expectedPackageFiles": [
@@ -36,6 +36,7 @@
     "C:\\Users\\andri\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
+    "C:\\Users\\andri\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\andri\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",

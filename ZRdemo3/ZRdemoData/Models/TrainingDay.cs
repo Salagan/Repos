@@ -8,13 +8,22 @@ namespace ZRdemoData.Models
 {
     public class TrainingDay
     {
+        public TrainingDay()
+        {
+            this.Gyms = new HashSet<Gym>();
+            this.Trainings = new HashSet<Training>();
+        }
+
         public int Id { get; set; }
+
         public DateTime Date { get; set; }
+
         public DayOfWeek DayOfWeek { get; set; }
+
         public bool IsHolliday { get; set; }
 
         public virtual ICollection<Gym> Gyms { get; set; }
-        public virtual ICollection<Training> Trainings { get; set; }
 
+        public virtual ICollection<Training> Trainings { get; set; }
     }
 }
