@@ -11,7 +11,6 @@ namespace ZRdemoData.Models
         public TrainingDay()
         {
             this.Gyms = new HashSet<Gym>();
-            this.Trainings = new HashSet<Training>();
         }
 
         public int Id { get; set; }
@@ -22,8 +21,10 @@ namespace ZRdemoData.Models
 
         public bool IsHolliday { get; set; }
 
+        public virtual ICollection<Training> Trainings { get; set; }
+
         public virtual ICollection<Gym> Gyms { get; set; }
 
-        public virtual ICollection<Training> Trainings { get; set; }
+        public virtual ICollection<GroupOfStudents> GroupOfStudents { get; set; }
     }
 }

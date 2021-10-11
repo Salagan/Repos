@@ -39,7 +39,5 @@ namespace ZRdemoData.Models
         public virtual ICollection<Student> Students { get; set; }
 
         public virtual ICollection<TrainingDay> TrainingDays { get; set; }
-
-        public virtual ICollection<Training> Trainings { get; set; }
     }
 }

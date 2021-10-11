@@ -4,7 +4,6 @@ G:\dell\Repos\ZRdemo3\ZRdemoData\bin\Debug\net5.0\ZRdemoData.runtimeconfig.dev.j
 G:\dell\Repos\ZRdemo3\ZRdemoData\bin\Debug\net5.0\ZRdemoData.dll
 G:\dell\Repos\ZRdemo3\ZRdemoData\bin\Debug\net5.0\ref\ZRdemoData.dll
 G:\dell\Repos\ZRdemo3\ZRdemoData\bin\Debug\net5.0\ZRdemoData.pdb
-G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.csproj.AssemblyReference.cache
 G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.GeneratedMSBuildEditorConfig.editorconfig
 G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.AssemblyInfoInputs.cache
 G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.AssemblyInfo.cs
@@ -13,3 +12,4 @@ G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.dll
 G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ref\ZRdemoData.dll
 G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.pdb
 G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.genruntimeconfig.cache
+G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.csproj.AssemblyReference.cache

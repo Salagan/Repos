@@ -15,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 using ZRdemoData.Repositories;
+using ZRdemoData.UnitOfWork;
 
 namespace ZRdemo3
 {
@@ -45,6 +46,7 @@ namespace ZRdemo3
             services.AddTransient<IGroupOfStudentsRepository, GroupOfStudentsRepository>();
             services.AddTransient<ITrainingRepository, TrainingRepository>();
             services.AddTransient<ITrainingDayRepository, TrainingDayRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

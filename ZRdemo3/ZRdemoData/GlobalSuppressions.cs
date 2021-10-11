@@ -46,3 +46,6 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "Reviewed.", Scope = "type", Target = "~T:ZRdemoData.Repositories.MemberRepository")]
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "Reviewed.", Scope = "type", Target = "~T:ZRdemoData.Repositories.TrainingDayRepository")]
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "Reviewed.", Scope = "type", Target = "~T:ZRdemoData.Repositories.TrainingRepository")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "Reviewed.", Scope = "type", Target = "~T:ZRdemoData.Intrefaces.IUnitOfWork")]
+[assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1309:Field names should not begin with underscore", Justification = "Reviewed.", Scope = "member", Target = "~F:ZRdemoData.UnitOfWork.UnitOfWork._context")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "Reviewed.", Scope = "type", Target = "~T:ZRdemoData.UnitOfWork.UnitOfWork")]

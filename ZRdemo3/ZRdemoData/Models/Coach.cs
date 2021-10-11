@@ -23,6 +23,5 @@ namespace ZRdemoData.Models
 
         public virtual ICollection<GroupOfStudents> GroupOfStudents { get; set; }
 
-        public virtual ICollection<Student> Students { get; set; }
     }
 }

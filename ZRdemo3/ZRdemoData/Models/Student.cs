@@ -25,8 +25,6 @@ namespace ZRdemoData.Models
 
         public int CoachId { get; set; }
 
-        public int GroupOfStudentsId { get; set; }
-
         public MemberOfTheTeam MemberData { get; set; }
 
         public bool Injury { get; set; }
