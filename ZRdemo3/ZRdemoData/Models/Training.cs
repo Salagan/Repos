@@ -30,8 +30,6 @@ namespace ZRdemoData.Models
 
         public int TrainingDayId { get; set; }
 
-        public int GroupOfStudentsId { get; set; }
-
         public DateTime TimeStart { get; set; }
 
         public DateTime TimeEnd { get; set; }
