@@ -20,6 +20,8 @@ namespace ZRdemoData.Intrefaces
 
         void AddRange(IEnumerable<T> enities);
 
+        void Update(T entity);
+
         void Remove(T entity);
 
         void RemoveRange(IEnumerable<T> enities);

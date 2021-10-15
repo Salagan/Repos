@@ -31,28 +31,62 @@ namespace ZRdemo3.Controllers
 
         // GET api/<CoachesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<CoachRepository> GetById(int id)
         {
-            return "value";
+            var coach = this._unitOfWork.Coaches.GetById(id);
+            return this.Ok(coach);
         }
 
         // POST api/<CoachesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<CoachRepository> Add([FromBody] Coach coach)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
 
+            this._unitOfWork.Coaches.Add(coach);
+            return this.Ok(coach);
         }
 
         // PUT api/<CoachesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<CoachRepository> Update(int id, [FromBody] Coach coachM)
         {
+            var coach = this._unitOfWork.Coaches.GetById(id);
+            if (!this.ModelState.IsValid)
+            {
+               return this.BadRequest(this.ModelState);
+            }
+
+            if (coach == null)
+            {
+               return this.BadRequest();
+            }
+
+            try
+            {
+                coach = coachM;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return this.BadRequest();
+            }
+
+            this._unitOfWork.Coaches.Update(coach);
+
+            return this.Ok(coach);
         }
 
         // DELETE api/<CoachesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<CoachRepository> Delete(int id)
         {
+            var coach = this._unitOfWork.Coaches.GetById(id);
+            this._unitOfWork.Coaches.Remove(coach);
+            return this.Ok();
         }
     }
 }

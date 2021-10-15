@@ -10,8 +10,8 @@ using ZRdemoData.Models;
 namespace ZRdemoData.Migrations
 {
     [DbContext(typeof(ZRdemoContext))]
-    [Migration("20211013133835_Initial")]
-    partial class Initial
+    [Migration("20211013153354_InitialZRdemo3DB")]
+    partial class InitialZRdemo3DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

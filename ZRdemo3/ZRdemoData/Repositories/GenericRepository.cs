@@ -44,6 +44,11 @@ namespace ZRdemoData.Repositories
             return this._context.Set<T>().Find(id);
         }
 
+        public void Update(T entity)
+        {
+            this._context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        }
+
         public void Remove(T entity)
         {
             this._context.Set<T>().Remove(entity);

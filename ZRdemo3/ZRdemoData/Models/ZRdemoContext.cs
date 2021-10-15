@@ -13,7 +13,6 @@ namespace ZRdemoData.Models
         public ZRdemoContext(DbContextOptions<ZRdemoContext> options)
             : base(options)
         {
-           // options.UseSqlServer("Data Source=.;Initial Catalog=master;Integrated Security=True;", b => b.MigrationsAssembly("ZRdemo3"));
         }
 
         public DbSet<Student> Students { get; set; }
