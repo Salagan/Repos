@@ -14,13 +14,15 @@ namespace ZRdemoData.Intrefaces
 
         IGymRepository Gyms { get; }
 
-        IMemberRepository Members { get; }
-
         IStudentRepository Students { get; }
 
         ITrainingDayRepository TrainingDays { get; }
 
         ITrainingRepository Trainings { get; }
+
+        IGuestRepository Guests { get; }
+
+        IGuestCoachRepository GuestCoaches { get; }
 
         int Complete();
     }

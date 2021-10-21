@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
@@ -21,6 +22,8 @@ namespace ZRdemo3.Controllers
             this._unitOfWork = unitOfWork;
         }
 
+        private IMapper Mapper { get; set; }
+
         // GET: api/<Coaches>
         [HttpGet]
         public ActionResult<IEnumerable<CoachRepository>> GetAll()
@@ -39,7 +42,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<CoachesController>
         [HttpPost]
-        public ActionResult<CoachRepository> Add([FromBody] Coach coach)
+        public ActionResult<CoachRepository> Add([FromForm] Coach coach)
         {
             if (!this.ModelState.IsValid)
             {
@@ -47,12 +50,13 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Coaches.Add(coach);
+            this._unitOfWork.Complete();
             return this.Ok(coach);
         }
 
         // PUT api/<CoachesController>/5
         [HttpPut("{id}")]
-        public ActionResult<CoachRepository> Update(int id, [FromBody] Coach coachM)
+        public ActionResult<CoachRepository> Update(int id, [FromForm] Coach model)
         {
             var coach = this._unitOfWork.Coaches.GetById(id);
             if (!this.ModelState.IsValid)
@@ -67,15 +71,15 @@ namespace ZRdemo3.Controllers
 
             try
             {
-                coach = coachM;
+                this.Mapper.Map(model, coach);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
-                return this.BadRequest();
+                return this.BadRequest(ex.Message);
             }
 
             this._unitOfWork.Coaches.Update(coach);
+            this._unitOfWork.Complete();
 
             return this.Ok(coach);
         }
@@ -86,6 +90,7 @@ namespace ZRdemo3.Controllers
         {
             var coach = this._unitOfWork.Coaches.GetById(id);
             this._unitOfWork.Coaches.Remove(coach);
+            this._unitOfWork.Complete();
             return this.Ok();
         }
     }

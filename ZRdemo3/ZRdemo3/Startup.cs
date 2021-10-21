@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,8 @@ namespace ZRdemo3
             Configuration = configuration;
         }
 
+        public static IMapper Config { get; set; }
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -42,11 +45,15 @@ namespace ZRdemo3
             services.AddTransient<ICoachRepository, CoachRepository>();
             services.AddTransient<IStudentRepository, StudentRepository>();
             services.AddTransient<IGymRepository, GymRepository>();
-            services.AddTransient<IMemberRepository, MemberRepository>();
             services.AddTransient<IGroupOfStudentsRepository, GroupOfStudentsRepository>();
             services.AddTransient<ITrainingRepository, TrainingRepository>();
             services.AddTransient<ITrainingDayRepository, TrainingDayRepository>();
+            services.AddTransient<IGuestCoachRepository, GuestCoachRepository>();
+            services.AddTransient<IGuestRepository, GuestRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            services.AddAutoMapper(typeof(Startup));
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

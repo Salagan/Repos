@@ -8,9 +8,9 @@ using ZRdemoData.Models;
 
 namespace ZRdemoData.Repositories
 {
-    public class MemberRepository : GenericRepository<MemberOfTheTeam>, IMemberRepository
+    public class GuestCoachRepository : GenericRepository<GuestCoach>, IGuestCoachRepository
     {
-        public MemberRepository(ZRdemoContext context)
+        public GuestCoachRepository(ZRdemoContext context)
             : base(context)
         {
         }

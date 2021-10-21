@@ -3,46 +3,60 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ZRdemoData.Migrations
 {
-    public partial class InitialZRdemo3DB : Migration
+    public partial class InitialZRDEmo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "MemberOfTheTeam",
+                name: "Coaches",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CoachId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MemberOfTheTeam", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Coaches",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MemberId = table.Column<int>(type: "int", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     IsWorking = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Coaches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Coaches_MemberOfTheTeam_MemberId",
-                        column: x => x.MemberId,
-                        principalTable: "MemberOfTheTeam",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Coaches", x => x.CoachId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GuestCoaches",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Belt = table.Column<int>(type: "int", nullable: false),
+                    SchoolName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GuestCoaches", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Guests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Guests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,7 +68,8 @@ namespace ZRdemoData.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DayOfWeek = table.Column<int>(type: "int", nullable: false),
                     IsHolliday = table.Column<bool>(type: "bit", nullable: false),
-                    CoachId = table.Column<int>(type: "int", nullable: true)
+                    CoachId = table.Column<int>(type: "int", nullable: true),
+                    GuestCoachId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -63,6 +78,12 @@ namespace ZRdemoData.Migrations
                         name: "FK_TrainingDays_Coaches_CoachId",
                         column: x => x.CoachId,
                         principalTable: "Coaches",
+                        principalColumn: "CoachId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TrainingDays_GuestCoaches_GuestCoachId",
+                        column: x => x.GuestCoachId,
+                        principalTable: "GuestCoaches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -94,10 +115,11 @@ namespace ZRdemoData.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CoachId = table.Column<int>(type: "int", nullable: false),
+                    GuestCoachId = table.Column<int>(type: "int", nullable: true),
                     GymID = table.Column<int>(type: "int", nullable: false),
                     GroupType = table.Column<int>(type: "int", nullable: false),
-                    GroupAge = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    GroupAge = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CoachId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -106,8 +128,14 @@ namespace ZRdemoData.Migrations
                         name: "FK_GroupOfStudents_Coaches_CoachId",
                         column: x => x.CoachId,
                         principalTable: "Coaches",
+                        principalColumn: "CoachId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_GroupOfStudents_GuestCoaches_GuestCoachId",
+                        column: x => x.GuestCoachId,
+                        principalTable: "GuestCoaches",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_GroupOfStudents_Gyms_GymID",
                         column: x => x.GymID,
@@ -144,33 +172,33 @@ namespace ZRdemoData.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    StudentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CoachId = table.Column<int>(type: "int", nullable: false),
-                    MemberDataId = table.Column<int>(type: "int", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     Injury = table.Column<bool>(type: "bit", nullable: false),
                     Belt = table.Column<int>(type: "int", nullable: false),
                     GroupId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.PrimaryKey("PK_Students", x => x.StudentId);
                     table.ForeignKey(
                         name: "FK_Students_Coaches_CoachId",
                         column: x => x.CoachId,
                         principalTable: "Coaches",
-                        principalColumn: "Id",
+                        principalColumn: "CoachId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Students_GroupOfStudents_GroupId",
                         column: x => x.GroupId,
                         principalTable: "GroupOfStudents",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Students_MemberOfTheTeam_MemberDataId",
-                        column: x => x.MemberDataId,
-                        principalTable: "MemberOfTheTeam",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -184,11 +212,13 @@ namespace ZRdemoData.Migrations
                     CoachId = table.Column<int>(type: "int", nullable: false),
                     GymId = table.Column<int>(type: "int", nullable: false),
                     TrainingDayId = table.Column<int>(type: "int", nullable: false),
+                    CoachGuestId = table.Column<int>(type: "int", nullable: true),
                     TimeStart = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TimeEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Uniform = table.Column<int>(type: "int", nullable: false),
                     TypeOfTraining = table.Column<int>(type: "int", nullable: false),
-                    GroupOfStudentsId = table.Column<int>(type: "int", nullable: true)
+                    GroupOfStudentsId = table.Column<int>(type: "int", nullable: true),
+                    GuestCoachId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -197,12 +227,18 @@ namespace ZRdemoData.Migrations
                         name: "FK_Trainings_Coaches_CoachId",
                         column: x => x.CoachId,
                         principalTable: "Coaches",
-                        principalColumn: "Id",
+                        principalColumn: "CoachId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Trainings_GroupOfStudents_GroupOfStudentsId",
                         column: x => x.GroupOfStudentsId,
                         principalTable: "GroupOfStudents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Trainings_GuestCoaches_GuestCoachId",
+                        column: x => x.GuestCoachId,
+                        principalTable: "GuestCoaches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -219,15 +255,39 @@ namespace ZRdemoData.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Coaches_MemberId",
-                table: "Coaches",
-                column: "MemberId");
+            migrationBuilder.CreateTable(
+                name: "GuestTraining",
+                columns: table => new
+                {
+                    GuestsId = table.Column<int>(type: "int", nullable: false),
+                    TrainingsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GuestTraining", x => new { x.GuestsId, x.TrainingsId });
+                    table.ForeignKey(
+                        name: "FK_GuestTraining_Guests_GuestsId",
+                        column: x => x.GuestsId,
+                        principalTable: "Guests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GuestTraining_Trainings_TrainingsId",
+                        column: x => x.TrainingsId,
+                        principalTable: "Trainings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupOfStudents_CoachId",
                 table: "GroupOfStudents",
                 column: "CoachId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GroupOfStudents_GuestCoachId",
+                table: "GroupOfStudents",
+                column: "GuestCoachId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupOfStudents_GymID",
@@ -238,6 +298,11 @@ namespace ZRdemoData.Migrations
                 name: "IX_GroupOfStudentsTrainingDay_TrainingDaysId",
                 table: "GroupOfStudentsTrainingDay",
                 column: "TrainingDaysId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GuestTraining_TrainingsId",
+                table: "GuestTraining",
+                column: "TrainingsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Gyms_TrainingDayId",
@@ -255,14 +320,14 @@ namespace ZRdemoData.Migrations
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_MemberDataId",
-                table: "Students",
-                column: "MemberDataId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TrainingDays_CoachId",
                 table: "TrainingDays",
                 column: "CoachId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainingDays_GuestCoachId",
+                table: "TrainingDays",
+                column: "GuestCoachId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trainings_CoachId",
@@ -273,6 +338,11 @@ namespace ZRdemoData.Migrations
                 name: "IX_Trainings_GroupOfStudentsId",
                 table: "Trainings",
                 column: "GroupOfStudentsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trainings_GuestCoachId",
+                table: "Trainings",
+                column: "GuestCoachId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trainings_GymId",
@@ -291,7 +361,13 @@ namespace ZRdemoData.Migrations
                 name: "GroupOfStudentsTrainingDay");
 
             migrationBuilder.DropTable(
+                name: "GuestTraining");
+
+            migrationBuilder.DropTable(
                 name: "Students");
+
+            migrationBuilder.DropTable(
+                name: "Guests");
 
             migrationBuilder.DropTable(
                 name: "Trainings");
@@ -309,7 +385,7 @@ namespace ZRdemoData.Migrations
                 name: "Coaches");
 
             migrationBuilder.DropTable(
-                name: "MemberOfTheTeam");
+                name: "GuestCoaches");
         }
     }
 }

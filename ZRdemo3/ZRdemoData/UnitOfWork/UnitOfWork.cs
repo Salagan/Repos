@@ -23,13 +23,15 @@ namespace ZRdemoData.UnitOfWork
 
             this.Gyms = new GymRepository(this._context);
 
-            this.Members = new MemberRepository(this._context);
-
             this.Students = new StudentRepository(this._context);
 
             this.Trainings = new TrainingRepository(this._context);
 
             this.TrainingDays = new TrainingDayRepository(this._context);
+
+            this.Guests = new GuestRepository(this._context);
+
+            this.GuestCoaches = new GuestCoachRepository(this._context);
         }
 
         public ICoachRepository Coaches { get; private set; }
@@ -38,13 +40,15 @@ namespace ZRdemoData.UnitOfWork
 
         public IGymRepository Gyms { get; private set; }
 
-        public IMemberRepository Members { get; private set; }
-
         public IStudentRepository Students { get; private set; }
 
         public ITrainingRepository Trainings { get; private set; }
 
         public ITrainingDayRepository TrainingDays { get; private set; }
+
+        public IGuestRepository Guests { get; private set; }
+
+        public IGuestCoachRepository GuestCoaches { get; private set; }
 
         public int Complete()
         {

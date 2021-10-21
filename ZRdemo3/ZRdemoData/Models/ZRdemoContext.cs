@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ZRdemoData.Models
 {
@@ -26,5 +25,9 @@ namespace ZRdemoData.Models
         public DbSet<Training> Trainings { get; set; }
 
         public DbSet<GroupOfStudents> GroupOfStudents { get; set; }
+
+        public DbSet<GuestCoach> GuestCoaches { get; set; }
+
+        public DbSet<Guest> Guests { get; set; }
     }
 }

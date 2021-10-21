@@ -7,7 +7,7 @@ using ZRdemoData.Models;
 
 namespace ZRdemoData.Intrefaces
 {
-    public interface IMemberRepository : IGenericRepository<MemberOfTheTeam>
+    public interface IGuestCoachRepository : IGenericRepository<GuestCoach>
     {
     }
 }

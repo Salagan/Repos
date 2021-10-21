@@ -30,6 +30,8 @@ namespace ZRdemoData.Models
 
         public int TrainingDayId { get; set; }
 
+        public int? CoachGuestId { get; set; }
+
         public DateTime TimeStart { get; set; }
 
         public DateTime TimeEnd { get; set; }
@@ -45,5 +47,9 @@ namespace ZRdemoData.Models
         public virtual Coach Coach { get; set; }
 
         public virtual GroupOfStudents GroupOfStudents { get; set; }
+
+        public virtual GuestCoach GuestCoach { get; set; }
+
+        public virtual ICollection<Guest> Guests { get; set; }
     }
 }

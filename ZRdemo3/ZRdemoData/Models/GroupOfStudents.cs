@@ -24,7 +24,7 @@ namespace ZRdemoData.Models
 
         public int Id { get; set; }
 
-        public int CoachId { get; set; }
+        public int? GuestCoachId { get; set; }
 
         public int GymID { get; set; }
 
@@ -33,6 +33,8 @@ namespace ZRdemoData.Models
         public string GroupAge { get; set; }
 
         public virtual Coach Coach { get; set; }
+
+        public virtual GuestCoach CoachGuest { get; set; }
 
         public virtual Gym Gym { get; set; }
 
