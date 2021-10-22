@@ -22,8 +22,6 @@ namespace ZRdemo3.Controllers
             this._unitOfWork = unitOfWork;
         }
 
-        private IMapper Mapper { get; set; }
-
         // GET: api/<Coaches>
         [HttpGet]
         public ActionResult<IEnumerable<CoachRepository>> GetAll()
@@ -54,34 +52,26 @@ namespace ZRdemo3.Controllers
             return this.Ok(coach);
         }
 
-        // PUT api/<CoachesController>/5
+        // Update api/<CoachesController>/1
         [HttpPut("{id}")]
-        public ActionResult<CoachRepository> Update(int id, [FromForm] Coach model)
+        public ActionResult Update(int id, [FromForm]Coach coach)
         {
-            var coach = this._unitOfWork.Coaches.GetById(id);
-            if (!this.ModelState.IsValid)
+            if (coach.CoachId != id)
             {
-               return this.BadRequest(this.ModelState);
-            }
-
-            if (coach == null)
-            {
-               return this.BadRequest();
+                return this.BadRequest();
             }
 
             try
             {
-                this.Mapper.Map(model, coach);
+                this._unitOfWork.Coaches.Update(coach);
+                this._unitOfWork.Complete();
             }
             catch (Exception ex)
             {
                 return this.BadRequest(ex.Message);
             }
 
-            this._unitOfWork.Coaches.Update(coach);
-            this._unitOfWork.Complete();
-
-            return this.Ok(coach);
+            return this.RedirectToAction("GetAll");
         }
 
         // DELETE api/<CoachesController>/5
