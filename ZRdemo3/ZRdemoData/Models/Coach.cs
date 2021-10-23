@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZRdemoData.Models
 {
-    public class Coach 
+    public class Coach
     {
         public Coach()
         {

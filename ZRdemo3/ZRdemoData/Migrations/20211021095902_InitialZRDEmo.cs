@@ -20,7 +20,7 @@ namespace ZRdemoData.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
-                    IsWorking = table.Column<bool>(type: "bit", nullable: false)
+                    IsWorking = table.Column<bool>(type: "bit", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -37,7 +37,7 @@ namespace ZRdemoData.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Belt = table.Column<int>(type: "int", nullable: false),
                     SchoolName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -52,7 +52,7 @@ namespace ZRdemoData.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -69,7 +69,7 @@ namespace ZRdemoData.Migrations
                     DayOfWeek = table.Column<int>(type: "int", nullable: false),
                     IsHolliday = table.Column<bool>(type: "bit", nullable: false),
                     CoachId = table.Column<int>(type: "int", nullable: true),
-                    GuestCoachId = table.Column<int>(type: "int", nullable: true)
+                    GuestCoachId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -96,7 +96,7 @@ namespace ZRdemoData.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    TrainingDayId = table.Column<int>(type: "int", nullable: true)
+                    TrainingDayId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -119,7 +119,7 @@ namespace ZRdemoData.Migrations
                     GymID = table.Column<int>(type: "int", nullable: false),
                     GroupType = table.Column<int>(type: "int", nullable: false),
                     GroupAge = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CoachId = table.Column<int>(type: "int", nullable: true)
+                    CoachId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -149,7 +149,7 @@ namespace ZRdemoData.Migrations
                 columns: table => new
                 {
                     GroupOfStudentsId = table.Column<int>(type: "int", nullable: false),
-                    TrainingDaysId = table.Column<int>(type: "int", nullable: false)
+                    TrainingDaysId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -184,7 +184,7 @@ namespace ZRdemoData.Migrations
                     Gender = table.Column<int>(type: "int", nullable: false),
                     Injury = table.Column<bool>(type: "bit", nullable: false),
                     Belt = table.Column<int>(type: "int", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: true)
+                    GroupId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -218,7 +218,7 @@ namespace ZRdemoData.Migrations
                     Uniform = table.Column<int>(type: "int", nullable: false),
                     TypeOfTraining = table.Column<int>(type: "int", nullable: false),
                     GroupOfStudentsId = table.Column<int>(type: "int", nullable: true),
-                    GuestCoachId = table.Column<int>(type: "int", nullable: true)
+                    GuestCoachId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -260,7 +260,7 @@ namespace ZRdemoData.Migrations
                 columns: table => new
                 {
                     GuestsId = table.Column<int>(type: "int", nullable: false),
-                    TrainingsId = table.Column<int>(type: "int", nullable: false)
+                    TrainingsId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
