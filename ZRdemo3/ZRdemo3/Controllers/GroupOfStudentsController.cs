@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 using ZRdemoData.Repositories;
-using ZRdemoData.UnitOfWork;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace ZRdemo3.Controllers
@@ -14,9 +14,9 @@ namespace ZRdemo3.Controllers
     [ApiController]
     public class GroupOfStudentsController : ControllerBase
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GroupOfStudentsController(UnitOfWork unitOfWork)
+        public GroupOfStudentsController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<GroupOfStudentsController>
         [HttpPost]
-        public ActionResult<GroupOfStudentsRepository> Add([FromForm] GroupOfStudents group)
+        public ActionResult<GroupOfStudentsRepository> Add([FromBody] GroupOfStudents group)
         {
             if (!this.ModelState.IsValid)
             {

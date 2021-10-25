@@ -24,19 +24,13 @@ namespace ZRdemoData.Models
 
         public int Id { get; set; }
 
-        public int? GuestCoachId { get; set; }
+        public int CoachId { get; set; }
 
-        public int GymID { get; set; }
+        public int GymId { get; set; }
 
         public GroupType GroupType { get; set; }
 
         public string GroupAge { get; set; }
-
-        public virtual Coach Coach { get; set; }
-
-        public virtual GuestCoach CoachGuest { get; set; }
-
-        public virtual Gym Gym { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
 

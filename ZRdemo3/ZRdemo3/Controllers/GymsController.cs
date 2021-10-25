@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 using ZRdemoData.Repositories;
-using ZRdemoData.UnitOfWork;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace ZRdemo3.Controllers
@@ -14,9 +14,9 @@ namespace ZRdemo3.Controllers
     [ApiController]
     public class GymsController : ControllerBase
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GymsController(UnitOfWork unitOfWork)
+        public GymsController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<GymsController>
         [HttpPost]
-        public ActionResult<GymRepository> Add([FromForm] Gym gym)
+        public ActionResult<GymRepository> Add([FromBody] Gym gym)
         {
             if (!this.ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace ZRdemo3.Controllers
 
         // PUT api/<GymsController>/5
         [HttpPut("{id}")]
-        public ActionResult<GymRepository> Update(int id, [FromForm] Gym gym)
+        public ActionResult<GymRepository> Update(int id, [FromBody] Gym gym)
         {
             if (id != gym.Id)
             {
@@ -76,7 +76,7 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok(gym);
         }
 
         // DELETE api/<GymsController>/5

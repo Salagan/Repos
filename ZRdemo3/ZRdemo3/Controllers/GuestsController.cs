@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 using ZRdemoData.Repositories;
-using ZRdemoData.UnitOfWork;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace ZRdemo3.Controllers
@@ -14,9 +14,9 @@ namespace ZRdemo3.Controllers
     [ApiController]
     public class GuestsController : ControllerBase
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GuestsController(UnitOfWork unitOfWork)
+        public GuestsController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
