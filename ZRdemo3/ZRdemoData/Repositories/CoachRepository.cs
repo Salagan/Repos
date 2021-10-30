@@ -16,12 +16,12 @@ namespace ZRdemoData.Repositories
         {
         }
 
-        public new IEnumerable<Coach> GetById(int id)
+        public new Coach GetById(int id)
         {
             return this._context.Coaches
                 .Where(c => c.CoachId == id)
                 .Include(t => t.TrainingDays)
-                .ToList();
+                .FirstOrDefault();
         }
 
         public new IEnumerable<Coach> GetAll()

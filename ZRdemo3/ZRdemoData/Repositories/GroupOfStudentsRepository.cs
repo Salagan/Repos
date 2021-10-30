@@ -23,13 +23,13 @@ namespace ZRdemoData.Repositories
                 .ToList();
         }
 
-        public new IEnumerable<GroupOfStudents> GetById(int id)
+        public new GroupOfStudents GetById(int id)
         {
             return this._context.GroupOfStudents.Where(g => g.Id == id)
                 .Include(s => s.Students)
                 .Include(t => t.TrainingDays)
                     .ThenInclude(g => g.Trainings)
-                .ToList();
+                .FirstOrDefault();
         }
     }
 }

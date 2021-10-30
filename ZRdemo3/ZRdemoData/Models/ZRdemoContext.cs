@@ -30,20 +30,23 @@ namespace ZRdemoData.Models
 
         public DbSet<Guest> Guests { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Coach>().HasMany<GroupOfStudents>(g => g.GroupOfStudents)
-        //        .WithOne(c => c.Coach)
-        //        .HasForeignKey(c => c.CoachId);
-        //    modelBuilder.Entity<TrainingDay>().HasMany<Coach>(c => c.Coaches)
-        //        .WithMany(t => t.TrainingDays)
-        //        .UsingEntity<TrainingDayCoach>(
-        //         tc => tc
-        //         .HasOne(c => c.Coach)
-        //         .WithMany(tc => tc.TrainingDayCoaches)
-        //         .HasForeignKey(c => c.CoachId)),
-        //        tc => tc
-        //        .HasOne(td => td.TrainingDay)
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                .HasOne<GroupOfStudents>(s => s.GroupOfStudents)
+                .WithMany(g => g.Students);
+
+            modelBuilder.Entity<GroupOfStudents>()
+                .HasMany<TrainingDay>(g => g.TrainingDays)
+                .WithMany(t => t.GroupOfStudents);
+
+            modelBuilder.Entity<Coach>()
+                .HasMany<TrainingDay>(c => c.TrainingDays)
+                .WithMany(t => t.Coaches);
+
+            modelBuilder.Entity<Gym>()
+                .HasMany<TrainingDay>(g => g.TrainingDays)
+                .WithMany(t => t.Gyms);
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace ZRdemoData.Models
         public string Address { get; set; }
 
         public bool IsAvailable { get; set; }
+
+        public virtual ICollection<TrainingDay> TrainingDays { get; set; }
     }
 }

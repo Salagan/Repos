@@ -10,20 +10,18 @@ namespace ZRdemoData.Models
     {
         public TrainingDay()
         {
+            this.GroupOfStudents = new HashSet<GroupOfStudents>();
+            this.Coaches = new HashSet<Coach>();
             this.Gyms = new HashSet<Gym>();
         }
 
         public int Id { get; set; }
-
-        public int GymId { get; set; }
 
         public DateTime Date { get; set; }
 
         public DayOfWeek DayOfWeek { get; set; }
 
         public bool IsHolliday { get; set; }
-
-        public virtual Gym Gym { get; set; }
 
         public virtual ICollection<Training> Trainings { get; set; }
 
