@@ -2,7 +2,7 @@
 
 namespace ZRdemoData.Migrations
 {
-    public partial class FixingConnectionBetweenModels : Migration
+    public partial class RealtionsModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,15 +27,7 @@ namespace ZRdemoData.Migrations
                 table: "Students");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Trainings_Coaches_CoachId",
-                table: "Trainings");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_Trainings_GroupOfStudents_GroupOfStudentsId",
-                table: "Trainings");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Trainings_GuestCoaches_GuestCoachId",
                 table: "Trainings");
 
             migrationBuilder.DropForeignKey(
@@ -43,24 +35,8 @@ namespace ZRdemoData.Migrations
                 table: "Trainings");
 
             migrationBuilder.DropIndex(
-                name: "IX_Trainings_CoachId",
-                table: "Trainings");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Trainings_GroupOfStudentsId",
-                table: "Trainings");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Trainings_GuestCoachId",
-                table: "Trainings");
-
-            migrationBuilder.DropIndex(
                 name: "IX_Trainings_GymId",
                 table: "Trainings");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Students_CoachId",
-                table: "Students");
 
             migrationBuilder.DropIndex(
                 name: "IX_Students_GroupId",
@@ -70,16 +46,12 @@ namespace ZRdemoData.Migrations
                 name: "IX_GroupOfStudents_GuestCoachId",
                 table: "GroupOfStudents");
 
-            migrationBuilder.DropIndex(
-                name: "IX_GroupOfStudents_GymID",
-                table: "GroupOfStudents");
-
             migrationBuilder.DropColumn(
-                name: "GroupOfStudentsId",
+                name: "CoachGuestId",
                 table: "Trainings");
 
             migrationBuilder.DropColumn(
-                name: "GuestCoachId",
+                name: "GymId",
                 table: "Trainings");
 
             migrationBuilder.DropColumn(
@@ -94,6 +66,36 @@ namespace ZRdemoData.Migrations
                 name: "GymID",
                 table: "GroupOfStudents",
                 newName: "GymId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_GroupOfStudents_GymID",
+                table: "GroupOfStudents",
+                newName: "IX_GroupOfStudents_GymId");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "GroupOfStudentsId",
+                table: "Trainings",
+                type: "int",
+                nullable: false,
+                defaultValue: 0,
+                oldClrType: typeof(int),
+                oldType: "int",
+                oldNullable: true);
+
+            migrationBuilder.AddColumn<int>(
+                name: "GymId",
+                table: "TrainingDays",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "CoachId",
+                table: "Students",
+                type: "int",
+                nullable: true,
+                oldClrType: typeof(int),
+                oldType: "int");
 
             migrationBuilder.AddColumn<int>(
                 name: "GroupOfStudentsId",
@@ -113,6 +115,11 @@ namespace ZRdemoData.Migrations
                 oldNullable: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_TrainingDays_GymId",
+                table: "TrainingDays",
+                column: "GymId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Students_GroupOfStudentsId",
                 table: "Students",
                 column: "GroupOfStudentsId");
@@ -126,12 +133,44 @@ namespace ZRdemoData.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_GroupOfStudents_Gyms_GymId",
+                table: "GroupOfStudents",
+                column: "GymId",
+                principalTable: "Gyms",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Students_Coaches_CoachId",
+                table: "Students",
+                column: "CoachId",
+                principalTable: "Coaches",
+                principalColumn: "CoachId",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_Students_GroupOfStudents_GroupOfStudentsId",
                 table: "Students",
                 column: "GroupOfStudentsId",
                 principalTable: "GroupOfStudents",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_TrainingDays_Gyms_GymId",
+                table: "TrainingDays",
+                column: "GymId",
+                principalTable: "Gyms",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.NoAction);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Trainings_GroupOfStudents_GroupOfStudentsId",
+                table: "Trainings",
+                column: "GroupOfStudentsId",
+                principalTable: "GroupOfStudents",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.NoAction);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -141,12 +180,36 @@ namespace ZRdemoData.Migrations
                 table: "GroupOfStudents");
 
             migrationBuilder.DropForeignKey(
+                name: "FK_GroupOfStudents_Gyms_GymId",
+                table: "GroupOfStudents");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Students_Coaches_CoachId",
+                table: "Students");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Students_GroupOfStudents_GroupOfStudentsId",
                 table: "Students");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_TrainingDays_Gyms_GymId",
+                table: "TrainingDays");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Trainings_GroupOfStudents_GroupOfStudentsId",
+                table: "Trainings");
+
+            migrationBuilder.DropIndex(
+                name: "IX_TrainingDays_GymId",
+                table: "TrainingDays");
 
             migrationBuilder.DropIndex(
                 name: "IX_Students_GroupOfStudentsId",
                 table: "Students");
+
+            migrationBuilder.DropColumn(
+                name: "GymId",
+                table: "TrainingDays");
 
             migrationBuilder.DropColumn(
                 name: "GroupOfStudentsId",
@@ -157,17 +220,41 @@ namespace ZRdemoData.Migrations
                 table: "GroupOfStudents",
                 newName: "GymID");
 
-            migrationBuilder.AddColumn<int>(
+            migrationBuilder.RenameIndex(
+                name: "IX_GroupOfStudents_GymId",
+                table: "GroupOfStudents",
+                newName: "IX_GroupOfStudents_GymID");
+
+            migrationBuilder.AlterColumn<int>(
                 name: "GroupOfStudentsId",
+                table: "Trainings",
+                type: "int",
+                nullable: true,
+                oldClrType: typeof(int),
+                oldType: "int");
+
+            migrationBuilder.AddColumn<int>(
+                name: "CoachGuestId",
                 table: "Trainings",
                 type: "int",
                 nullable: true);
 
             migrationBuilder.AddColumn<int>(
-                name: "GuestCoachId",
+                name: "GymId",
                 table: "Trainings",
                 type: "int",
-                nullable: true);
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "CoachId",
+                table: "Students",
+                type: "int",
+                nullable: false,
+                defaultValue: 0,
+                oldClrType: typeof(int),
+                oldType: "int",
+                oldNullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "GroupId",
@@ -190,29 +277,9 @@ namespace ZRdemoData.Migrations
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trainings_CoachId",
-                table: "Trainings",
-                column: "CoachId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trainings_GroupOfStudentsId",
-                table: "Trainings",
-                column: "GroupOfStudentsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trainings_GuestCoachId",
-                table: "Trainings",
-                column: "GuestCoachId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Trainings_GymId",
                 table: "Trainings",
                 column: "GymId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_CoachId",
-                table: "Students",
-                column: "CoachId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_GroupId",
@@ -223,11 +290,6 @@ namespace ZRdemoData.Migrations
                 name: "IX_GroupOfStudents_GuestCoachId",
                 table: "GroupOfStudents",
                 column: "GuestCoachId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GroupOfStudents_GymID",
-                table: "GroupOfStudents",
-                column: "GymID");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_GroupOfStudents_Coaches_CoachId",
@@ -270,26 +332,10 @@ namespace ZRdemoData.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Trainings_Coaches_CoachId",
-                table: "Trainings",
-                column: "CoachId",
-                principalTable: "Coaches",
-                principalColumn: "CoachId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_Trainings_GroupOfStudents_GroupOfStudentsId",
                 table: "Trainings",
                 column: "GroupOfStudentsId",
                 principalTable: "GroupOfStudents",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Trainings_GuestCoaches_GuestCoachId",
-                table: "Trainings",
-                column: "GuestCoachId",
-                principalTable: "GuestCoaches",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 

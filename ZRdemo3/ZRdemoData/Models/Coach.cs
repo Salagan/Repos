@@ -33,7 +33,5 @@ namespace ZRdemoData.Models
         public bool IsWorking { get; set; }
 
         public ICollection<TrainingDay> TrainingDays { get; set; }
-
-        public ICollection<GroupOfStudents> GroupOfStudents { get; set; }
     }
 }

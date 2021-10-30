@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,13 +21,10 @@ namespace ZRdemoData.Models
         public GroupOfStudents()
         {
             this.Students = new HashSet<Student>();
+            this.TrainingDays = new HashSet<TrainingDay>();
         }
 
         public int Id { get; set; }
-
-        public int CoachId { get; set; }
-
-        public int GymId { get; set; }
 
         public GroupType GroupType { get; set; }
 

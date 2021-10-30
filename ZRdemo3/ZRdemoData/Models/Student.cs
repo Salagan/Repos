@@ -30,9 +30,7 @@ namespace ZRdemoData.Models
     {
         public int StudentId { get; set; }
 
-        public int CoachId { get; set; }
-
-        public int GroupOfStudentsId { get; set; }
+        public int? GroupOfStudentsId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -51,5 +49,7 @@ namespace ZRdemoData.Models
         public bool Injury { get; set; }
 
         public Belts Belt { get; set; }
+
+        public virtual GroupOfStudents GroupOfStudents { get; set; }
     }
 }

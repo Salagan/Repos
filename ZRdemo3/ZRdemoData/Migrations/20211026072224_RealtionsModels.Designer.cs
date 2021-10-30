@@ -3,36 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZRdemoData.Models;
 
 namespace ZRdemoData.Migrations
 {
     [DbContext(typeof(ZRdemoContext))]
-    partial class ZRdemoContextModelSnapshot : ModelSnapshot
+    [Migration("20211026072224_RealtionsModels")]
+    partial class RealtionsModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CoachTrainingDay", b =>
-                {
-                    b.Property<int>("CoachesCoachId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TrainingDaysId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CoachesCoachId", "TrainingDaysId");
-
-                    b.HasIndex("TrainingDaysId");
-
-                    b.ToTable("CoachTrainingDay");
-                });
 
             modelBuilder.Entity("GroupOfStudentsTrainingDay", b =>
                 {
@@ -107,13 +94,23 @@ namespace ZRdemoData.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CoachId")
+                        .HasColumnType("int");
+
                     b.Property<string>("GroupAge")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GroupType")
                         .HasColumnType("int");
 
+                    b.Property<int>("GymId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CoachId");
+
+                    b.HasIndex("GymId");
 
                     b.ToTable("GroupOfStudents");
                 });
@@ -205,6 +202,9 @@ namespace ZRdemoData.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("CoachId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -214,7 +214,7 @@ namespace ZRdemoData.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GroupOfStudentsId")
+                    b.Property<int>("GroupOfStudentsId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Injury")
@@ -227,6 +227,8 @@ namespace ZRdemoData.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StudentId");
+
+                    b.HasIndex("CoachId");
 
                     b.HasIndex("GroupOfStudentsId");
 
@@ -284,6 +286,9 @@ namespace ZRdemoData.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CoachId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -301,26 +306,13 @@ namespace ZRdemoData.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CoachId");
+
                     b.HasIndex("GuestCoachId");
 
                     b.HasIndex("GymId");
 
                     b.ToTable("TrainingDays");
-                });
-
-            modelBuilder.Entity("CoachTrainingDay", b =>
-                {
-                    b.HasOne("ZRdemoData.Models.Coach", null)
-                        .WithMany()
-                        .HasForeignKey("CoachesCoachId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ZRdemoData.Models.TrainingDay", null)
-                        .WithMany()
-                        .HasForeignKey("TrainingDaysId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("GroupOfStudentsTrainingDay", b =>
@@ -353,6 +345,25 @@ namespace ZRdemoData.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ZRdemoData.Models.GroupOfStudents", b =>
+                {
+                    b.HasOne("ZRdemoData.Models.Coach", "Coach")
+                        .WithMany("GroupOfStudents")
+                        .HasForeignKey("CoachId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZRdemoData.Models.Gym", "Gym")
+                        .WithMany()
+                        .HasForeignKey("GymId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Coach");
+
+                    b.Navigation("Gym");
+                });
+
             modelBuilder.Entity("ZRdemoData.Models.Gym", b =>
                 {
                     b.HasOne("ZRdemoData.Models.TrainingDay", null)
@@ -362,9 +373,17 @@ namespace ZRdemoData.Migrations
 
             modelBuilder.Entity("ZRdemoData.Models.Student", b =>
                 {
+                    b.HasOne("ZRdemoData.Models.Coach", "Coach")
+                        .WithMany()
+                        .HasForeignKey("CoachId");
+
                     b.HasOne("ZRdemoData.Models.GroupOfStudents", "GroupOfStudents")
                         .WithMany("Students")
-                        .HasForeignKey("GroupOfStudentsId");
+                        .HasForeignKey("GroupOfStudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Coach");
 
                     b.Navigation("GroupOfStudents");
                 });
@@ -404,6 +423,10 @@ namespace ZRdemoData.Migrations
 
             modelBuilder.Entity("ZRdemoData.Models.TrainingDay", b =>
                 {
+                    b.HasOne("ZRdemoData.Models.Coach", null)
+                        .WithMany("TrainingDays")
+                        .HasForeignKey("CoachId");
+
                     b.HasOne("ZRdemoData.Models.GuestCoach", null)
                         .WithMany("TrainingDays")
                         .HasForeignKey("GuestCoachId");
@@ -415,6 +438,13 @@ namespace ZRdemoData.Migrations
                         .IsRequired();
 
                     b.Navigation("Gym");
+                });
+
+            modelBuilder.Entity("ZRdemoData.Models.Coach", b =>
+                {
+                    b.Navigation("GroupOfStudents");
+
+                    b.Navigation("TrainingDays");
                 });
 
             modelBuilder.Entity("ZRdemoData.Models.GroupOfStudents", b =>

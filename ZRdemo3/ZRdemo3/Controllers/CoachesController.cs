@@ -40,7 +40,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<CoachesController>
         [HttpPost]
-        public ActionResult<CoachRepository> Add([FromForm] Coach coach)
+        public ActionResult<CoachRepository> Add([FromBody] Coach coach)
         {
             if (!this.ModelState.IsValid)
             {
@@ -53,6 +53,7 @@ namespace ZRdemo3.Controllers
         }
 
         // Update api/<CoachesController>/1
+        //patch
         [HttpPut("{id}")]
         public ActionResult Update(int id, [FromForm]Coach coach)
         {
