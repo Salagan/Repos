@@ -20,14 +20,16 @@ namespace ZRdemoData.Repositories
         {
             return this._context.Coaches
                 .Where(c => c.CoachId == id)
-                .Include(t => t.TrainingDays)
+                .Include(t => t.CoachTrainingDays)
+                    .ThenInclude(ctr => ctr.TrainingDay)
+                        .ThenInclude(tr => tr.Trainings)
                 .FirstOrDefault();
         }
 
         public new IEnumerable<Coach> GetAll()
         {
             return this._context.Coaches
-                .Include(t => t.TrainingDays)
+                .Include(t => t.CoachTrainingDays)
                 .ToList();
         }
     }

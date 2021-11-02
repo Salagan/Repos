@@ -14,6 +14,6 @@ namespace ZRdemoData.Models
 
         public bool IsAvailable { get; set; }
 
-        public virtual ICollection<TrainingDay> TrainingDays { get; set; }
+        public virtual ICollection<GymTrainingDay> GymTrainingDays { get; set; }
     }
 }

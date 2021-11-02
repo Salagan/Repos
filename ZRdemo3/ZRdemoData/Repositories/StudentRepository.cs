@@ -28,7 +28,9 @@ namespace ZRdemoData.Repositories
             return this._context.Students
                 .Where(s => s.StudentId == id)
                 .Include(g => g.GroupOfStudents)
-                    .ThenInclude(t => t.TrainingDays)
+                    .ThenInclude(g => g.GroupOfStudentsTrainingDays)
+                        .ThenInclude(gtr => gtr.TrainingDay)
+                            .ThenInclude(tr => tr.Trainings)
                 .FirstOrDefault();
         }
     }

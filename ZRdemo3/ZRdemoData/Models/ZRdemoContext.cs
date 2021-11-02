@@ -30,6 +30,12 @@ namespace ZRdemoData.Models
 
         public DbSet<Guest> Guests { get; set; }
 
+        public DbSet<CoachTrainingDay> CoachTrainingDays { get; set; }
+
+        public DbSet<GroupOfStudentsTrainingDay> GroupOfStudentsTrainingDays { get; set; }
+
+        public DbSet<GymTrainingDay> GymTrainingDays { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Student>()
@@ -37,16 +43,33 @@ namespace ZRdemoData.Models
                 .WithMany(g => g.Students);
 
             modelBuilder.Entity<GroupOfStudents>()
-                .HasMany<TrainingDay>(g => g.TrainingDays)
-                .WithMany(t => t.GroupOfStudents);
+                .HasMany<GroupOfStudentsTrainingDay>(g => g.GroupOfStudentsTrainingDays)
+                .WithOne(gtr => gtr.GroupOfStudents);
 
             modelBuilder.Entity<Coach>()
-                .HasMany<TrainingDay>(c => c.TrainingDays)
-                .WithMany(t => t.Coaches);
+                .HasMany<CoachTrainingDay>(c => c.CoachTrainingDays)
+                .WithOne(t => t.Coach);
 
             modelBuilder.Entity<Gym>()
-                .HasMany<TrainingDay>(g => g.TrainingDays)
-                .WithMany(t => t.Gyms);
+                .HasMany<GymTrainingDay>(g => g.GymTrainingDays)
+                .WithOne(t => t.Gym);
+
+            modelBuilder.Entity<TrainingDay>()
+                .HasMany<Training>(td => td.Trainings)
+                .WithOne(tr => tr.TrainingDay);
+
+            modelBuilder.Entity<TrainingDay>()
+                .HasMany<CoachTrainingDay>(tr => tr.CoacheTrainingDay)
+                .WithOne(ctr => ctr.TrainingDay);
+
+            modelBuilder.Entity<CoachTrainingDay>()
+                .HasKey(ct => new { ct.CoachId, ct.TrainingDayId });
+
+            modelBuilder.Entity<GroupOfStudentsTrainingDay>()
+                .HasKey(gtr => new { gtr.GroupOfStudentsId, gtr.TrainingDayId });
+
+            modelBuilder.Entity<GymTrainingDay>()
+                .HasKey(gt => new { gt.GymId, gt.TrainingDayID });
         }
     }
 }

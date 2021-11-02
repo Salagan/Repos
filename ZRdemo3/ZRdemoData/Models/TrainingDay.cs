@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,9 @@ namespace ZRdemoData.Models
     {
         public TrainingDay()
         {
-            this.GroupOfStudents = new HashSet<GroupOfStudents>();
-            this.Coaches = new HashSet<Coach>();
-            this.Gyms = new HashSet<Gym>();
+            this.GroupOfStudentsTrainingDay = new HashSet<GroupOfStudentsTrainingDay>();
+            this.CoacheTrainingDay = new HashSet<CoachTrainingDay>();
+            this.GymTrainingDays = new HashSet<GymTrainingDay>();
         }
 
         public int Id { get; set; }
@@ -25,10 +26,10 @@ namespace ZRdemoData.Models
 
         public virtual ICollection<Training> Trainings { get; set; }
 
-        public virtual ICollection<Gym> Gyms { get; set; }
+        public virtual ICollection<GymTrainingDay> GymTrainingDays { get; set; }
 
-        public virtual ICollection<Coach> Coaches { get; set; }
+        public virtual ICollection<CoachTrainingDay> CoacheTrainingDay { get; set; }
 
-        public virtual ICollection<GroupOfStudents> GroupOfStudents { get; set; }
+        public virtual ICollection<GroupOfStudentsTrainingDay> GroupOfStudentsTrainingDay { get; set; }
     }
 }

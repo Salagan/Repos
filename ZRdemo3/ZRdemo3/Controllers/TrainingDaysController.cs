@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<TrainingDayController>
         [HttpPost]
-        public ActionResult<TrainingDayRepository> Add([FromForm] TrainingDay trainingDay)
+        public ActionResult<TrainingDayRepository> Add([FromBody] TrainingDay trainingDay)
         {
             if (!this.ModelState.IsValid)
             {
