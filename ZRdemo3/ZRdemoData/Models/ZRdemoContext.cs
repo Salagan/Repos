@@ -36,24 +36,31 @@ namespace ZRdemoData.Models
 
         public DbSet<GymTrainingDay> GymTrainingDays { get; set; }
 
+        public DbSet<GuestTraining> GuestTrainings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Student
             modelBuilder.Entity<Student>()
                 .HasOne<GroupOfStudents>(s => s.GroupOfStudents)
                 .WithMany(g => g.Students);
 
+            // Group of Students
             modelBuilder.Entity<GroupOfStudents>()
                 .HasMany<GroupOfStudentsTrainingDay>(g => g.GroupOfStudentsTrainingDays)
                 .WithOne(gtr => gtr.GroupOfStudents);
 
+            // Coach
             modelBuilder.Entity<Coach>()
                 .HasMany<CoachTrainingDay>(c => c.CoachTrainingDays)
                 .WithOne(t => t.Coach);
 
+            // Gym
             modelBuilder.Entity<Gym>()
                 .HasMany<GymTrainingDay>(g => g.GymTrainingDays)
                 .WithOne(t => t.Gym);
 
+            // Training Day
             modelBuilder.Entity<TrainingDay>()
                 .HasMany<Training>(td => td.Trainings)
                 .WithOne(tr => tr.TrainingDay);
@@ -62,6 +69,22 @@ namespace ZRdemoData.Models
                 .HasMany<CoachTrainingDay>(tr => tr.CoacheTrainingDay)
                 .WithOne(ctr => ctr.TrainingDay);
 
+            // Training
+            modelBuilder.Entity<Training>()
+                .HasMany(t => t.GuestTrainings)
+                .WithOne(gut => gut.Training);
+
+            // Guest
+            modelBuilder.Entity<Guest>()
+                .HasMany(gu => gu.GuestTrainings)
+                .WithOne(gut => gut.Guest);
+
+            // Guest Coach
+            modelBuilder.Entity<GuestCoach>()
+                .HasMany(gc => gc.Trainings)
+                .WithOne(t => t.GuestCoach);
+
+            // Join tables keys
             modelBuilder.Entity<CoachTrainingDay>()
                 .HasKey(ct => new { ct.CoachId, ct.TrainingDayId });
 
@@ -70,6 +93,9 @@ namespace ZRdemoData.Models
 
             modelBuilder.Entity<GymTrainingDay>()
                 .HasKey(gt => new { gt.GymId, gt.TrainingDayID });
+
+            modelBuilder.Entity<GuestTraining>()
+                .HasKey(gut => new { gut.GuestId, gut.TrainingId });
         }
     }
 }

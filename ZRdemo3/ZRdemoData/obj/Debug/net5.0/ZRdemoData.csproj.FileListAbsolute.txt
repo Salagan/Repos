@@ -12,4 +12,3 @@ G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.dll
 G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ref\ZRdemoData.dll
 G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.pdb
 G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.genruntimeconfig.cache
-G:\dell\Repos\ZRdemo3\ZRdemoData\obj\Debug\net5.0\ZRdemoData.csproj.AssemblyReference.cache

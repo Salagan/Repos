@@ -20,6 +20,6 @@ namespace ZRdemoData.Models
 
         public string Email { get; set; }
 
-        public virtual ICollection<TrainingDay> TrainingDays { get; set; }
+        public virtual ICollection<Training> Trainings { get; set; }
     }
 }

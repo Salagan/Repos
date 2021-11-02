@@ -2,7 +2,7 @@
 
 namespace ZRdemoData.Migrations
 {
-    public partial class manyToManyConnectionConfig : Migration
+    public partial class ManyToManyConnectionConfig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

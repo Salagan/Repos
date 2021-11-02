@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<Controller>
         [HttpPost]
-        public ActionResult<GuestCoachRepository> Add([FromForm] GuestCoach guestCoach)
+        public ActionResult<GuestCoachRepository> Add([FromBody] GuestCoach guestCoach)
         {
             if (!this.ModelState.IsValid)
             {

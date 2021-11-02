@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<Controller>
         [HttpPost]
-        public ActionResult<GuestRepository> Add([FromForm] Guest guest)
+        public ActionResult<GuestRepository> Add([FromBody] Guest guest)
         {
             if (!this.ModelState.IsValid)
             {

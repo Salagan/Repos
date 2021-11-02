@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<TrainingsController>
         [HttpPost]
-        public ActionResult<TrainingRepository> Add([FromForm] Training training)
+        public ActionResult<TrainingRepository> Add([FromBody] Training training)
         {
             if (!this.ModelState.IsValid)
             {

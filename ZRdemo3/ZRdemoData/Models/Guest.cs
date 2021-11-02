@@ -16,6 +16,6 @@ namespace ZRdemoData.Models
 
         public string PhoneNumber { get; set; }
 
-        public virtual ICollection<Training> Trainings { get; set; }
+        public virtual ICollection<GuestTraining> GuestTrainings { get; set; }
     }
 }

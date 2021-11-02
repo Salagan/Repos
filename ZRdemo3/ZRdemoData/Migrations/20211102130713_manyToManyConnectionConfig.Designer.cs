@@ -11,7 +11,7 @@ namespace ZRdemoData.Migrations
 {
     [DbContext(typeof(ZRdemoContext))]
     [Migration("20211102130713_manyToManyConnectionConfig")]
-    partial class manyToManyConnectionConfig
+    partial class ManyToManyConnectionConfig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
