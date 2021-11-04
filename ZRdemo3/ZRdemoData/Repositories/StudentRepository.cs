@@ -16,21 +16,17 @@ namespace ZRdemoData.Repositories
         {
         }
 
-        public new IEnumerable<Student> GetAll()
+        public override IEnumerable<Student> GetAll()
         {
-            return this._context.Students
-                .Include(g => g.GroupOfStudents)
-                .ToList();
+            return this._context.Students.ToList();
         }
 
-        public new Student GetById(int id)
+        public override Student GetById(int id)
         {
             return this._context.Students
                 .Where(s => s.StudentId == id)
                 .Include(g => g.GroupOfStudents)
-                    .ThenInclude(g => g.GroupOfStudentsTrainingDays)
-                        .ThenInclude(gtr => gtr.TrainingDay)
-                            .ThenInclude(tr => tr.Trainings)
+                      .ThenInclude(g => g.Trainings)
                 .FirstOrDefault();
         }
     }

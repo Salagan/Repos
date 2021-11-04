@@ -16,21 +16,17 @@ namespace ZRdemoData.Repositories
         {
         }
 
-        public new Coach GetById(int id)
+        public override Coach GetById(int id)
         {
             return this._context.Coaches
                 .Where(c => c.CoachId == id)
-                .Include(t => t.CoachTrainingDays)
-                    .ThenInclude(ctr => ctr.TrainingDay)
-                        .ThenInclude(tr => tr.Trainings)
+                .Include(t => t.Trainings)
                 .FirstOrDefault();
         }
 
-        public new IEnumerable<Coach> GetAll()
+        public override IEnumerable<Coach> GetAll()
         {
-            return this._context.Coaches
-                .Include(t => t.CoachTrainingDays)
-                .ToList();
+            return this._context.Coaches.ToList();
         }
     }
 }

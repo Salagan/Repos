@@ -47,8 +47,6 @@ namespace ZRdemo3
             services.AddTransient<IGymRepository, GymRepository>();
             services.AddTransient<IGroupOfStudentsRepository, GroupOfStudentsRepository>();
             services.AddTransient<ITrainingRepository, TrainingRepository>();
-            services.AddTransient<ITrainingDayRepository, TrainingDayRepository>();
-            services.AddTransient<IGuestCoachRepository, GuestCoachRepository>();
             services.AddTransient<IGuestRepository, GuestRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 

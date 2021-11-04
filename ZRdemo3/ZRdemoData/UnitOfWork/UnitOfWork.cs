@@ -27,11 +27,7 @@ namespace ZRdemoData.UnitOfWork
 
             this.Trainings = new TrainingRepository(this._context);
 
-            this.TrainingDays = new TrainingDayRepository(this._context);
-
             this.Guests = new GuestRepository(this._context);
-
-            this.GuestCoaches = new GuestCoachRepository(this._context);
         }
 
         public ICoachRepository Coaches { get; private set; }
@@ -44,11 +40,7 @@ namespace ZRdemoData.UnitOfWork
 
         public ITrainingRepository Trainings { get; private set; }
 
-        public ITrainingDayRepository TrainingDays { get; private set; }
-
         public IGuestRepository Guests { get; private set; }
-
-        public IGuestCoachRepository GuestCoaches { get; private set; }
 
         public int Complete()
         {

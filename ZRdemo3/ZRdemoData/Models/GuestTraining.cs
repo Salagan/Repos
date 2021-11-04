@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ZRdemoData.Models
 {
-    public class GuestTraining
+     public class GuestTraining
     {
         public int GuestId { get; set; }
 
-        public virtual Guest Guest { get; set; }
+        public Guest Guest { get; set; }
 
         public int TrainingId { get; set; }
 
-        public virtual Training Training { get; set; }
+        public Training Training { get; set; }
     }
 }

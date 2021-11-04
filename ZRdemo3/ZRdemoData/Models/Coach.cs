@@ -11,7 +11,7 @@ namespace ZRdemoData.Models
     {
         public Coach()
         {
-            this.CoachTrainingDays = new HashSet<CoachTrainingDay>();
+            this.Trainings = new HashSet<Training>();
         }
 
         public int CoachId { get; set; }
@@ -32,6 +32,6 @@ namespace ZRdemoData.Models
 
         public bool IsWorking { get; set; }
 
-        public ICollection<CoachTrainingDay> CoachTrainingDays { get; set; }
+        public ICollection<Training> Trainings { get; set; }
     }
 }

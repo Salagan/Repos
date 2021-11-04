@@ -26,25 +26,29 @@ namespace ZRdemoData.Models
         public int Id { get; set; }
 
         // keys
-        [ForeignKey("TrainingDay")]
-        public int TrainingDayId { get; set; }
+        [ForeignKey("GymId")]
+        public int GymId { get; set; }
 
-        public int? GuestCoachId { get; set; }
+        [ForeignKey("Coachid")]
+        public int CoachId { get; set; }
+
+        [ForeignKey("GroupOfStudentsId")]
+        public int GroupOfStudentsId { get; set; }
 
         // entity properties
         public DateTime TimeStart { get; set; }
-
-        public DateTime TimeEnd { get; set; }
 
         public Uniform Uniform { get; set; }
 
         public TypeOfTraining TypeOfTraining { get; set; }
 
         // navigation properties
-        public virtual TrainingDay TrainingDay { get; set; }
+        public virtual Gym Gym { get; set; }
 
-        public virtual GuestCoach GuestCoach { get; set; }
+        public virtual Coach Coach { get; set; }
 
-        public virtual ICollection<GuestTraining> GuestTrainings { get; set; }
+        public virtual GroupOfStudents GroupOfStudents { get; set; }
+
+        public virtual ICollection<GuestTraining> GuestTrainigs { get; set; }
     }
 }

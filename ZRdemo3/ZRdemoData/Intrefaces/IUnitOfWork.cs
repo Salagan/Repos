@@ -16,13 +16,9 @@ namespace ZRdemoData.Intrefaces
 
         IStudentRepository Students { get; }
 
-        ITrainingDayRepository TrainingDays { get; }
-
         ITrainingRepository Trainings { get; }
 
         IGuestRepository Guests { get; }
-
-        IGuestCoachRepository GuestCoaches { get; }
 
         int Complete();
     }

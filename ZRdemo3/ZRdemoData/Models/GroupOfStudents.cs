@@ -21,7 +21,7 @@ namespace ZRdemoData.Models
         public GroupOfStudents()
         {
             this.Students = new HashSet<Student>();
-            this.GroupOfStudentsTrainingDays = new HashSet<GroupOfStudentsTrainingDay>();
+            this.Trainings = new HashSet<Training>();
         }
 
         public int Id { get; set; }
@@ -32,6 +32,6 @@ namespace ZRdemoData.Models
 
         public virtual ICollection<Student> Students { get; set; }
 
-        public virtual ICollection<GroupOfStudentsTrainingDay> GroupOfStudentsTrainingDays { get; set; }
+        public virtual ICollection<Training> Trainings { get; set; }
     }
 }
