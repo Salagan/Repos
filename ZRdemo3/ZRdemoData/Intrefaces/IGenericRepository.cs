@@ -10,9 +10,9 @@ namespace ZRdemoData.Intrefaces
     public interface IGenericRepository<T>
         where T : class
     {
-        T GetById(int id);
+        Task<T> GetById(int id);
 
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
 
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);
 

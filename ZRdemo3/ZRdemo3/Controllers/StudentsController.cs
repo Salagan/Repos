@@ -23,17 +23,17 @@ namespace ZRdemo3.Controllers
 
         // GET: api/<StudentsController>
         [HttpGet]
-        public ActionResult<IEnumerable<StudentRepository>> GetAll()
+        public async Task<ActionResult<IEnumerable<StudentRepository>>> GetAll()
         {
-            var students = this._unitOfWork.Students.GetAll();
+            var students = await this._unitOfWork.Students.GetAll();
             return this.Ok(students);
         }
 
         // GET api/<StudentsController>/5
         [HttpGet("{id}")]
-        public ActionResult<StudentRepository> GetById(int id)
+        public async Task<ActionResult<StudentRepository>> GetById(int id)
         {
-            var student = this._unitOfWork.Students.GetById(id);
+            var student = await this._unitOfWork.Students.GetById(id);
             if (student == null)
             {
                 return this.BadRequest();
@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<StudentsController>
         [HttpPost]
-        public ActionResult<StudentRepository> Add([FromBody] Student student)
+        public async Task<ActionResult<StudentRepository>> Add([FromBody] Student student)
         {
             if (!this.ModelState.IsValid)
             {
@@ -52,14 +52,14 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Students.Add(student);
-            this._unitOfWork.Complete();
+            await this._unitOfWork.Complete();
 
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<StudentsController>/5
         [HttpPut("{id}")]
-        public ActionResult<StudentRepository> Update(int id, [FromForm] Student student)
+        public async Task<ActionResult<StudentRepository>> Update(int id, [FromForm] Student student)
         {
             if (id != student.StudentId)
             {
@@ -69,7 +69,7 @@ namespace ZRdemo3.Controllers
             try
             {
                 this._unitOfWork.Students.Update(student);
-                this._unitOfWork.Complete();
+                await this._unitOfWork.Complete();
             }
             catch (Exception ex)
             {
@@ -81,9 +81,9 @@ namespace ZRdemo3.Controllers
 
         // DELETE api/<StudentsController>/5
         [HttpDelete("{id}")]
-        public ActionResult<StudentRepository> Delete(int id)
+        public async Task<ActionResult<StudentRepository>> Delete(int id)
         {
-            var student = this._unitOfWork.Students.GetById(id);
+            var student = await this._unitOfWork.Students.GetById(id);
 
             if (student == null)
             {
@@ -91,7 +91,7 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Students.Remove(student);
-            this._unitOfWork.Complete();
+            await this._unitOfWork.Complete();
 
             return this.RedirectToAction("GetAll");
         }

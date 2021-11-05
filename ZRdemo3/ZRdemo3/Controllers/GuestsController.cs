@@ -23,17 +23,17 @@ namespace ZRdemo3.Controllers
 
         // GET: api/<Controller>
         [HttpGet]
-        public ActionResult<IEnumerable<GuestRepository>> GetAll()
+        public async Task<ActionResult<IEnumerable<GuestRepository>>> GetAll()
         {
-            var guests = this._unitOfWork.Guests.GetAll();
+            var guests = await this._unitOfWork.Guests.GetAll();
             return this.Ok(guests);
         }
 
         // GET api/<Controllerr>/5
         [HttpGet("{id}")]
-        public ActionResult<GuestRepository> GetById(int id)
+        public async Task<ActionResult<GuestRepository>> GetById(int id)
         {
-            var guest = this._unitOfWork.Guests.GetById(id);
+            var guest = await this._unitOfWork.Guests.GetById(id);
             if (guest == null)
             {
                 return this.BadRequest();
@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<Controller>
         [HttpPost]
-        public ActionResult<GuestRepository> Add([FromBody] Guest guest)
+        public async Task<ActionResult<GuestRepository>> Add([FromBody] Guest guest)
         {
             if (!this.ModelState.IsValid)
             {
@@ -52,14 +52,13 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Guests.Add(guest);
-            this._unitOfWork.Complete();
-
+            await this._unitOfWork.Complete();
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<Controller>/5
         [HttpPut("{id}")]
-        public ActionResult<GuestRepository> Update(int id, [FromForm] Guest guest)
+        public async Task<ActionResult<GuestRepository>> Update(int id, [FromForm] Guest guest)
         {
             if (id != guest.Id)
             {
@@ -69,7 +68,7 @@ namespace ZRdemo3.Controllers
             try
             {
                 this._unitOfWork.Guests.Update(guest);
-                this._unitOfWork.Complete();
+                await this._unitOfWork.Complete();
             }
             catch (Exception ex)
             {
@@ -81,9 +80,9 @@ namespace ZRdemo3.Controllers
 
         // DELETE api/<Controller>/5
         [HttpDelete("{id}")]
-        public ActionResult<GuestRepository> Delete(int id)
+        public async Task<ActionResult<GuestRepository>> Delete(int id)
         {
-            var guest = this._unitOfWork.Guests.GetById(id);
+            var guest = await this._unitOfWork.Guests.GetById(id);
 
             if (guest == null)
             {
@@ -91,7 +90,7 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Guests.Remove(guest);
-            this._unitOfWork.Complete();
+            await this._unitOfWork.Complete();
 
             return this.RedirectToAction("GetAll");
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 
@@ -34,14 +35,14 @@ namespace ZRdemoData.Repositories
             return this._context.Set<T>().Where(expression);
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public async virtual Task<IEnumerable<T>> GetAll()
         {
-            return this._context.Set<T>().ToList();
+            return await this._context.Set<T>().ToListAsync();
         }
 
-        public virtual T GetById(int id)
+        public async virtual Task<T> GetById(int id)
         {
-            return this._context.Set<T>().Find(id);
+            return await this._context.Set<T>().FindAsync(id);
         }
 
         public virtual void Update(T entity)

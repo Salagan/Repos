@@ -16,17 +16,17 @@ namespace ZRdemoData.Repositories
         {
         }
 
-        public override Coach GetById(int id)
+        public async override Task<Coach> GetById(int id)
         {
-            return this._context.Coaches
+            return await this._context.Coaches
                 .Where(c => c.CoachId == id)
                 .Include(t => t.Trainings)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
-        public override IEnumerable<Coach> GetAll()
+        public async override Task<IEnumerable<Coach>> GetAll()
         {
-            return this._context.Coaches.ToList();
+            return await this._context.Coaches.ToListAsync();
         }
     }
 }

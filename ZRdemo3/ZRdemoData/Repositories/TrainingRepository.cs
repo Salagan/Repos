@@ -16,18 +16,18 @@ namespace ZRdemoData.Repositories
         {
         }
 
-        public override IEnumerable<Training> GetAll()
+        public async override Task<IEnumerable<Training>> GetAll()
         {
-            return this._context.Trainings.ToList();
+            return await this._context.Trainings.ToListAsync();
         }
 
-        public override Training GetById(int id)
+        public async override Task<Training> GetById(int id)
         {
-            return this._context.Trainings
+            return await this._context.Trainings
                 .Where(t => t.Id == id)
                 .Include(t => t.Coach)
                 .Include(t => t.GroupOfStudents)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
     }
 }

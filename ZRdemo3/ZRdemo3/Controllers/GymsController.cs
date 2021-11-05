@@ -23,17 +23,17 @@ namespace ZRdemo3.Controllers
 
         // GET: api/<GymsController>
         [HttpGet]
-        public ActionResult<IEnumerable<GymRepository>> GetAll()
+        public async Task<ActionResult<IEnumerable<GymRepository>>> GetAll()
         {
-            var gyms = this._unitOfWork.Gyms.GetAll();
+            var gyms = await this._unitOfWork.Gyms.GetAll();
             return this.Ok(gyms);
         }
 
         // GET api/<GymsControllerr>/5
         [HttpGet("{id}")]
-        public ActionResult<GymRepository> GetById(int id)
+        public async Task<ActionResult<GymRepository>> GetById(int id)
         {
-            var gym = this._unitOfWork.Gyms.GetById(id);
+            var gym = await this._unitOfWork.Gyms.GetById(id);
             if (gym == null)
             {
                 return this.BadRequest();
@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<GymsController>
         [HttpPost]
-        public ActionResult<GymRepository> Add([FromBody] Gym gym)
+        public async Task<ActionResult<GymRepository>> Add([FromBody] Gym gym)
         {
             if (!this.ModelState.IsValid)
             {
@@ -52,14 +52,13 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Gyms.Add(gym);
-            this._unitOfWork.Complete();
-
+            await this._unitOfWork.Complete();
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<GymsController>/5
         [HttpPut("{id}")]
-        public ActionResult<GymRepository> Update(int id, [FromBody] Gym gym)
+        public async Task<ActionResult<GymRepository>> Update(int id, [FromBody] Gym gym)
         {
             if (id != gym.Id)
             {
@@ -69,7 +68,7 @@ namespace ZRdemo3.Controllers
             try
             {
                 this._unitOfWork.Gyms.Update(gym);
-                this._unitOfWork.Complete();
+                await this._unitOfWork.Complete();
             }
             catch (Exception ex)
             {
@@ -81,9 +80,9 @@ namespace ZRdemo3.Controllers
 
         // DELETE api/<GymsController>/5
         [HttpDelete("{id}")]
-        public ActionResult<GymRepository> Delete(int id)
+        public async Task<ActionResult<GymRepository>> Delete(int id)
         {
-            var gym = this._unitOfWork.Gyms.GetById(id);
+            var gym = await this._unitOfWork.Gyms.GetById(id);
 
             if (gym == null)
             {
@@ -91,7 +90,7 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Gyms.Remove(gym);
-            this._unitOfWork.Complete();
+            await this._unitOfWork.Complete();
 
             return this.RedirectToAction("GetAll");
         }

@@ -20,6 +20,6 @@ namespace ZRdemoData.Intrefaces
 
         IGuestRepository Guests { get; }
 
-        int Complete();
+        Task<int> Complete();
     }
 }

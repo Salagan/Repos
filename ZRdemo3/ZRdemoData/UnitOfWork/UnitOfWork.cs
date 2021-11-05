@@ -42,9 +42,9 @@ namespace ZRdemoData.UnitOfWork
 
         public IGuestRepository Guests { get; private set; }
 
-        public int Complete()
+        public async Task<int> Complete()
         {
-            return this._context.SaveChanges();
+            return await this._context.SaveChangesAsync();
         }
 
         public void Dispose()

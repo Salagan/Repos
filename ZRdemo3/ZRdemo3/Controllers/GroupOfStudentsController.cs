@@ -23,17 +23,17 @@ namespace ZRdemo3.Controllers
 
         // GET: api/<GroupOfStudentsController>
         [HttpGet]
-        public ActionResult<IEnumerable<GroupOfStudentsRepository>> GetAll()
+        public async Task<ActionResult<IEnumerable<GroupOfStudentsRepository>>> GetAll()
         {
-            var groups = this._unitOfWork.GroupsOfStudents.GetAll();
+            var groups = await this._unitOfWork.GroupsOfStudents.GetAll();
             return this.Ok(groups);
         }
 
         // GET api/<GroupOfStudentsController>/5
         [HttpGet("{id}")]
-        public ActionResult<GroupOfStudentsRepository> GetById(int id)
+        public async Task<ActionResult<GroupOfStudentsRepository>> GetById(int id)
         {
-            var group = this._unitOfWork.GroupsOfStudents.GetById(id);
+            var group = await this._unitOfWork.GroupsOfStudents.GetById(id);
             if (group == null)
             {
                 return this.BadRequest();
@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<GroupOfStudentsController>
         [HttpPost]
-        public ActionResult<GroupOfStudentsRepository> Add([FromBody] GroupOfStudents group)
+        public async Task<ActionResult<GroupOfStudentsRepository>> Add([FromBody] GroupOfStudents group)
         {
             if (!this.ModelState.IsValid)
             {
@@ -52,14 +52,14 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.GroupsOfStudents.Add(group);
-            this._unitOfWork.Complete();
+            await this._unitOfWork.Complete();
 
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<GroupOfStudentsController>/5
         [HttpPut("{id}")]
-        public ActionResult<GroupOfStudentsRepository> Update(int id, [FromForm] GroupOfStudents group)
+        public async Task<ActionResult<GroupOfStudentsRepository>> Update(int id, [FromForm] GroupOfStudents group)
         {
             if (id != group.Id)
             {
@@ -69,7 +69,7 @@ namespace ZRdemo3.Controllers
             try
             {
                 this._unitOfWork.GroupsOfStudents.Update(group);
-                this._unitOfWork.Complete();
+                await this._unitOfWork.Complete();
             }
             catch (Exception ex)
             {
@@ -81,9 +81,9 @@ namespace ZRdemo3.Controllers
 
         // DELETE api/<GroupOfStudentsController>/5
         [HttpDelete("{id}")]
-        public ActionResult<GroupOfStudentsRepository> Delete(int id)
+        public async Task<ActionResult<GroupOfStudentsRepository>> Delete(int id)
         {
-            var group = this._unitOfWork.GroupsOfStudents.GetById(id);
+            var group = await this._unitOfWork.GroupsOfStudents.GetById(id);
 
             if (group == null)
             {
@@ -91,7 +91,7 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.GroupsOfStudents.Remove(group);
-            this._unitOfWork.Complete();
+            await this._unitOfWork.Complete();
 
             return this.RedirectToAction("GetAll");
         }

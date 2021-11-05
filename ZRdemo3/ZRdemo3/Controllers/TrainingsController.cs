@@ -23,17 +23,17 @@ namespace ZRdemo3.Controllers
 
         // GET: api/<TrainingsController>
         [HttpGet]
-        public ActionResult<IEnumerable<TrainingRepository>> GetAll()
+        public async Task<ActionResult<IEnumerable<TrainingRepository>>> GetAll()
         {
-            var trainings = this._unitOfWork.Trainings.GetAll();
+            var trainings = await this._unitOfWork.Trainings.GetAll();
             return this.Ok(trainings);
         }
 
         // GET api/<TrainingsController>/5
         [HttpGet("{id}")]
-        public ActionResult<TrainingRepository> GetById(int id)
+        public async Task<ActionResult<TrainingRepository>> GetById(int id)
         {
-            var training = this._unitOfWork.Trainings.GetById(id);
+            var training = await this._unitOfWork.Trainings.GetById(id);
             if (training == null)
             {
                 return this.BadRequest();
@@ -44,7 +44,7 @@ namespace ZRdemo3.Controllers
 
         // POST api/<TrainingsController>
         [HttpPost]
-        public ActionResult<TrainingRepository> Add([FromBody] Training training)
+        public async Task<ActionResult<TrainingRepository>> Add([FromBody] Training training)
         {
             if (!this.ModelState.IsValid)
             {
@@ -52,14 +52,13 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Trainings.Add(training);
-            this._unitOfWork.Complete();
-
+            await this._unitOfWork.Complete();
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<TrainingsController>/5
         [HttpPut("{id}")]
-        public ActionResult<TrainingRepository> Update(int id, [FromForm] Training training)
+        public async Task<ActionResult<TrainingRepository>> Update(int id, [FromForm] Training training)
         {
             if (id != training.Id)
             {
@@ -69,7 +68,7 @@ namespace ZRdemo3.Controllers
             try
             {
                 this._unitOfWork.Trainings.Update(training);
-                this._unitOfWork.Complete();
+                await this._unitOfWork.Complete();
             }
             catch (Exception ex)
             {
@@ -81,9 +80,9 @@ namespace ZRdemo3.Controllers
 
         // DELETE api/<TrainingsController>/5
         [HttpDelete("{id}")]
-        public ActionResult<TrainingRepository> Delete(int id)
+        public async Task<ActionResult<TrainingRepository>> Delete(int id)
         {
-            var training = this._unitOfWork.Trainings.GetById(id);
+            var training = await this._unitOfWork.Trainings.GetById(id);
 
             if (training == null)
             {
@@ -91,7 +90,7 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Trainings.Remove(training);
-            this._unitOfWork.Complete();
+            await this._unitOfWork.Complete();
 
             return this.RedirectToAction("GetAll");
         }

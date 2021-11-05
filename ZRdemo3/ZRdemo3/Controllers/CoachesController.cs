@@ -24,23 +24,23 @@ namespace ZRdemo3.Controllers
 
         // GET: api/<Coaches>
         [HttpGet]
-        public ActionResult<IEnumerable<CoachRepository>> GetAll()
+        public async Task<ActionResult<IEnumerable<CoachRepository>>> GetAll()
         {
-            var coaches = this._unitOfWork.Coaches.GetAll();
+            var coaches = await this._unitOfWork.Coaches.GetAll();
             return this.Ok(coaches);
         }
 
         // GET api/<CoachesController>/5
         [HttpGet("{id}")]
-        public ActionResult<CoachRepository> GetById(int id)
+        public async Task<ActionResult<CoachRepository>> GetById(int id)
         {
-            var coach = this._unitOfWork.Coaches.GetById(id);
+            var coach = await this._unitOfWork.Coaches.GetById(id);
             return this.Ok(coach);
         }
 
         // POST api/<CoachesController>
         [HttpPost]
-        public ActionResult<CoachRepository> Add([FromBody] Coach coach)
+        public async Task<ActionResult<CoachRepository>> Add([FromBody] Coach coach)
         {
             if (!this.ModelState.IsValid)
             {
@@ -48,14 +48,14 @@ namespace ZRdemo3.Controllers
             }
 
             this._unitOfWork.Coaches.Add(coach);
-            this._unitOfWork.Complete();
+            await this._unitOfWork.Complete();
             return this.Ok(coach);
         }
 
         // Update api/<CoachesController>/1
         // patch
         [HttpPut("{id}")]
-        public ActionResult Update(int id, [FromForm]Coach coach)
+        public async Task<ActionResult<CoachRepository>> Update(int id, [FromForm]Coach coach)
         {
             if (coach.CoachId != id)
             {
@@ -65,7 +65,7 @@ namespace ZRdemo3.Controllers
             try
             {
                 this._unitOfWork.Coaches.Update(coach);
-                this._unitOfWork.Complete();
+                await this._unitOfWork.Complete();
             }
             catch (Exception ex)
             {
@@ -77,11 +77,11 @@ namespace ZRdemo3.Controllers
 
         // DELETE api/<CoachesController>/5
         [HttpDelete("{id}")]
-        public ActionResult<CoachRepository> Delete(int id)
+        public async Task<ActionResult<CoachRepository>> Delete(int id)
         {
-            var coach = this._unitOfWork.Coaches.GetById(id);
+            var coach = await this._unitOfWork.Coaches.GetById(id);
             this._unitOfWork.Coaches.Remove(coach);
-            this._unitOfWork.Complete();
+            await this._unitOfWork.Complete();
             return this.Ok();
         }
     }
