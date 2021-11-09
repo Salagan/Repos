@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZRdemo3", "ZRdemo3\ZRdemo3.csproj", "{E7887033-F7DF-48F6-8DEC-15AA4D053C88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZRdemoData", "ZRdemoData\ZRdemoData.csproj", "{0D759DD6-8D89-4773-8D49-5E6E10DBB953}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZRdemoData", "ZRdemoData\ZRdemoData.csproj", "{0D759DD6-8D89-4773-8D49-5E6E10DBB953}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

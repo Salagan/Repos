@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Список пользователей</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>Список пользователей</h2>
+    <form name="gymForm">
+        <input type="hidden" name="id" value="0" />
+        <div class="form-group col-md-5">
+            <label for="Address">Address:</label>
+            <input class="form-control" name="Address" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="isAvailable">Available</label>
+            <input class="form-control" name="isAvailable" type="checkbox" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="workingHours">Working hours</label>
+            <input class="form-group" name="workingHours" />
+        </div>
+        <div class="panel-body">
+            <button type="submit" id="submit" class="btn btn-primary">Сохранить</button>
+            <a id="reset" class="btn btn-primary">Сбросить</a>
+        </div>
+    </form>
+    <table class="table table-condensed table-striped  col-md-6">
+        <thead><tr><th>Id</th><th>Address</th><th>isAvailable</th><th>WorkingHours</th><th></th><th></th></tr></thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div>2019 © Metanit.com</div>
+    <script>
+        // Получение всех пользователей
+        async function GetGyms() {
+            // отправляет запрос и получаем ответ
+            const response = await fetch("/api/gyms", {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            // если запрос прошел нормально
+            if (response.ok === true) {
+                // получаем данные
+                const gyms = await response.json();
+                let rows = document.querySelector("tbody");
+                gyms.forEach(gym => {
+                    // добавляем полученные элементы в таблицу
+                    rows.append(row(gym));
+                });
+            }
+        }
+        // Получение одного пользователя
+        async function GetGym(id) {
+            const response = await fetch("/api/gyms/" + id, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const gym = await response.json();
+                const form = document.forms["GymForm"];
+                form.elements["id"].value = gym.id;
+                form.elements["address"].value = gym.address;
+                form.elements["isAvailable"].value = gym.isAvailable;
+                form.elements["workingHours"].value = gym.workingHours;
+            }
+        }
+        // Добавление пользователя
+        async function CreateGym(gymName, gymAge) {
+
+            const response = await fetch("api/Gyms", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: GymName,
+                    age: parseInt(GgmAge, 10)
+                })
+            });
+            if (response.ok === true) {
+                const Gym = await response.json();
+                reset();
+                document.querySelector("tbody").append(row(Gym));
+            }
+        }
+        // Изменение пользователя
+        async function EditGym(GymId, GymName, GymAge) {
+            const response = await fetch("api/Gyms", {
+                method: "PUT",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: parseInt(GymId, 10),
+                    name: GymName,
+                    age: parseInt(GymAge, 10)
+                })
+            });
+            if (response.ok === true) {
+                const Gym = await response.json();
+                reset();
+                document.querySelector("tr[data-rowid='" + Gym.id + "']").replaceWith(row(Gym));
+            }
+        }
+        // Удаление пользователя
+        async function DeleteGym(id) {
+            const response = await fetch("/api/Gyms/" + id, {
+                method: "DELETE",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const Gym = await response.json();
+                document.querySelector("tr[data-rowid='" + Gym.id + "']").remove();
+            }
+        }
+
+        // сброс формы
+        function reset() {
+            const form = document.forms["gymForm"];
+            form.reset();
+            form.elements["id"].value = 0;
+        }
+        // создание строки для таблицы
+        function row(gym) {
+
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-rowid", gym.id);
+
+            const idTd = document.createElement("td");
+            idTd.append(gym.id);
+            tr.append(idTd);
+
+            const addressTd = document.createElement("td");
+            addressTd.append(gym.address);
+            tr.append(addressTd);
+
+            const isAvailableTd = document.createElement("td");
+            isAvailableTd.append(gym.isAvailable);
+            tr.append(isAvailableTd);
+
+            const workingHoursTd = document.createElement("td");
+            workingHoursTd.append(gym.workingHours);
+            tr.append(workingHoursTd);
+
+            const linksTd = document.createElement("td");
+
+            const editLink = document.createElement("a");
+            editLink.setAttribute("data-id", gym.id);
+            editLink.setAttribute("style", "cursor:pointer;padding:15px;");
+            editLink.append("Изменить");
+            editLink.addEventListener("click", e => {
+
+                e.preventDefault();
+                GetGym(gym.id);
+            });
+            linksTd.append(editLink);
+
+            const removeLink = document.createElement("a");
+            removeLink.setAttribute("data-id", gym.id);
+            removeLink.setAttribute("style", "cursor:pointer;padding:15px;");
+            removeLink.append("Удалить");
+            removeLink.addEventListener("click", e => {
+
+                e.preventDefault();
+                DeleteGym(gym.id);
+            });
+
+            linksTd.append(removeLink);
+            tr.appendChild(linksTd);
+
+            return tr;
+        }
+        // сброс значений формы
+        document.getElementById("reset").click(function (e) {
+
+            e.preventDefault();
+            reset();
+        })
+
+        // отправка формы
+        document.forms["gymForm"].addEventListener("submit", e => {
+            e.preventDefault();
+            const form = document.forms["gymForm"];
+            const id = form.elements["id"].value;
+            const address = form.elements["address"].value;
+            const isAvailable = form.elements["isAvailable"].value;
+            const workingHours = form.elements["workingHours"].value;
+            if (id == 0)
+                CreateGym(address, isAvailable, workingHours);
+            else
+                EditGym(id, address, isAvailable, workingHours);
+        });
+
+        // загрузка пользователей
+        GetGyms();
+
+    </script>
+</body>
+</html>

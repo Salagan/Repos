@@ -49,7 +49,7 @@ namespace ZRdemo3
             services.AddTransient<ITrainingRepository, TrainingRepository>();
             services.AddTransient<IGuestRepository, GuestRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-
+            services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));
         }
 
@@ -59,11 +59,14 @@ namespace ZRdemo3
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZRdemo3 v1"));
+
+                // app.UseSwagger();
+                // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZRdemo3 v1"));
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -72,6 +75,7 @@ namespace ZRdemo3
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Список пользователей</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>List of Students</h2>
+    <form name="studentForm">
+        <input type="hidden" name="studentId" value="0" />
+        <div class="form-group col-md-5">
+            <label for="firstName">FirstName:</label>
+            <input class="form-control" name="firstName" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="lastName">LastName:</label>
+            <input class="form-control" name="lastName" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="age">Age:</label>
+            <input class="form-control" name="age" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="groupOfStudetnsId">Group Id:</label>
+            <input class="form-control" name="groupOfStudetnsId" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="birthDate">Birth Date:</label>
+            <input class="form-control" name="birthDate" type="datetime" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="phoneNumber">Phone Number:</label>
+            <input class="form-control" name="phoneNumber" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="email">Email:</label>
+            <input class="form-control" name="email" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="gender">Gender:</label>
+            <input class="form-control" name="gender" type="range" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="injury">Injury:</label>
+            <input class="form-control" name="isAvailable" type="checkbox" />
+        </div>
+        <div class="form-group col-md-5">
+            <label for="belt">Belt</label>
+            <input class="form-group" name="workingHours" type="range" />
+        </div>
+        <div class="panel-body">
+            <button type="submit" id="submit" class="btn btn-primary">Save</button>
+            <a id="reset" class="btn btn-primary">Reset</a>
+        </div>
+    </form>
+    <table class="table table-condensed table-striped  col-md-6">
+        <thead><tr><th>StudentId</th><th>FirstName</th><th>LastName</th><th>Age</th><th>Group Id</th><th>Birth Date</th><th>Phone Number</th>
+               <th>Email</th><th>Gender</th><th>Injury</th><th>Belt</th><th></th><th></th>
+            </tr></thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        // Получение всех пользователей
+        async function GetStudents() {
+            // отправляет запрос и получаем ответ
+            const response = await fetch("/api/students", {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            // если запрос прошел нормально
+            if (response.ok === true) {
+                // получаем данные
+                const students = await response.json();
+                let rows = document.querySelector("tbody");
+                students.forEach(student => {
+                    // добавляем полученные элементы в таблицу
+                    rows.append(row(student));
+                });
+            }
+        }
+        // Получение одного пользователя
+        async function GetStudent(id) {
+            const response = await fetch("/api/students/" + id, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const student = await response.json();
+                const form = document.forms["studentForm"];
+                form.elements["studentId"].value = student.studentId;
+                form.elements["firstName"].value = student.firstName;
+                form.elements["lastName"].value = student.lastName;
+                form.elements["age"].value = student.age;
+                form.elements["groupOfStudentsId"].value = student.groupOfStudentsId;
+                form.elements["birthDate"].value = student.birthDate;
+                form.elements["phoneNumber"].value = student.phoneNumber;
+                form.elements["email"].value = student.email;
+                form.elements["gender"].value = student.gender;
+                form.elements["injury"].value = student.value;
+                form.elements["belt"].value = student.belt;
+            }
+        }
+        // Добавление пользователя
+        async function CreateStudent(StudentName, StudentAge) {
+
+            const response = await fetch("api/students", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: StudentName,
+                    age: parseInt(StudentAge, 10)
+                })
+            });
+            if (response.ok === true) {
+                const student = await response.json();
+                reset();
+                document.querySelector("tbody").append(row(student));
+            }
+        }
+        // Изменение пользователя
+        async function EditStudent(StudentId, StudentName, StudentAge) {
+            const response = await fetch("api/students", {
+                method: "PUT",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: parseInt(StudentId, 10),
+                    name: StudentName,
+                    age: parseInt(StudentAge, 10)
+                })
+            });
+            if (response.ok === true) {
+                const student = await response.json();
+                reset();
+                document.querySelector("tr[data-rowid='" + student.studentId + "']").replaceWith(row(student));
+            }
+        }
+        // Удаление пользователя
+        async function DeleteStudent(id) {
+            const response = await fetch("/api/student/" + id, {
+                method: "DELETE",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const student = await response.json();
+                document.querySelector("tr[data-rowid='" + student.studentId + "']").remove();
+            }
+        }
+
+        // сброс формы
+        function reset() {
+            const form = document.forms["studentForm"];
+            form.reset();
+            form.elements["studentId"].value = 0;
+        }
+        // создание строки для таблицы
+        function row(student) {
+
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-rowid", student.studentId);
+
+            const studentIdTd = document.createElement("td");
+            studentIdTd.append(student.studentId);
+            tr.append(studentIdTd);
+
+            const firstNameTd = document.createElement("td");
+            firstNameTd.append(student.firstName);
+            tr.append(firstNameTd);
+
+            const lastNameTd = document.createElement("td");
+            lastNameTd.append(student.lastName);
+            tr.append(lastNameTd);
+
+            const ageTd = document.createElement("td");
+            ageTd.append(student.age);
+            tr.append(ageTd);
+
+            const groupOfStudentsIdTd = document.createElement("td");
+            groupOfStudentsIdTd.append(student.groupOfStudentsId);
+            tr.append(groupOfStudentsIdTd);
+
+            const birthDateTd = document.createElement("td");
+            birthDateTd.append(student.birthDate);
+            tr.append(birthDateTd);
+
+            const phoneNumberTd = document.createElement("td");
+            phoneNumberTd.append(student.phoneNumber);
+            tr.append(phoneNumberTd);
+
+            const emailTd = document.createElement("td");
+            emailTd.append(student.email);
+            tr.append(emailTd);
+
+            const genderTd = document.createElement("td");
+            genderTd.append(student.gender);
+            tr.append(genderTd);
+
+            const injuryTd = document.createElement("td");
+            injuryTd.append(student.injury);
+            tr.append(injuryTd);
+
+            const beltTd = document.createElement("td");
+            beltTd.append(student.belt);
+            tr.append(beltTd);
+
+            const linksTd = document.createElement("td");
+
+            const editLink = document.createElement("a");
+            editLink.setAttribute("data-id", student.studentId);
+            editLink.setAttribute("style", "cursor:pointer;padding:15px;");
+            editLink.append("Изменить");
+            editLink.addEventListener("click", e => {
+
+                e.preventDefault();
+                GetStudent(student.studentId);
+            });
+            linksTd.append(editLink);
+
+            const removeLink = document.createElement("a");
+            removeLink.setAttribute("data-id", student.studentId);
+            removeLink.setAttribute("style", "cursor:pointer;padding:15px;");
+            removeLink.append("Удалить");
+            removeLink.addEventListener("click", e => {
+
+                e.preventDefault();
+                DeleteStudent(student.studentId);
+            });
+
+            linksTd.append(removeLink);
+            tr.appendChild(linksTd);
+
+            return tr;
+        }
+        // сброс значений формы
+        document.getElementById("reset").click(function (e) {
+
+            e.preventDefault();
+            reset();
+        })
+
+        // отправка формы
+        //document.forms["studentForm"].addEventListener("submit", e => {
+        //    e.preventDefault();
+        //    const form = document.forms["studentForm"];
+        //    const id = form.elements["id"].value;
+        //    const address = form.elements["address"].value;
+        //    const isAvailable = form.elements["isAvailable"].value;
+        //    const workingHours = form.elements["workingHours"].value;
+        //    if (id == 0)
+        //        CreateGym(address, isAvailable, workingHours);
+        //    else
+        //        EditGym(id, address, isAvailable, workingHours);
+        //});
+
+        // загрузка пользователей
+        GetStudents();
+
+    </script>
+</body>
+</html>

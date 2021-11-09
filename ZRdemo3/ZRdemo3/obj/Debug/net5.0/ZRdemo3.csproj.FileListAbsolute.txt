@@ -140,3 +140,4 @@ G:\dell\Repos\ZRdemo3\ZRdemo3\obj\Debug\net5.0\ZRdemo3.csproj.AssemblyReference.
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\ZRdemo3.Views.dll
