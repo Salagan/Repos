@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ZRdemoBll.Interfaces;
+using ZRdemoBll.Services;
 using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 using ZRdemoData.Repositories;
@@ -49,7 +51,7 @@ namespace ZRdemo3
             services.AddTransient<ITrainingRepository, TrainingRepository>();
             services.AddTransient<IGuestRepository, GuestRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddRazorPages();
+            services.AddTransient<IGymService, GymService>();
             services.AddAutoMapper(typeof(Startup));
         }
 
@@ -60,14 +62,13 @@ namespace ZRdemo3
             {
                 app.UseDeveloperExceptionPage();
 
-                // app.UseSwagger();
-                // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZRdemo3 v1"));
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZRdemo3 v1"));
             }
 
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseAuthorization();
@@ -75,7 +76,6 @@ namespace ZRdemo3
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapRazorPages();
             });
         }
     }

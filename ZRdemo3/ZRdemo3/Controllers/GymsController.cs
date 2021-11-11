@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ZRdemoBll.Interfaces;
+using ZRdemoBll.ModelsDTO;
 using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 using ZRdemoData.Repositories;
@@ -16,17 +19,20 @@ namespace ZRdemo3.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public GymsController(IUnitOfWork unitOfWork)
+        private readonly IGymService _gymService;
+
+        public GymsController(IUnitOfWork unitOfWork, IGymService serv)
         {
             this._unitOfWork = unitOfWork;
+            this._gymService = serv;
         }
 
         // GET: api/<GymsController>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GymRepository>>> GetAll()
         {
-            var gyms = await this._unitOfWork.Gyms.GetAll();
-            return this.Ok(gyms);
+            var gymDTOs = await this._gymService.GetGyms();
+            return this.Ok(gymDTOs);
         }
 
         // GET api/<GymsControllerr>/5
