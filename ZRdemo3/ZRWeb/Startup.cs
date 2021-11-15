@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Refit;
+using ZRWeb.HttpClients;
 
 namespace ZRWeb
 {
@@ -24,6 +26,11 @@ namespace ZRWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            
+            //services
+            //        .AddRefitClient<IGymApi>()
+            //        .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.github.com"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +57,9 @@ namespace ZRWeb
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Gym}/{action=Index}/{id?}");
             });
         }
     }

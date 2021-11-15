@@ -172,9 +172,11 @@
               "target": "Package",
               "version": "[10.1.1, )"
             },
-            "Ninject": {
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[3.3.4, )"
+              "version": "[1.1.118, )"
             }
           },
           "imports": [

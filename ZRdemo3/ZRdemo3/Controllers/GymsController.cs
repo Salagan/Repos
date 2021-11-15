@@ -6,9 +6,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ZRdemoBll.Interfaces;
 using ZRdemoBll.ModelsDTO;
-using ZRdemoData.Intrefaces;
-using ZRdemoData.Models;
-using ZRdemoData.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace ZRdemo3.Controllers
@@ -17,19 +14,16 @@ namespace ZRdemo3.Controllers
     [ApiController]
     public class GymsController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-
         private readonly IGymService _gymService;
 
-        public GymsController(IUnitOfWork unitOfWork, IGymService serv)
+        public GymsController(IGymService serv)
         {
-            this._unitOfWork = unitOfWork;
             this._gymService = serv;
         }
 
         // GET: api/<GymsController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GymRepository>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GymDTO>>> GetAll()
         {
             var gymDTOs = await this._gymService.GetGyms();
             return this.Ok(gymDTOs);
@@ -37,66 +31,44 @@ namespace ZRdemo3.Controllers
 
         // GET api/<GymsControllerr>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GymRepository>> GetById(int id)
+        public async Task<ActionResult<GymDTO>> GetById(int id)
         {
-            var gym = await this._unitOfWork.Gyms.GetById(id);
-            if (gym == null)
+            var gymDTO = await this._gymService.GetGymById(id);
+            if (gymDTO == null)
             {
                 return this.BadRequest();
             }
 
-            return this.Ok(gym);
+            return this.Ok(gymDTO);
         }
 
         // POST api/<GymsController>
         [HttpPost]
-        public async Task<ActionResult<GymRepository>> Add([FromBody] Gym gym)
+        public ActionResult<GymDTO> Add([FromBody] GymDTO gymDTO)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            this._unitOfWork.Gyms.Add(gym);
-            await this._unitOfWork.Complete();
+            this._gymService.Add(gymDTO);
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<GymsController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<GymRepository>> Update(int id, [FromBody] Gym gym)
+        public async Task<ActionResult<GymDTO>> Update(int id, [FromBody] GymDTO gymDTO)
         {
-            if (id != gym.Id)
-            {
-                return this.BadRequest();
-            }
-
-            try
-            {
-                this._unitOfWork.Gyms.Update(gym);
-                await this._unitOfWork.Complete();
-            }
-            catch (Exception ex)
-            {
-                return this.BadRequest(ex.Message);
-            }
+            var gym = await this._gymService.Edit(id, gymDTO);
 
             return this.Ok(gym);
         }
 
         // DELETE api/<GymsController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<GymRepository>> Delete(int id)
+        public ActionResult<GymDTO> Delete(int id)
         {
-            var gym = await this._unitOfWork.Gyms.GetById(id);
-
-            if (gym == null)
-            {
-                return this.BadRequest();
-            }
-
-            this._unitOfWork.Gyms.Remove(gym);
-            await this._unitOfWork.Complete();
+            this._gymService.Delete(id);
 
             return this.RedirectToAction("GetAll");
         }

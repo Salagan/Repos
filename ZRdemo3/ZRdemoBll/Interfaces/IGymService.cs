@@ -11,6 +11,14 @@ namespace ZRdemoBll.Interfaces
     {
         Task<IEnumerable<GymDTO>> GetGyms();
 
+        Task<GymDTO> GetGymById(int id);
+
+        void Add(GymDTO gymDTO);
+
+        Task<GymDTO> Edit(int id, GymDTO gymDTO);
+
+        void Delete(int id);
+
         void Dispose();
     }
 }
