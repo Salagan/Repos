@@ -53,6 +53,8 @@ namespace ZRdemo3
             services.AddTransient<IGuestRepository, GuestRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IGymService, GymService>();
+            services.AddTransient<ICoachService, CoachService>();
+            services.AddTransient<IGroupService, GroupService>();
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutomapperProfile());

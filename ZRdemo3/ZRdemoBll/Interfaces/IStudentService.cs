@@ -7,15 +7,15 @@ using ZRdemoBll.ModelsDTO;
 
 namespace ZRdemoBll.Interfaces
 {
-    public interface IGymService
+    public interface IStudentService
     {
-        Task<IEnumerable<GymDTO>> GetGyms();
+        Task<IEnumerable<StudentDTO>> GetStudents();
 
-        Task<GymDTO> GetGymById(int id);
+        Task<StudentDTO> GetStudent(int id);
 
-        void Add(GymDTO gymDTO);
+        void Add(StudentDTO studentDTO);
 
-        Task<GymDTO> Edit(int id, GymDTO gymDTO);
+        void Edit(int id, StudentDTO studentDTO);
 
         void Delete(int id);
     }

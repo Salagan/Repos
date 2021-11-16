@@ -3,29 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZRdemoData.Enums;
 
 namespace ZRdemoData.Models
 {
-    public enum Belts
-    {
-        White,
-        Grey,
-        Yellow,
-        Orange,
-        Green,
-        Blue,
-        Purple,
-        Brown,
-        Black,
-    }
-
-    public enum Gender
-    {
-        Male,
-        Female,
-        Other,
-    }
-
     public class Student
     {
         public int StudentId { get; set; }

@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZRdemoData", "ZRdemoData\ZR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZRWeb", "ZRWeb\ZRWeb.csproj", "{95D1DD08-C576-49F8-9EC6-95888870F440}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZRdemoBll", "ZRdemoBll\ZRdemoBll.csproj", "{2EAA052C-1351-4104-A8D9-3332851613B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZRdemoBll", "ZRdemoBll\ZRdemoBll.csproj", "{2EAA052C-1351-4104-A8D9-3332851613B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{46943974-ED3B-4A59-B696-BCE2F314ABAC}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

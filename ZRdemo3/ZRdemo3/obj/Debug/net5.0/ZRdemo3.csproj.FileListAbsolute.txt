@@ -141,15 +141,6 @@ G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dl
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\ZRdemo3.Views.dll
-G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\ZRdemo3.Views.pdb
-G:\dell\Repos\ZRdemo3\ZRdemo3\obj\Debug\net5.0\ZRdemo3.RazorAssemblyInfo.cache
-G:\dell\Repos\ZRdemo3\ZRdemo3\obj\Debug\net5.0\ZRdemo3.RazorAssemblyInfo.cs
-G:\dell\Repos\ZRdemo3\ZRdemo3\obj\Debug\net5.0\ZRdemo3.TagHelpers.input.cache
-G:\dell\Repos\ZRdemo3\ZRdemo3\obj\Debug\net5.0\ZRdemo3.TagHelpers.output.cache
-G:\dell\Repos\ZRdemo3\ZRdemo3\obj\Debug\net5.0\ZRdemo3.RazorCoreGenerate.cache
-G:\dell\Repos\ZRdemo3\ZRdemo3\obj\Debug\net5.0\ZRdemo3.RazorTargetAssemblyInfo.cs
-G:\dell\Repos\ZRdemo3\ZRdemo3\obj\Debug\net5.0\ZRdemo3.Views.pdb
-G:\dell\Repos\ZRdemo3\ZRdemo3\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Antiforgery.dll
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Authentication.Abstractions.dll
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Authentication.Cookies.dll

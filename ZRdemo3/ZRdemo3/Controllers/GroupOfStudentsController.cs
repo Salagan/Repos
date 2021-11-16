@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ZRdemoData.Intrefaces;
-using ZRdemoData.Models;
-using ZRdemoData.Repositories;
+using ZRdemoBll.Interfaces;
+using ZRdemoBll.ModelsDTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace ZRdemo3.Controllers
@@ -14,84 +13,69 @@ namespace ZRdemo3.Controllers
     [ApiController]
     public class GroupOfStudentsController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IGroupService _groupService;
 
-        public GroupOfStudentsController(IUnitOfWork unitOfWork)
+        public GroupOfStudentsController(IGroupService groupService)
         {
-            this._unitOfWork = unitOfWork;
+            this._groupService = groupService;
         }
 
         // GET: api/<GroupOfStudentsController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GroupOfStudentsRepository>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GroupOfStudentsDTO>>> GetAll()
         {
-            var groups = await this._unitOfWork.GroupsOfStudents.GetAll();
+            var groups = await this._groupService.GetGroups();
+
             return this.Ok(groups);
         }
 
         // GET api/<GroupOfStudentsController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GroupOfStudentsRepository>> GetById(int id)
+        public async Task<ActionResult<GroupOfStudentsDTO>> GetById(int id)
         {
-            var group = await this._unitOfWork.GroupsOfStudents.GetById(id);
-            if (group == null)
-            {
-                return this.BadRequest();
-            }
+            var group = await this._groupService.GetGroup(id);
 
             return this.Ok(group);
         }
 
         // POST api/<GroupOfStudentsController>
         [HttpPost]
-        public async Task<ActionResult<GroupOfStudentsRepository>> Add([FromBody] GroupOfStudents group)
+        public ActionResult<GroupOfStudentsDTO> Add([FromBody] GroupOfStudentsDTO group)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            this._unitOfWork.GroupsOfStudents.Add(group);
-            await this._unitOfWork.Complete();
+            this._groupService.Add(group);
 
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<GroupOfStudentsController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<GroupOfStudentsRepository>> Update(int id, [FromForm] GroupOfStudents group)
+        public ActionResult<GroupOfStudentsDTO> Update(int id, [FromBody] GroupOfStudentsDTO group)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
             if (id != group.Id)
             {
                 return this.BadRequest();
             }
 
-            try
-            {
-                this._unitOfWork.GroupsOfStudents.Update(group);
-                await this._unitOfWork.Complete();
-            }
-            catch (Exception ex)
-            {
-                return this.BadRequest(ex.Message);
-            }
+            this._groupService.Edit(id, group);
 
             return this.RedirectToAction("GetAll");
         }
 
         // DELETE api/<GroupOfStudentsController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<GroupOfStudentsRepository>> Delete(int id)
+        public ActionResult<GroupOfStudentsDTO> Delete(int id)
         {
-            var group = await this._unitOfWork.GroupsOfStudents.GetById(id);
-
-            if (group == null)
-            {
-                return this.BadRequest();
-            }
-
-            this._unitOfWork.GroupsOfStudents.Remove(group);
-            await this._unitOfWork.Complete();
+            this._groupService.Delete(id);
 
             return this.RedirectToAction("GetAll");
         }

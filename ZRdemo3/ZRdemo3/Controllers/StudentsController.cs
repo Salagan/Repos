@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ZRdemoData.Intrefaces;
-using ZRdemoData.Models;
-using ZRdemoData.Repositories;
+using ZRdemoBll.Interfaces;
+using ZRdemoBll.ModelsDTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace ZRdemo3.Controllers
@@ -14,62 +13,55 @@ namespace ZRdemo3.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IStudentService _studentService;
 
-        public StudentsController(IUnitOfWork unitOfWork)
+        public StudentsController(IStudentService studentService)
         {
-            this._unitOfWork = unitOfWork;
+            this._studentService = studentService;
         }
 
         // GET: api/<StudentsController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudentRepository>>> GetAll()
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetAll()
         {
-            var students = await this._unitOfWork.Students.GetAll();
+            var students = await this._studentService.GetStudents();
             return this.Ok(students);
         }
 
         // GET api/<StudentsController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<StudentRepository>> GetById(int id)
+        public async Task<ActionResult<StudentDTO>> GetById(int id)
         {
-            var student = await this._unitOfWork.Students.GetById(id);
-            if (student == null)
-            {
-                return this.BadRequest();
-            }
-
+            var student = await this._studentService.GetStudent(id);
             return this.Ok(student);
         }
 
         // POST api/<StudentsController>
         [HttpPost]
-        public async Task<ActionResult<StudentRepository>> Add([FromBody] Student student)
+        public ActionResult<StudentDTO> Add([FromBody] StudentDTO studentDTO)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            this._unitOfWork.Students.Add(student);
-            await this._unitOfWork.Complete();
+            this._studentService.Add(studentDTO);
 
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<StudentsController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<StudentRepository>> Update(int id, [FromForm] Student student)
+        public ActionResult<StudentDTO> Update(int id, [FromBody] StudentDTO studentDTO)
         {
-            if (id != student.StudentId)
+            if (id != studentDTO.StudentId)
             {
                 return this.BadRequest();
             }
 
             try
             {
-                this._unitOfWork.Students.Update(student);
-                await this._unitOfWork.Complete();
+                this._studentService.Edit(id, studentDTO);
             }
             catch (Exception ex)
             {
@@ -81,17 +73,9 @@ namespace ZRdemo3.Controllers
 
         // DELETE api/<StudentsController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<StudentRepository>> Delete(int id)
+        public ActionResult<StudentDTO> Delete(int id)
         {
-            var student = await this._unitOfWork.Students.GetById(id);
-
-            if (student == null)
-            {
-                return this.BadRequest();
-            }
-
-            this._unitOfWork.Students.Remove(student);
-            await this._unitOfWork.Complete();
+            this._studentService.Delete(id);
 
             return this.RedirectToAction("GetAll");
         }

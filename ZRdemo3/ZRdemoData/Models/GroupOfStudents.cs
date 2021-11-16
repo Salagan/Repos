@@ -4,18 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZRdemoData.Enums;
 
 namespace ZRdemoData.Models
 {
-    public enum GroupType
-    {
-        AdultBeginers,
-        AdultAdvance,
-        Kids,
-        Junior,
-        Juvenile,
-    }
-
     public class GroupOfStudents
     {
         public GroupOfStudents()

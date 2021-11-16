@@ -6,11 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Index.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\js\Site.js" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>

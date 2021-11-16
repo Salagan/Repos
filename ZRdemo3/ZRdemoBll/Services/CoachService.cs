@@ -1,0 +1,99 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
+using ZRdemoBll.Interfaces;
+using ZRdemoBll.ModelsDTO;
+using ZRdemoData.Intrefaces;
+using ZRdemoData.Models;
+
+namespace ZRdemoBll.Services
+{
+    public class CoachService : ICoachService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public CoachService(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            this._unitOfWork = unitOfWork;
+            this._mapper = mapper;
+        }
+
+        public async Task<IEnumerable<CoachDTO>> GetCoaches()
+        {
+            var coaches = await this._unitOfWork.Coaches.GetAll();
+
+            var coachesDTO = this._mapper.Map<IEnumerable<CoachDTO>>(coaches);
+
+            return coachesDTO;
+        }
+
+        public async Task<CoachDTO> GetCoach(int id)
+        {
+            var coach = await this._unitOfWork.Coaches.GetById(id);
+            if (coach == null)
+            {
+                throw new Exception("Not found");
+            }
+
+            var coachDTO = this._mapper.Map<CoachDTO>(coach);
+
+            return coachDTO;
+        }
+
+        public async void Add(CoachDTO coachDTO)
+        {
+            var coachEx = this._unitOfWork.Coaches.Find(c => c.FirstName == coachDTO.FirstName)
+                                                 .Where(c => c.LastName == coachDTO.LastName)
+                                                 .FirstOrDefault();
+            if (coachEx != null)
+            {
+                throw new Exception("Allready exist");
+            }
+
+            var coach = this._mapper.Map<Coach>(coachDTO);
+
+            this._unitOfWork.Coaches.Add(coach);
+
+            await this._unitOfWork.Complete();
+        }
+
+        public async void Edit(int id, CoachDTO coachDTO)
+        {
+            var coach = await this._unitOfWork.Coaches.GetById(id);
+
+            if (coach == null)
+            {
+                throw new Exception("Not found!");
+            }
+
+            if (coachDTO.CoachId != id)
+            {
+                coachDTO.CoachId = id;
+            }
+
+            this._mapper.Map(coachDTO, coach);
+
+            this._unitOfWork.Coaches.Update(coach);
+
+            await this._unitOfWork.Complete();
+        }
+
+        public async void Delete(int id)
+        {
+            var coach = await this._unitOfWork.Coaches.GetById(id);
+
+            if (coach == null)
+            {
+                throw new Exception("Not found!");
+            }
+
+            this._unitOfWork.Coaches.Remove(coach);
+
+            await this._unitOfWork.Complete();
+        }
+    }
+}

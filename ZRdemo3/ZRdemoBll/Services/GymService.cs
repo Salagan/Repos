@@ -13,24 +13,24 @@ namespace ZRdemoBll.Services
 {
     public class GymService : IGymService
     {
-        private readonly IUnitOfWork Database;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public GymService (IUnitOfWork unitOfWork, IMapper mapper)
         {
-            this.Database = unitOfWork;
+            this._unitOfWork = unitOfWork;
             this._mapper = mapper;
         }
 
         public async Task<IEnumerable<GymDTO>> GetGyms()
         {
-            var gyms = await this.Database.Gyms.GetAll();
+            var gyms = await this._unitOfWork.Gyms.GetAll();
             return this._mapper.Map<IEnumerable<Gym>, IEnumerable<GymDTO>>(gyms);
         }
 
         public async Task<GymDTO> GetGymById(int id)
         {
-            var gym = await this.Database.Gyms.GetById(id);
+            var gym = await this._unitOfWork.Gyms.GetById(id);
             return this._mapper.Map<GymDTO>(gym);
         }
 
@@ -42,20 +42,20 @@ namespace ZRdemoBll.Services
            }
 
             // method to check if object exact same object is already exist
-           if (this.Database.Gyms.Find(g => g.Address.Trim().ToLower() == gymDTO.Address.Trim().ToLower()) != null)
+           if (this._unitOfWork.Gyms.Find(g => g.Address.Trim().ToLower() == gymDTO.Address.Trim().ToLower()) != null)
            {
                 throw new Exception("Gym allready exist");
            }
 
            var gym = this._mapper.Map<Gym>(gymDTO);
 
-           this.Database.Gyms.Add(gym);
-           await this.Database.Complete();
+           this._unitOfWork.Gyms.Add(gym);
+           await this._unitOfWork.Complete();
         }
 
         public async Task<GymDTO> Edit(int id, GymDTO gymDTO)
         {
-            var gym = await this.Database.Gyms.GetById(id);
+            var gym = await this._unitOfWork.Gyms.GetById(id);
 
             if (gym == null)
             {
@@ -69,30 +69,25 @@ namespace ZRdemoBll.Services
 
             this._mapper.Map(gymDTO, gym);
 
-            this.Database.Gyms.Update(gym);
+            this._unitOfWork.Gyms.Update(gym);
 
-            await this.Database.Complete();
+            await this._unitOfWork.Complete();
 
             return gymDTO;
         }
 
         public async void Delete(int id)
         {
-            var gym = await this.Database.Gyms.GetById(id);
+            var gym = await this._unitOfWork.Gyms.GetById(id);
 
             if (gym == null)
             {
                 throw new Exception("There is no such gym");
             }
 
-            this.Database.Gyms.Remove(gym);
+            this._unitOfWork.Gyms.Remove(gym);
 
-            await this.Database.Complete();
-        }
-
-        public void Dispose()
-        {
-            this.Database.Dispose();
+            await this._unitOfWork.Complete();
         }
     }
 }

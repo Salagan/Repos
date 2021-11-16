@@ -4,23 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZRdemoData.Enums;
 
 namespace ZRdemoData.Models
 {
-    public enum TypeOfTraining
-    {
-        RegularTraining,
-        Seminar,
-        OpenMat,
-        Personal,
-    }
-
-    public enum Uniform
-    {
-        Gi,
-        NoGi,
-    }
-
     public class Training
     {
         public int Id { get; set; }

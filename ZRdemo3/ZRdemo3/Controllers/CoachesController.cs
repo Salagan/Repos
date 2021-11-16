@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ZRdemoBll.Interfaces;
 using ZRdemoBll.ModelsDTO;
-using ZRdemoData.Intrefaces;
-using ZRdemoData.Models;
-using ZRdemoData.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace ZRdemo3.Controllers
@@ -16,73 +13,74 @@ namespace ZRdemo3.Controllers
     [ApiController]
     public class CoachesController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICoachService _coachService;
 
-        public CoachesController(IUnitOfWork unitOfWork)
+        public CoachesController(ICoachService coachService)
         {
-            this._unitOfWork = unitOfWork;
+            this._coachService = coachService;
         }
 
         // GET: api/<Coaches>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CoachRepository>>> GetAll()
+        public async Task<ActionResult<IEnumerable<CoachDTO>>> GetAll()
         {
-            var coaches = await this._unitOfWork.Coaches.GetAll();
+            var coaches = await this._coachService.GetCoaches();
             return this.Ok(coaches);
         }
 
         // GET api/<CoachesController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CoachRepository>> GetById(int id)
+        public async Task<ActionResult<CoachDTO>> GetById(int? id)
         {
-            var coach = await this._unitOfWork.Coaches.GetById(id);
+            if (id == null)
+            {
+                return this.BadRequest();
+            }
+
+            var coach = await this._coachService.GetCoach((int)id);
+
             return this.Ok(coach);
         }
 
         // POST api/<CoachesController>
         [HttpPost]
-        public async Task<ActionResult<CoachRepository>> Add([FromBody] Coach coach)
+        public ActionResult<CoachDTO> Add([FromBody] CoachDTO coachDTO)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            this._unitOfWork.Coaches.Add(coach);
-            await this._unitOfWork.Complete();
-            return this.Ok(coach);
+            this._coachService.Add(coachDTO);
+
+            return this.RedirectToAction("GetAll");
         }
 
         // Update api/<CoachesController>/1
-        // patch
         [HttpPut("{id}")]
-        public async Task<ActionResult<CoachRepository>> Update(int id, [FromForm]Coach coach)
+        public ActionResult<CoachDTO> Update(int id, [FromBody]CoachDTO coachDTO)
         {
-            if (coach.CoachId != id)
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            if (coachDTO.CoachId != id)
             {
                 return this.BadRequest();
             }
 
-            try
-            {
-                this._unitOfWork.Coaches.Update(coach);
-                await this._unitOfWork.Complete();
-            }
-            catch (Exception ex)
-            {
-                return this.BadRequest(ex.Message);
-            }
+            this._coachService.Edit(id, coachDTO);
 
             return this.RedirectToAction("GetAll");
         }
 
         // DELETE api/<CoachesController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CoachRepository>> Delete(int id)
+        public ActionResult<CoachDTO> Delete(int id)
         {
-            var coach = await this._unitOfWork.Coaches.GetById(id);
-            this._unitOfWork.Coaches.Remove(coach);
-            await this._unitOfWork.Complete();
+            this._coachService.Delete(id);
+
             return this.Ok();
         }
     }
