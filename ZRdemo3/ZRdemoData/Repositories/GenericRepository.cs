@@ -30,9 +30,22 @@ namespace ZRdemoData.Repositories
             this._context.Set<T>().AddRange(entities);
         }
 
-        public virtual IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+        public virtual IQueryable<T> Find(Expression<Func<T, bool>> expression)
         {
             return this._context.Set<T>().Where(expression);
+        }
+
+        public async virtual Task<T> FindAsync(params Expression<Func<T, bool>>[] expressions)
+        {
+            IQueryable<T> t = this._context.Set<T>();
+            //return expressions.Aggregate(t, (a, b) => a.Where(b));
+
+            foreach (Expression<Func<T, bool>> a in expressions)
+            {
+                t = t.Where(a);
+            }
+
+            return await t.FirstOrDefaultAsync();
         }
 
         public async virtual Task<IEnumerable<T>> GetAll()

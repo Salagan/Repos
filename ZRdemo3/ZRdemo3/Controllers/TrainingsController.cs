@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ZRdemoData.Intrefaces;
-using ZRdemoData.Models;
-using ZRdemoData.Repositories;
+using ZRdemoBll.Interfaces;
+using ZRdemoBll.ModelsDTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace ZRdemo3.Controllers
@@ -14,61 +13,56 @@ namespace ZRdemo3.Controllers
     [ApiController]
     public class TrainingsController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ITrainingService _trainigService;
 
-        public TrainingsController(IUnitOfWork unitOfWork)
+        public TrainingsController(ITrainingService trainingService)
         {
-            this._unitOfWork = unitOfWork;
+            this._trainigService = trainingService;
         }
 
         // GET: api/<TrainingsController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TrainingRepository>>> GetAll()
+        public async Task<ActionResult<IEnumerable<TrainingDTO>>> GetAll()
         {
-            var trainings = await this._unitOfWork.Trainings.GetAll();
+            var trainings = await this._trainigService.GetTrainings();
             return this.Ok(trainings);
         }
 
         // GET api/<TrainingsController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TrainingRepository>> GetById(int id)
+        public async Task<ActionResult<TrainingDTO>> GetById(int id)
         {
-            var training = await this._unitOfWork.Trainings.GetById(id);
-            if (training == null)
-            {
-                return this.BadRequest();
-            }
+            var training = await this._trainigService.GetTraining(id);
 
             return this.Ok(training);
         }
 
         // POST api/<TrainingsController>
         [HttpPost]
-        public async Task<ActionResult<TrainingRepository>> Add([FromBody] Training training)
+        public ActionResult<TrainingDTO> Add([FromBody] TrainingDTO trainingDTO)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            this._unitOfWork.Trainings.Add(training);
-            await this._unitOfWork.Complete();
+            this._trainigService.Add(trainingDTO);
+
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<TrainingsController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<TrainingRepository>> Update(int id, [FromForm] Training training)
+        public ActionResult<TrainingDTO> Update(int id, [FromForm] TrainingDTO trainingDTO)
         {
-            if (id != training.Id)
+            if (id != trainingDTO.Id)
             {
                 return this.BadRequest();
             }
 
             try
             {
-                this._unitOfWork.Trainings.Update(training);
-                await this._unitOfWork.Complete();
+                this._trainigService.Edit(id, trainingDTO);
             }
             catch (Exception ex)
             {
@@ -80,17 +74,9 @@ namespace ZRdemo3.Controllers
 
         // DELETE api/<TrainingsController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TrainingRepository>> Delete(int id)
+        public ActionResult<TrainingDTO> Delete(int id)
         {
-            var training = await this._unitOfWork.Trainings.GetById(id);
-
-            if (training == null)
-            {
-                return this.BadRequest();
-            }
-
-            this._unitOfWork.Trainings.Remove(training);
-            await this._unitOfWork.Complete();
+            this._trainigService.Delete(id);
 
             return this.RedirectToAction("GetAll");
         }

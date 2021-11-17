@@ -55,6 +55,7 @@ namespace ZRdemo3
             services.AddTransient<IGymService, GymService>();
             services.AddTransient<ICoachService, CoachService>();
             services.AddTransient<IGroupService, GroupService>();
+            services.AddTransient<IGuestService, GuestService>();
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutomapperProfile());
@@ -76,7 +77,7 @@ namespace ZRdemo3
             }
 
             app.UseHttpsRedirection();
-            
+
             app.UseRouting();
 
             app.UseAuthorization();

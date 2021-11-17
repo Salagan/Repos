@@ -16,7 +16,7 @@ namespace ZRdemoBll.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GymService (IUnitOfWork unitOfWork, IMapper mapper)
+        public GymService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this._unitOfWork = unitOfWork;
             this._mapper = mapper;
@@ -42,7 +42,7 @@ namespace ZRdemoBll.Services
            }
 
             // method to check if object exact same object is already exist
-           if (this._unitOfWork.Gyms.Find(g => g.Address.Trim().ToLower() == gymDTO.Address.Trim().ToLower()) != null)
+           if (this._unitOfWork.Gyms.FindAsync(g => g.Address.Trim().ToLower() == gymDTO.Address.Trim().ToLower()) != null)
            {
                 throw new Exception("Gym allready exist");
            }

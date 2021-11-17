@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ZRdemoBll.Interfaces;
 using ZRdemoBll.ModelsDTO;
 using ZRdemoData.Intrefaces;
@@ -46,9 +47,9 @@ namespace ZRdemoBll.Services
 
         public async void Add(CoachDTO coachDTO)
         {
-            var coachEx = this._unitOfWork.Coaches.Find(c => c.FirstName == coachDTO.FirstName)
-                                                 .Where(c => c.LastName == coachDTO.LastName)
-                                                 .FirstOrDefault();
+            var coachEx = this._unitOfWork.Coaches.FindAsync(c => c.FirstName == coachDTO.FirstName,
+                                                             c => c.LastName == coachDTO.LastName);
+
             if (coachEx != null)
             {
                 throw new Exception("Allready exist");

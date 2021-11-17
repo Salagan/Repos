@@ -9,7 +9,6 @@ using ZRdemoBll.ModelsDTO;
 using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 
-
 namespace ZRdemoBll.Services
 {
     public class GroupService : IGroupService
@@ -47,9 +46,8 @@ namespace ZRdemoBll.Services
 
         public async void Add(GroupOfStudentsDTO groupOfStudentsDTO)
         {
-            var groupEx = this._unitOfWork.GroupsOfStudents.Find(g => g.GroupType.ToString() == groupOfStudentsDTO.GroupType.ToString())
-                                                 .Where(g => g.GroupAge == groupOfStudentsDTO.GroupAge)
-                                                 .FirstOrDefault();
+            var groupEx = this._unitOfWork.GroupsOfStudents.FindAsync(g => g.GroupType.ToString() == groupOfStudentsDTO.GroupType.ToString(),
+                                                                      g => g.GroupAge == groupOfStudentsDTO.GroupAge);
             if (groupEx != null)
             {
                 throw new Exception("Allready exist");

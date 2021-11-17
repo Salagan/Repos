@@ -2,3 +2,6 @@
 
 # SA1600: Elements should be documented
 dotnet_diagnostic.SA1600.severity = none
+
+# SA1309: Field names should not begin with underscore
+dotnet_diagnostic.SA1309.severity = none

@@ -47,10 +47,9 @@ namespace ZRdemoBll.Services
 
         public async void Add(StudentDTO studentDTO)
         {
-            var studentEx = this._unitOfWork.Students.Find(s => s.FirstName == studentDTO.FirstName)
-                                                 .Where(s => s.LastName == studentDTO.LastName)
-                                                 .Where(s => s.Age == studentDTO.Age)
-                                                 .FirstOrDefault();
+            var studentEx = this._unitOfWork.Students.FindAsync(s => s.FirstName == studentDTO.FirstName,
+                                                                s => s.LastName == studentDTO.LastName,
+                                                                s => s.Age == studentDTO.Age);
             if (studentEx != null)
             {
                 throw new Exception("Allready exist");
