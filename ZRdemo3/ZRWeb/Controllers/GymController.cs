@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ZRdemoContracts.ModelsDTO;
 using ZRWeb.HttpClients;
 
 namespace ZRWeb.Controllers
@@ -18,9 +19,11 @@ namespace ZRWeb.Controllers
             _gymApi = RestService.For<IGymApi>("https://localhost:44301");
         }
         // GET: GymController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var gyms = await this._gymApi.GetGyms();
+            
+            return View(gyms);
         }
 
         // GET: GymController/Details/5
@@ -52,15 +55,16 @@ namespace ZRWeb.Controllers
         }
 
         // GET: GymController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var gym = await this._gymApi.GetById(id);
+            return View(gym);
         }
 
         // POST: GymController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, GymDTO gymDTO)
         {
             try
             {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Refit;
-using ZRdemoBll.ModelsDTO;
+using ZRdemoContracts.ModelsDTO;
 
 namespace ZRWeb.HttpClients
 {
@@ -11,5 +11,11 @@ namespace ZRWeb.HttpClients
     {
         [Get("/api/gyms/{id}")]
         Task<GymDTO> GetById(int id);
+
+        [Get("/api/gyms")]
+        Task<IEnumerable<GymDTO>> GetGyms();
+
+        [Post("/api/gyms/{id}")]
+        Task Edit(int id, GymDTO gymDTO);
     }
 }

@@ -44,7 +44,6 @@
           "StyleCop.Analyzers": "1.1.118",
           "Swashbuckle.AspNetCore": "6.2.3",
           "ZRdemoBll": "1.0.0",
-          "ZRdemoData": "1.0.0",
           "knockoutjs": "3.5.1",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
@@ -1984,6 +1983,7 @@
       "ZRdemoBll/1.0.0": {
         "dependencies": {
           "AutoMapper": "10.1.1",
+          "ZRdemoContracts": "1.0.0",
           "ZRdemoData": "1.0.0"
         },
         "runtime": {
@@ -1991,6 +1991,14 @@
         },
         "compile": {
           "ZRdemoBll.dll": {}
+        }
+      },
+      "ZRdemoContracts/1.0.0": {
+        "runtime": {
+          "ZRdemoContracts.dll": {}
+        },
+        "compile": {
+          "ZRdemoContracts.dll": {}
         }
       },
       "ZRdemoData/1.0.0": {
@@ -4680,6 +4688,11 @@
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
     "ZRdemoBll/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ZRdemoContracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

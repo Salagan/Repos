@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZRdemoBll\ZRdemoBll.csproj" />
-    <ProjectReference Include="..\ZRdemoData\ZRdemoData.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,35 @@
+﻿@page
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<ZRdemoContracts.ModelsDTO.GymDTO>
+@{
+}
+@{
+}
+<h2></h2>
+
+<h1>Gyms home page</h1>
+<form method="get">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Address)</th>
+                <th>@Html.DisplayNameFor(model => model.IsAvailable)</th>
+                <th>@Html.DisplayNameFor(model => model.WorkingHours)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var gym in Model)
+            {
+                <tr>
+                    <td>  @Html.DisplayFor(modelItem => gym.Id)  </td>
+                    <td> @Html.DisplayFor(modelItem => gym.Address)</td>
+                    <td> @Html.DisplayFor(modelItem => gym.IsAvailable)</td>
+                    <td> @Html.DisplayFor(modelItem => gym.WorkingHours)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

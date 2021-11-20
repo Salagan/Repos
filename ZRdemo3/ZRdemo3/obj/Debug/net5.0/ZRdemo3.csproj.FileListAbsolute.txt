@@ -427,3 +427,5 @@ G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Razor.Ru
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\ZRdemoBll.dll
 G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\ZRdemoBll.pdb
+G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\ZRdemoContracts.dll
+G:\dell\Repos\ZRdemo3\ZRdemo3\bin\Debug\net5.0\ZRdemoContracts.pdb

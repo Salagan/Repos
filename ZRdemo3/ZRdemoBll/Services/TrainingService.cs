@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ZRdemoBll.Interfaces;
-using ZRdemoBll.ModelsDTO;
+using ZRdemoContracts.ModelsDTO;
 using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 

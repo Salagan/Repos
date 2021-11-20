@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ZRdemoBll.Interfaces;
-using ZRdemoBll.ModelsDTO;
+using ZRdemoContracts.ModelsDTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace ZRdemo3.Controllers
@@ -56,7 +56,7 @@ namespace ZRdemo3.Controllers
 
         // PUT api/<GymsController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<GymDTO>> Update(int id, [FromBody] GymDTO gymDTO)
+        public async Task<ActionResult<GymDTO>> Update(int id, [FromForm] GymDTO gymDTO)
         {
             var gym = await this._gymService.Edit(id, gymDTO);
 

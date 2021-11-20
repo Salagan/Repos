@@ -2197,6 +2197,7 @@
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "AutoMapper": "10.1.1",
+          "ZRdemoContracts": "1.0.0",
           "ZRdemoData": "1.0.0"
         },
         "compile": {
@@ -2204,6 +2205,16 @@
         },
         "runtime": {
           "bin/placeholder/ZRdemoBll.dll": {}
+        }
+      },
+      "ZRdemoContracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/ZRdemoContracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ZRdemoContracts.dll": {}
         }
       },
       "ZRdemoData/1.0.0": {
@@ -7673,6 +7684,11 @@
       "path": "../ZRdemoBll/ZRdemoBll.csproj",
       "msbuildProject": "../ZRdemoBll/ZRdemoBll.csproj"
     },
+    "ZRdemoContracts/1.0.0": {
+      "type": "project",
+      "path": "../ZRdemoContracts/ZRdemoContracts.csproj",
+      "msbuildProject": "../ZRdemoContracts/ZRdemoContracts.csproj"
+    },
     "ZRdemoData/1.0.0": {
       "type": "project",
       "path": "../ZRdemoData/ZRdemoData.csproj",
@@ -7692,7 +7708,6 @@
       "StyleCop.Analyzers >= 1.1.118",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "ZRdemoBll >= 1.0.0",
-      "ZRdemoData >= 1.0.0",
       "knockoutjs >= 3.5.1"
     ]
   },
@@ -7730,9 +7745,6 @@
           "projectReferences": {
             "G:\\dell\\Repos\\ZRdemo3\\ZRdemoBll\\ZRdemoBll.csproj": {
               "projectPath": "G:\\dell\\Repos\\ZRdemo3\\ZRdemoBll\\ZRdemoBll.csproj"
-            },
-            "G:\\dell\\Repos\\ZRdemo3\\ZRdemoData\\ZRdemoData.csproj": {
-              "projectPath": "G:\\dell\\Repos\\ZRdemo3\\ZRdemoData\\ZRdemoData.csproj"
             }
           }
         }

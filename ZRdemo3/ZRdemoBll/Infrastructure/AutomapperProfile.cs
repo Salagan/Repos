@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using ZRdemoBll.ModelsDTO;
+using ZRdemoContracts.ModelsDTO;
 using ZRdemoData.Models;
 
 namespace ZRdemoBll.Infrastructure

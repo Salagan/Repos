@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using ZRdemoBll.Interfaces;
-using ZRdemoBll.ModelsDTO;
+using ZRdemoContracts.ModelsDTO;
 using ZRdemoData.Intrefaces;
 using ZRdemoData.Models;
 

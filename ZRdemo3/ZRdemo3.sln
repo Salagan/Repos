@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZRdemoContracts", "ZRdemoContracts\ZRdemoContracts.csproj", "{7C9FB0D1-F95A-4406-876E-5C855B94D2AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{2EAA052C-1351-4104-A8D9-3332851613B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EAA052C-1351-4104-A8D9-3332851613B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EAA052C-1351-4104-A8D9-3332851613B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C9FB0D1-F95A-4406-876E-5C855B94D2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C9FB0D1-F95A-4406-876E-5C855B94D2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C9FB0D1-F95A-4406-876E-5C855B94D2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C9FB0D1-F95A-4406-876E-5C855B94D2AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

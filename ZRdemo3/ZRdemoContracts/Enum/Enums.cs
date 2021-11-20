@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZRdemoBll.Enums
+namespace ZRdemoContracts.Enum
 {
     public enum GroupType
     {
