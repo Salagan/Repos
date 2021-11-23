@@ -44,21 +44,28 @@ namespace ZRdemo3.Controllers
 
         // POST api/<CoachesController>
         [HttpPost]
-        public ActionResult<CoachDTO> Add([FromBody] CoachDTO coachDTO)
+        public async Task<ActionResult<CoachDTO>> Add([FromBody] CoachDTO coachDTO)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            this._coachService.Add(coachDTO);
+            try
+            {
+                await this._coachService.Add(coachDTO);
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
 
             return this.RedirectToAction("GetAll");
         }
 
         // Update api/<CoachesController>/1
         [HttpPut("{id}")]
-        public ActionResult<CoachDTO> Update(int id, [FromBody]CoachDTO coachDTO)
+        public async Task<ActionResult<CoachDTO>> Update(int id, [FromBody]CoachDTO coachDTO)
         {
             if (!this.ModelState.IsValid)
             {
@@ -70,16 +77,23 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest();
             }
 
-            this._coachService.Edit(id, coachDTO);
+            try
+            {
+                await this._coachService.Edit(id, coachDTO);
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
 
             return this.RedirectToAction("GetAll");
         }
 
         // DELETE api/<CoachesController>/5
         [HttpDelete("{id}")]
-        public ActionResult<CoachDTO> Delete(int id)
+        public async Task<ActionResult<CoachDTO>> Delete(int id)
         {
-            this._coachService.Delete(id);
+            await this._coachService.Delete(id);
 
             return this.Ok();
         }

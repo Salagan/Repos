@@ -44,10 +44,15 @@ namespace ZRdemoBll.Services
             return groupDTO;
         }
 
-        public async void Add(GroupOfStudentsDTO groupOfStudentsDTO)
+        public async Task Add(GroupOfStudentsDTO groupOfStudentsDTO)
         {
-            var groupEx = this._unitOfWork.GroupsOfStudents.FindAsync(g => g.GroupType.ToString() == groupOfStudentsDTO.GroupType.ToString(),
-                                                                      g => g.GroupAge == groupOfStudentsDTO.GroupAge);
+            var groupType = (ZRdemoData.Enums.GroupType)((int)groupOfStudentsDTO.GroupType);
+
+            var groupEx = await this._unitOfWork.GroupsOfStudents.FindOneAsync(g => g.GroupType == groupType && g.GroupAge == groupOfStudentsDTO.GroupAge);
+
+            // var groupEx =  this._unitOfWork.GroupsOfStudents.Find(g => g.GroupType == groupType&& g.GroupAge == groupOfStudentsDTO.GroupAge).FirstOrDefault();
+            // var groupEx = this._unitOfWork.GroupsOfStudents.Find(g => g.GroupType.ToString() == groupOfStudentsDTO.GroupType.ToString())
+            //                                                .Where(g => g.GroupAge == groupOfStudentsDTO.GroupAge).FirstOrDefault();
             if (groupEx != null)
             {
                 throw new Exception("Allready exist");
@@ -59,7 +64,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Edit(int id, GroupOfStudentsDTO groupOfStudentsDTO)
+        public async Task Edit(int id, GroupOfStudentsDTO groupOfStudentsDTO)
         {
             var group = await this._unitOfWork.GroupsOfStudents.GetById(id);
 
@@ -80,7 +85,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             var group = await this._unitOfWork.GroupsOfStudents.GetById(id);
 

@@ -14,7 +14,10 @@ namespace ZRdemoData.Intrefaces
 
         Task<IEnumerable<T>> GetAll();
 
-        Task<T> FindAsync(params Expression<Func<T, bool>>[] expressions);
+        // T FindOne(Expression<Func<T, bool>> expressions);
+        Task<T> FindOneAsync(Expression<Func<T, bool>> expression);
+
+        Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression);
 
         void Add(T entity);
 

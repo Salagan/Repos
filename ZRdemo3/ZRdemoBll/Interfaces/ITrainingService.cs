@@ -13,10 +13,10 @@ namespace ZRdemoBll.Interfaces
 
         Task<TrainingDTO> GetTraining(int id);
 
-        void Add(TrainingDTO trainingDTO);
+        Task Add(TrainingDTO trainingDTO);
 
-        void Edit(int id, TrainingDTO trainingDTO);
+        Task Edit(int id, TrainingDTO trainingDTO);
 
-        void Delete(int id);
+        Task Delete(int id);
     }
 }

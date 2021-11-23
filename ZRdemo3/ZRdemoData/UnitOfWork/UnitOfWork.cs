@@ -49,7 +49,7 @@ namespace ZRdemoData.UnitOfWork
 
         public void Dispose()
         {
-            this._context.Dispose();
+            this._context.DisposeAsync();
             GC.SuppressFinalize(this);
         }
     }

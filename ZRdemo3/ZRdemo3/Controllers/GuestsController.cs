@@ -40,21 +40,28 @@ namespace ZRdemo3.Controllers
 
         // POST api/<Controller>
         [HttpPost]
-        public ActionResult<GuestDTO> Add([FromBody] GuestDTO guestDTO)
+        public async Task<ActionResult<GuestDTO>> Add([FromBody] GuestDTO guestDTO)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            this._guestService.Add(guestDTO);
+            try
+            {
+               await this._guestService.Add(guestDTO);
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
 
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<Controller>/5
-        [HttpPut("{id}")]
-        public ActionResult<GuestDTO> Update(int id, [FromBody] GuestDTO guestDTO)
+        [HttpPost("{id}")]
+        public async Task<ActionResult<GuestDTO>> Update(int id, [FromBody] GuestDTO guestDTO)
         {
             if (id != guestDTO.Id)
             {
@@ -63,7 +70,7 @@ namespace ZRdemo3.Controllers
 
             try
             {
-                this._guestService.Edit(id, guestDTO);
+               await this._guestService.Edit(id, guestDTO);
             }
             catch (Exception ex)
             {
@@ -75,9 +82,9 @@ namespace ZRdemo3.Controllers
 
         // DELETE api/<Controller>/5
         [HttpDelete("{id}")]
-        public ActionResult<GuestDTO> Delete(int id)
+        public async Task<ActionResult<GuestDTO>> Delete(int id)
         {
-            this._guestService.Delete(id);
+            await this._guestService.Delete(id);
 
             return this.RedirectToAction("GetAll");
         }

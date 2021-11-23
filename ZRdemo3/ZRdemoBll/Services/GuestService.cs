@@ -45,10 +45,11 @@ namespace ZRdemoBll.Services
             return guestDTO;
         }
 
-        public async void Add(GuestDTO guestDTO)
+        public async Task Add(GuestDTO guestDTO)
         {
-            var guestEx = this._unitOfWork.Guests.FindAsync(g => g.Name == guestDTO.Name,
-                                                            g => g.LastName == guestDTO.LastName);
+            // var guestEx = await this._unitOfWork.Guests.FindOneAsync(g => g.Name == guestDTO.Name,
+            //                                                g => g.LastName == guestDTO.LastName);
+            var guestEx = await this._unitOfWork.Guests.FindOneAsync(g => g.Name == guestDTO.Name && g.LastName == guestDTO.LastName);
 
             if (guestEx != null)
             {
@@ -62,7 +63,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Edit(int id, GuestDTO guestDTO)
+        public async Task Edit(int id, GuestDTO guestDTO)
         {
             var guest = await this._unitOfWork.Guests.GetById(id);
 
@@ -83,7 +84,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             var guest = await this._unitOfWork.Guests.GetById(id);
 

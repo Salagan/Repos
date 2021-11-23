@@ -45,11 +45,13 @@ namespace ZRdemoBll.Services
             return studentDTO;
         }
 
-        public async void Add(StudentDTO studentDTO)
+        public async Task Add(StudentDTO studentDTO)
         {
-            var studentEx = this._unitOfWork.Students.FindAsync(s => s.FirstName == studentDTO.FirstName,
-                                                                s => s.LastName == studentDTO.LastName,
-                                                                s => s.Age == studentDTO.Age);
+            // var studentEx = this._unitOfWork.Students.FindOneAsync(s => s.FirstName == studentDTO.FirstName,
+            //                                                    s => s.LastName == studentDTO.LastName,
+            //                                                    s => s.Age == studentDTO.Age);
+            var studentEx = await this._unitOfWork.Students.FindOneAsync(s => s.FirstName == studentDTO.FirstName && s.LastName == studentDTO.LastName
+                                                                                                            && s.Age == studentDTO.Age);
             if (studentEx != null)
             {
                 throw new Exception("Allready exist");
@@ -62,7 +64,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Edit(int id, StudentDTO studentDTO)
+        public async Task Edit(int id, StudentDTO studentDTO)
         {
             var student = await this._unitOfWork.Students.GetById(id);
 
@@ -83,7 +85,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             var student = await this._unitOfWork.Students.GetById(id);
 

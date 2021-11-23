@@ -45,10 +45,11 @@ namespace ZRdemoBll.Services
             return coachDTO;
         }
 
-        public async void Add(CoachDTO coachDTO)
+        public async Task Add(CoachDTO coachDTO)
         {
-            var coachEx = this._unitOfWork.Coaches.FindAsync(c => c.FirstName == coachDTO.FirstName,
-                                                             c => c.LastName == coachDTO.LastName);
+            // var coachEx = this._unitOfWork.Coaches.FindOneAsync(c => c.FirstName == coachDTO.FirstName,
+            //                                                 c => c.LastName == coachDTO.LastName);
+            var coachEx = await this._unitOfWork.Coaches.FindOneAsync(c => c.FirstName == coachDTO.FirstName && c.LastName == coachDTO.LastName);
 
             if (coachEx != null)
             {
@@ -62,7 +63,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Edit(int id, CoachDTO coachDTO)
+        public async Task Edit(int id, CoachDTO coachDTO)
         {
             var coach = await this._unitOfWork.Coaches.GetById(id);
 
@@ -83,7 +84,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             var coach = await this._unitOfWork.Coaches.GetById(id);
 

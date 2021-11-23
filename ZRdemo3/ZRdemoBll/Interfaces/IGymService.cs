@@ -13,10 +13,10 @@ namespace ZRdemoBll.Interfaces
 
         Task<GymDTO> GetGymById(int id);
 
-        void Add(GymDTO gymDTO);
+        Task Add(GymDTO gymDTO);
 
-        Task<GymDTO> Edit(int id, GymDTO gymDTO);
+        Task Edit(int id, GymDTO gymDTO);
 
-        void Delete(int id);
+        Task Delete(int id);
     }
 }

@@ -34,26 +34,24 @@ namespace ZRdemoBll.Services
             return this._mapper.Map<GymDTO>(gym);
         }
 
-        public async void Add(GymDTO gymDTO)
+        public async Task Add(GymDTO gymDTO)
         {
-           if (gymDTO == null)
-           {
-                throw new Exception("Invalid object");
-           }
-
             // method to check if object exact same object is already exist
-           if (this._unitOfWork.Gyms.FindAsync(g => g.Address.Trim().ToLower() == gymDTO.Address.Trim().ToLower()) != null)
-           {
+            // if (this._unitOfWork.Gyms.FindOneAsync(g => g.Address.Trim().ToLower() == gymDTO.Address.Trim().ToLower()) != null)
+            var gymEx = await this._unitOfWork.Gyms.FindOneAsync(g => g.Address.Trim().ToLower() == gymDTO.Address.Trim().ToLower());
+
+            if (gymEx != null)
+            {
                 throw new Exception("Gym allready exist");
-           }
+            }
 
-           var gym = this._mapper.Map<Gym>(gymDTO);
+            var gym = this._mapper.Map<Gym>(gymDTO);
 
-           this._unitOfWork.Gyms.Add(gym);
-           await this._unitOfWork.Complete();
+            this._unitOfWork.Gyms.Add(gym);
+            await this._unitOfWork.Complete();
         }
 
-        public async Task<GymDTO> Edit(int id, GymDTO gymDTO)
+        public async Task Edit(int id, GymDTO gymDTO)
         {
             var gym = await this._unitOfWork.Gyms.GetById(id);
 
@@ -72,11 +70,9 @@ namespace ZRdemoBll.Services
             this._unitOfWork.Gyms.Update(gym);
 
             await this._unitOfWork.Complete();
-
-            return gymDTO;
         }
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             var gym = await this._unitOfWork.Gyms.GetById(id);
 

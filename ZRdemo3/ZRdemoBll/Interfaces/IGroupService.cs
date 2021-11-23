@@ -13,10 +13,10 @@ namespace ZRdemoBll.Interfaces
 
         Task<GroupOfStudentsDTO> GetGroup(int id);
 
-        void Add(GroupOfStudentsDTO groupOfStudentsDTO);
+        Task Add(GroupOfStudentsDTO groupOfStudentsDTO);
 
-        void Edit(int id, GroupOfStudentsDTO groupOfStudentsDTO);
+        Task Edit(int id, GroupOfStudentsDTO groupOfStudentsDTO);
 
-        void Delete(int id);
+        Task Delete(int id);
     }
 }

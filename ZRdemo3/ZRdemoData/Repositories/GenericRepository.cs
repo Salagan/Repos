@@ -30,21 +30,14 @@ namespace ZRdemoData.Repositories
             this._context.Set<T>().AddRange(entities);
         }
 
-        // public virtual IQueryable<T> Find(Expression<Func<T, bool>> expression)
-        // {
-        //    return this._context.Set<T>().Where(expression);
-        // }
-        public async virtual Task<T> FindAsync(params Expression<Func<T, bool>>[] expressions)
+        public async virtual Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression)
         {
-            IQueryable<T> t = this._context.Set<T>();
-            return await expressions.Aggregate(t, (a, b) => a.Where(b)).FirstOrDefaultAsync();
+            return await this._context.Set<T>().Where(expression).ToListAsync();
+        }
 
-            // foreach (Expression<Func<T, bool>> a in expressions)
-            // {
-            //    t = t.Where(a);
-            // }
-
-            // return await t.FirstOrDefaultAsync();
+        public async virtual Task<T> FindOneAsync(Expression<Func<T, bool>> expression)
+        {
+            return await this._context.Set<T>().Where(expression).FirstOrDefaultAsync();
         }
 
         public async virtual Task<IEnumerable<T>> GetAll()
@@ -59,6 +52,7 @@ namespace ZRdemoData.Repositories
 
         public virtual void Update(T entity)
         {
+            // this._context.Set<T>().Attach(entity);
             this._context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
 

@@ -42,16 +42,17 @@ namespace ZRWeb.Controllers
         // POST: GymController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(GymDTO gymDTO)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await this._gymApi.Create(gymDTO);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return this.BadRequest(ex.Message);
             }
+            return RedirectToAction("Index");
         }
 
         // GET: GymController/Edit/5
@@ -64,37 +65,45 @@ namespace ZRWeb.Controllers
         // POST: GymController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, GymDTO gymDTO)
+        public async  Task<ActionResult> Edit(GymDTO gymDTO)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await this._gymApi.Edit(gymDTO.Id, gymDTO);
+                }
+                catch(Exception ex)
+                {
+                    return this.BadRequest(ex.Message);
+                }
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(gymDTO);
         }
 
         // GET: GymController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var gym = this._gymApi.GetById(id);
+
+            return View(gym);
         }
 
-        // POST: GymController/Delete/5
-        [HttpPost]
+        // Delete: GymController/Delete/5
+        [HttpDelete]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> DeleteGym(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await this._gymApi.Delete(id);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return BadRequest(ex.Message);
             }
+            return RedirectToAction("Index");
         }
     }
 }

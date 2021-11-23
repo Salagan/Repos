@@ -43,31 +43,46 @@ namespace ZRdemo3.Controllers
 
         // POST api/<GymsController>
         [HttpPost]
-        public ActionResult<GymDTO> Add([FromBody] GymDTO gymDTO)
+        public async Task<ActionResult<GymDTO>> Add([FromBody] GymDTO gymDTO)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            this._gymService.Add(gymDTO);
+            try
+            {
+               await this._gymService.Add(gymDTO);
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<GymsController>/5
-        [HttpPut("{id}")]
+        [HttpPatch("{id}")]
         public async Task<ActionResult<GymDTO>> Update(int id, [FromForm] GymDTO gymDTO)
         {
-            var gym = await this._gymService.Edit(id, gymDTO);
+            try
+            {
+                await this._gymService.Edit(id, gymDTO);
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
 
-            return this.Ok(gym);
+            return this.RedirectToAction("GetAll");
         }
 
         // DELETE api/<GymsController>/5
         [HttpDelete("{id}")]
-        public ActionResult<GymDTO> Delete(int id)
+        public async Task<ActionResult<GymDTO>> Delete(int id)
         {
-            this._gymService.Delete(id);
+            await this._gymService.Delete(id);
 
             return this.RedirectToAction("GetAll");
         }

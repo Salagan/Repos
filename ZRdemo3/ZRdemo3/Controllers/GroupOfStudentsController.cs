@@ -40,21 +40,28 @@ namespace ZRdemo3.Controllers
 
         // POST api/<GroupOfStudentsController>
         [HttpPost]
-        public ActionResult<GroupOfStudentsDTO> Add([FromBody] GroupOfStudentsDTO group)
+        public async Task<ActionResult<GroupOfStudentsDTO>> Add([FromBody] GroupOfStudentsDTO group)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            this._groupService.Add(group);
+            try
+            {
+               await this._groupService.Add(group);
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
 
             return this.RedirectToAction("GetAll");
         }
 
         // PUT api/<GroupOfStudentsController>/5
         [HttpPut("{id}")]
-        public ActionResult<GroupOfStudentsDTO> Update(int id, [FromBody] GroupOfStudentsDTO group)
+        public async Task<ActionResult<GroupOfStudentsDTO>> Update(int id, [FromBody] GroupOfStudentsDTO group)
         {
             if (!this.ModelState.IsValid)
             {
@@ -66,16 +73,23 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest();
             }
 
-            this._groupService.Edit(id, group);
+            try
+            {
+                await this._groupService.Edit(id, group);
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
 
             return this.RedirectToAction("GetAll");
         }
 
         // DELETE api/<GroupOfStudentsController>/5
         [HttpDelete("{id}")]
-        public ActionResult<GroupOfStudentsDTO> Delete(int id)
+        public async Task<ActionResult<GroupOfStudentsDTO>> Delete(int id)
         {
-            this._groupService.Delete(id);
+            await this._groupService.Delete(id);
 
             return this.RedirectToAction("GetAll");
         }

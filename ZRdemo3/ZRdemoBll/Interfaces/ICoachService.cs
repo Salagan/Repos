@@ -13,10 +13,10 @@ namespace ZRdemoBll.Interfaces
 
         Task<CoachDTO> GetCoach(int id);
 
-        void Add(CoachDTO coachDTO);
+        Task Add(CoachDTO coachDTO);
 
-        void Edit(int id, CoachDTO coachDTO);
+        Task Edit(int id, CoachDTO coachDTO);
 
-        void Delete(int id);
+        Task Delete(int id);
     }
 }

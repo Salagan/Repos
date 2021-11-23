@@ -46,10 +46,11 @@ namespace ZRdemoBll.Services
             return trainingDTO;
         }
 
-        public async void Add(TrainingDTO trainingDTO)
+        public async Task Add(TrainingDTO trainingDTO)
         {
-            var trainingEx = await this._unitOfWork.Trainings.FindAsync(t => t.TimeStart == trainingDTO.TimeStart,
-                                                                        t => t.GymId == trainingDTO.GymId);
+            // var trainingEx = await this._unitOfWork.Trainings.FindOneAsync(t => t.TimeStart == trainingDTO.TimeStart,
+            //                                                            t => t.GymId == trainingDTO.GymId);
+            var trainingEx = await this._unitOfWork.Trainings.FindOneAsync(t => t.TimeStart == trainingDTO.TimeStart && t.GymId == trainingDTO.GymId);
             if (trainingEx != null)
             {
                 throw new Exception("Alredy exist");
@@ -62,7 +63,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Edit(int id, TrainingDTO trainingDTO)
+        public async Task Edit(int id, TrainingDTO trainingDTO)
         {
             var training = await this._unitOfWork.Trainings.GetById(id);
 
@@ -83,7 +84,7 @@ namespace ZRdemoBll.Services
             await this._unitOfWork.Complete();
         }
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             var training = await this._unitOfWork.Trainings.GetById(id);
 

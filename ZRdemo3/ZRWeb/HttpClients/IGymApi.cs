@@ -17,5 +17,11 @@ namespace ZRWeb.HttpClients
 
         [Post("/api/gyms/{id}")]
         Task Edit(int id, GymDTO gymDTO);
+
+        [Post("/api/gyms")]
+        Task Create(GymDTO gymDTO);
+
+        [Delete("/api/gyms/{id}")]
+        Task Delete(int id);
     }
 }
