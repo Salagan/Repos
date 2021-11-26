@@ -15,7 +15,7 @@ namespace ZRWeb.HttpClients
         [Get("/api/gyms")]
         Task<IEnumerable<GymDTO>> GetGyms();
 
-        [Post("/api/gyms/{id}")]
+        [Put("/api/gyms/{id}")]
         Task Edit(int id, GymDTO gymDTO);
 
         [Post("/api/gyms")]

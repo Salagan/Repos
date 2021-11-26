@@ -59,12 +59,12 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
         }
 
         // PUT api/<GymsController>/5
-        [HttpPatch("{id}")]
-        public async Task<ActionResult<GymDTO>> Update(int id, [FromForm] GymDTO gymDTO)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<GymDTO>> Update(int id, [FromBody] GymDTO gymDTO)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
         }
 
         // DELETE api/<GymsController>/5

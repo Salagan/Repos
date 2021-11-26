@@ -52,7 +52,7 @@ namespace ZRWeb.Controllers
             {
                 return this.BadRequest(ex.Message);
             }
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index", "Gym");
         }
 
         // GET: GymController/Edit/5
@@ -65,33 +65,33 @@ namespace ZRWeb.Controllers
         // POST: GymController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async  Task<ActionResult> Edit(GymDTO gymDTO)
+        public async  Task<ActionResult> Edit(int id, GymDTO gymDTO)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await this._gymApi.Edit(gymDTO.Id, gymDTO);
+                    await this._gymApi.Edit(id, gymDTO);
                 }
                 catch(Exception ex)
                 {
                     return this.BadRequest(ex.Message);
                 }
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index", "Gym");
             }
             return View(gymDTO);
         }
 
         // GET: GymController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var gym = this._gymApi.GetById(id);
+            var gym = await this._gymApi.GetById(id);
 
             return View(gym);
         }
 
         // Delete: GymController/Delete/5
-        [HttpDelete]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteGym(int id)
         {

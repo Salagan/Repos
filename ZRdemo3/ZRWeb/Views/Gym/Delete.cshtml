@@ -1,43 +1,48 @@
 ﻿@model ZRdemoContracts.ModelsDTO.GymDTO
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "DeleteGym";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>View</h1>
+<h1>Delete</h1>
 
+<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>GymDTO</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Id)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Address)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Address)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsAvailable)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IsAvailable)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.WorkingHours)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.WorkingHours)
         </dd>
     </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a href="/Gym/Index">Back to List</a>
-</div>
+
+    @using (Html.BeginForm("DeleteGym", "Gym"))
+    {
+
+        @Html.HiddenFor(model=> model.Id)
+        <input type="submit" value="Delete Gym" class="btn-danger" /> 
+        @Html.ActionLink("Back to List", "Index")
+     }
+    </div>
