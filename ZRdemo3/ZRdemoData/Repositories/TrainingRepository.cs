@@ -16,11 +16,6 @@ namespace ZRdemoData.Repositories
         {
         }
 
-        public async override Task<IEnumerable<Training>> GetAll()
-        {
-            return await this._context.Trainings.ToListAsync();
-        }
-
         public async override Task<Training> GetById(int id)
         {
             return await this._context.Trainings

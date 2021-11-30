@@ -23,10 +23,5 @@ namespace ZRdemoData.Repositories
                 .Include(t => t.Trainings)
                 .FirstOrDefaultAsync();
         }
-
-        public async override Task<IEnumerable<Coach>> GetAll()
-        {
-            return await this._context.Coaches.ToListAsync();
-        }
     }
 }

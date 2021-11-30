@@ -56,6 +56,7 @@ namespace ZRdemo3
             services.AddTransient<ICoachService, CoachService>();
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<IGuestService, GuestService>();
+            services.AddTransient<IStudentService, StudentService>();
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutomapperProfile());

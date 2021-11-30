@@ -30,5 +30,7 @@ namespace ZRdemoContracts.ModelsDTO
         public bool Injury { get; set; }
 
         public Belts Belt { get; set; }
+
+        public GroupOfStudentsDTO GroupOfStudentsDTO { get; set; }
     }
 }
