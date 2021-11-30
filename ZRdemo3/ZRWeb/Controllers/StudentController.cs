@@ -44,58 +44,70 @@ namespace ZRWeb.Controllers
         // POST: StudentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(StudentDTO studentDTO)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await this._studentApi.AddStudent(studentDTO);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return this.BadRequest(ex.Message);
             }
+
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         // GET: StudentController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var student = await this._studentApi.GetStudent(id);
+
+            return View(student);
         }
 
         // POST: StudentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, StudentDTO student)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await this._studentApi.Edit(id, student);
+                }
+                catch (Exception ex)
+                {
+                    return this.BadRequest(ex.Message);
+                }
+                return RedirectToAction(nameof(this.Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(student);
         }
 
         // GET: StudentController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var student = await this._studentApi.GetStudent(id);
+
+            return View(student);
         }
 
         // POST: StudentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> DeleteStudent(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await this._studentApi.Delete(id);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return this.BadRequest(ex.Message);
             }
+            return RedirectToAction(nameof(this.Index));
         }
     }
 }

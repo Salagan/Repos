@@ -14,5 +14,14 @@ namespace ZRWeb.HttpClients
 
         [Get("/api/students/{id}")]
         Task<StudentDTO> GetStudent(int id);
+
+        [Post("/api/students")]
+        Task AddStudent(StudentDTO studentDTO);
+
+        [Put("/api/students/{id}")]
+        Task Edit(int id, StudentDTO student);
+
+        [Delete("/api/students/{id}")]
+        Task Delete(int id);
     }
 }

@@ -75,7 +75,7 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction("GetAll");
+            return this.RedirectToAction(nameof(this.GetAll));
         }
 
         // DELETE api/<StudentsController>/5
