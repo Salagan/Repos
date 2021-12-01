@@ -21,6 +21,7 @@ namespace ZRdemoData.Models
 
         public string LastName { get; set; }
 
+        // change to experiance in years
         public int Age { get; set; }
 
         public DateTime BirthDate { get; set; }
@@ -32,6 +33,8 @@ namespace ZRdemoData.Models
         public Gender Gender { get; set; }
 
         public bool IsWorking { get; set; }
+
+        public Belts Belt { get; set; }
 
         public ICollection<Training> Trainings { get; set; }
     }

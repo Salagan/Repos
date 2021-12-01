@@ -1,0 +1,78 @@
+﻿@model ZRdemoContracts.ModelsDTO.CoachDTO
+@using ZRdemoContracts.Enum
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>CoachDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.CoachId)
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">First name</label>
+                @Html.EditorFor(c => c.FirstName)
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Last Name</label>
+                @Html.EditorFor(c => c.LastName)
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label">Age</label>
+                @Html.EditorFor(c => c.Age)
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label">BirthDate</label>
+                @Html.EditorFor(c => c.BirthDate)
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
+                @Html.EditorFor(c => c.PhoneNumber)
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email</label>
+                @Html.EditorFor(c => c.Email)
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label">Gender</label>
+                @Html.DropDownListFor(c => c.Gender, new SelectList(Enum.GetValues(typeof(Gender))))
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    @Html.CheckBoxFor(c => c.IsWorking) @Html.DisplayNameFor(model => model.IsWorking)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Belt" class="control-label">Belt</label>
+                @Html.DropDownListFor(c => c.Belt, new SelectList(Enum.GetValues(typeof(Belts))))
+                <span asp-validation-for="Belt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a href="/coach/index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

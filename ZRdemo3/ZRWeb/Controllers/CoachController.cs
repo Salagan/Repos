@@ -43,58 +43,68 @@ namespace ZRWeb.Controllers
         // POST: CoachController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(CoachDTO coach)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await this._coachApi.Add(coach);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return this.BadRequest(ex.Message);
             }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: CoachController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var coach = await this._coachApi.GetCoach(id);
+
+            return View(coach);
         }
 
         // POST: CoachController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, CoachDTO coach)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await this._coachApi.Edit(id, coach);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return this.BadRequest(ex.Message);
             }
+
+            return this.RedirectToAction(nameof(Index));
         }
 
         // GET: CoachController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var coach = await this._coachApi.GetCoach(id);
+
+            return View(coach);
         }
 
         // POST: CoachController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> DeleteCoach(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await this._coachApi.Delete(id);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return this.BadRequest(ex.Message);
             }
+
+            return this.RedirectToAction(nameof(Index));
         }
 
         //GET: CoachController/Schedule/5

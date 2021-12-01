@@ -45,3 +45,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "Reviewed.", Scope = "type", Target = "~T:ZRdemoData.Enums.GroupType")]
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:Enumeration items should be documented", Justification = "Reviewed.", Scope = "type", Target = "~T:ZRdemoData.Enums.TypeOfTraining")]
 [assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "Reviewed.", Scope = "type", Target = "~T:ZRdemoData.Enums.Belts")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1601:Partial elements should be documented", Justification = "<Reviewed.>", Scope = "type", Target = "~T:ZRdemoData.Migrations.AddBeltsColumnToCoach")]

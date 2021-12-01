@@ -27,6 +27,8 @@ namespace ZRdemoContracts.ModelsDTO
 
         public bool IsWorking { get; set; }
 
+        public Belts Belt { get; set; }
+
         public List<TrainingDTO> Trainings { get; set; }
     }
 }
