@@ -13,7 +13,7 @@ namespace ZRdemoBll.Infrastructure
     {
         public AutomapperProfile()
         {
-            this.CreateMap<Coach, CoachDTO>().ReverseMap();
+            this.CreateMap<Coach, CoachDTO>().ForMember(c => c.Trainings, opt => opt.MapFrom(src => src.Trainings)).ReverseMap();
             this.CreateMap<GroupOfStudents, GroupOfStudentsDTO>().ReverseMap();
             this.CreateMap<Guest, GuestDTO>().ReverseMap();
             this.CreateMap<GuestTraining, GuestTrainingDTO>().ReverseMap();

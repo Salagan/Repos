@@ -26,5 +26,7 @@ namespace ZRdemoContracts.ModelsDTO
         public Gender Gender { get; set; }
 
         public bool IsWorking { get; set; }
+
+        public List<TrainingDTO> Trainings { get; set; }
     }
 }

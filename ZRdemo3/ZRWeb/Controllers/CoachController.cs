@@ -96,5 +96,13 @@ namespace ZRWeb.Controllers
                 return View();
             }
         }
+
+        //GET: CoachController/Schedule/5
+        public async Task<ActionResult> Schedule(int id)
+        {
+            var coach = await this._coachApi.GetCoach(id);
+
+            return View(coach);
+        }
     }
 }
