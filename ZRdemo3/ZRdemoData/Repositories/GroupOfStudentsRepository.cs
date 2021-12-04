@@ -19,7 +19,6 @@ namespace ZRdemoData.Repositories
         public async override Task<IEnumerable<GroupOfStudents>> GetAll()
         {
             return await this._context.GroupOfStudents
-                 .Include(g => g.Students)
                  .ToListAsync();
         }
 

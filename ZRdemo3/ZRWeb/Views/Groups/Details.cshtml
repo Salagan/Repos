@@ -1,0 +1,77 @@
+﻿@model ZRdemoContracts.ModelsDTO.GroupOfStudentsDTO
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>GroupOfStudentsDTO</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GroupType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GroupType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GroupAge)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GroupAge)
+        </dd>
+    </dl>
+    
+</div>
+<h4>List of students:</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].Belt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].Injury)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Students)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Belt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Injury)
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a href="/groups/index">Back to List</a>
+</div>

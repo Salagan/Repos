@@ -1,0 +1,50 @@
+﻿@model ZRdemoContracts.ModelsDTO.GroupOfStudentsDTO
+
+@{
+    ViewData["Title"] = "Schedule";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Schedule for</h1>
+<h4>@Html.DisplayFor(g => g.GroupType), @Html.DisplayFor(g => g.GroupAge)</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Trainings[0].TimeStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trainings[0].Uniform)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trainings[0].TypeOfTraining)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trainings[0].GymId)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Trainings)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Uniform)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeOfTraining)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GymId)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a href="/groups/index">Back to List</a>
+</div>

@@ -14,5 +14,9 @@ namespace ZRdemoContracts.ModelsDTO
         public GroupType GroupType { get; set; }
 
         public string GroupAge { get; set; }
+
+        public List<StudentDTO> Students { get; set; }
+
+        public List<TrainingDTO> Trainings { get; set; }
     }
 }

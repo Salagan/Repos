@@ -1,0 +1,43 @@
+﻿@model ZRdemoContracts.ModelsDTO.GroupOfStudentsDTO
+@using ZRdemoContracts.Enum
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>GroupOfStudentsDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                <label asp-for="GroupType" class="control-label">Group Type</label>
+                @Html.DropDownListFor(model => model.GroupType, new SelectList(Enum.GetValues(typeof(GroupType))), "Select type")
+                <span asp-validation-for="GroupType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GroupAge" class="control-label"> Group Age</label>
+                @Html.EditorFor(model => model.GroupAge)
+                <span asp-validation-for="GroupAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+        </div>
+</div>
+
+<div>
+    <a href="/groups/index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
