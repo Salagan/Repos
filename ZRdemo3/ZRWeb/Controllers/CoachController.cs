@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Refit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Refit;
 using ZRdemoContracts.ModelsDTO;
 using ZRWeb.HttpClients;
 
@@ -16,14 +16,15 @@ namespace ZRWeb.Controllers
 
         public CoachController()
         {
-            _coachApi = RestService.For<ICoachApi>("https://localhost:44301");
+            this._coachApi = RestService.For<ICoachApi>("https://localhost:44301");
         }
+
         // GET: CoachController
         public async Task<ActionResult> Index()
         {
             var coaches = await this._coachApi.GetCoaches();
 
-            return View(coaches);
+            return this.View(coaches);
         }
 
         // GET: CoachController/Details/5
@@ -31,13 +32,13 @@ namespace ZRWeb.Controllers
         {
             var coach = await this._coachApi.GetCoach(id);
 
-            return View(coach);
+            return this.View(coach);
         }
 
         // GET: CoachController/Create
         public ActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         // POST: CoachController/Create
@@ -54,7 +55,7 @@ namespace ZRWeb.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         // GET: CoachController/Edit/5
@@ -62,7 +63,7 @@ namespace ZRWeb.Controllers
         {
             var coach = await this._coachApi.GetCoach(id);
 
-            return View(coach);
+            return this.View(coach);
         }
 
         // POST: CoachController/Edit/5
@@ -79,7 +80,7 @@ namespace ZRWeb.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         // GET: CoachController/Delete/5
@@ -87,7 +88,7 @@ namespace ZRWeb.Controllers
         {
             var coach = await this._coachApi.GetCoach(id);
 
-            return View(coach);
+            return this.View(coach);
         }
 
         // POST: CoachController/Delete/5
@@ -104,15 +105,15 @@ namespace ZRWeb.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
-        //GET: CoachController/Schedule/5
+        // GET: CoachController/Schedule/5
         public async Task<ActionResult> Schedule(int id)
         {
             var coach = await this._coachApi.GetCoach(id);
 
-            return View(coach);
+            return this.View(coach);
         }
     }
 }

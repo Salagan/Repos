@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Refit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Refit;
 using ZRdemoContracts.ModelsDTO;
 using ZRWeb.HttpClients;
 
@@ -16,7 +16,7 @@ namespace ZRWeb.Controllers
 
         public StudentController()
         {
-            _studentApi = RestService.For<IStudentApi>("https://localhost:44301");
+            this._studentApi = RestService.For<IStudentApi>("https://localhost:44301");
         }
 
         // GET: StudentController
@@ -24,7 +24,7 @@ namespace ZRWeb.Controllers
         {
             var students = await this._studentApi.GetStudents();
 
-            return View(students);
+            return this.View(students);
         }
 
         // GET: StudentController/Details/5
@@ -32,13 +32,13 @@ namespace ZRWeb.Controllers
         {
             var student = await this._studentApi.GetStudent(id);
 
-            return View(student);
+            return this.View(student);
         }
 
         // GET: StudentController/Create
         public ActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         // POST: StudentController/Create
@@ -63,7 +63,7 @@ namespace ZRWeb.Controllers
         {
             var student = await this._studentApi.GetStudent(id);
 
-            return View(student);
+            return this.View(student);
         }
 
         // POST: StudentController/Edit/5
@@ -71,7 +71,7 @@ namespace ZRWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, StudentDTO student)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 try
                 {
@@ -81,9 +81,11 @@ namespace ZRWeb.Controllers
                 {
                     return this.BadRequest(ex.Message);
                 }
-                return RedirectToAction(nameof(this.Index));
+
+                return this.RedirectToAction(nameof(this.Index));
             }
-            return View(student);
+
+            return this.View(student);
         }
 
         // GET: StudentController/Delete/5
@@ -91,7 +93,7 @@ namespace ZRWeb.Controllers
         {
             var student = await this._studentApi.GetStudent(id);
 
-            return View(student);
+            return this.View(student);
         }
 
         // POST: StudentController/Delete/5
@@ -107,7 +109,8 @@ namespace ZRWeb.Controllers
             {
                 return this.BadRequest(ex.Message);
             }
-            return RedirectToAction(nameof(this.Index));
+
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

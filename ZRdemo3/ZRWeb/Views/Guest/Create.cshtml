@@ -1,0 +1,58 @@
+﻿@model ZRdemoContracts.ModelsDTO.GuestDTO
+@using ZRdemoContracts.Enum
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>GuestDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                @Html.EditorFor(g => g.Name)
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Last name</label>
+                @Html.EditorFor(g => g.LastName)
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Belt" class="control-label">Belt</label>
+                @Html.DropDownListFor(g => g.Belt, new SelectList(Enum.GetValues(typeof(Belts))), "Select belt")
+                <span asp-validation-for="Belt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SchoolName" class="control-label">School Name</label>
+                @Html.EditorFor(g => g.SchoolName)
+                <span asp-validation-for="SchoolName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email</label>
+                @Html.EditorFor(g => g.Email)
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a href="/guest/index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

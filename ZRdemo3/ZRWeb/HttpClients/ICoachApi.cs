@@ -7,7 +7,7 @@ using ZRdemoContracts.ModelsDTO;
 
 namespace ZRWeb.HttpClients
 {
-    interface ICoachApi
+    public interface ICoachApi
     {
         [Get("/api/coaches")]
         Task<IEnumerable<CoachDTO>> GetCoaches();
