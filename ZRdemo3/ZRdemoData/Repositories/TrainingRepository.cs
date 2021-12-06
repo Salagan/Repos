@@ -20,9 +20,19 @@ namespace ZRdemoData.Repositories
         {
             return await this._context.Trainings
                 .Where(t => t.Id == id)
-                .Include(t => t.Coach)
+                .Include(t => t.Gym)
                 .Include(t => t.GroupOfStudents)
+                .Include(t => t.Coach)
                 .FirstOrDefaultAsync();
+        }
+
+        public async override Task<IEnumerable<Training>> GetAll()
+        {
+            return await this._context.Trainings
+                .Include(t => t.Gym)
+                .Include(t => t.GroupOfStudents)
+                .Include(t => t.Coach)
+                .ToListAsync();
         }
     }
 }

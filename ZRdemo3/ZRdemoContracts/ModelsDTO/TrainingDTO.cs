@@ -24,5 +24,11 @@ namespace ZRdemoContracts.ModelsDTO
         public Uniform Uniform { get; set; }
 
         public TypeOfTraining TypeOfTraining { get; set; }
+
+        public GymDTO Gym { get; set; }
+
+        public CoachDTO Coach { get; set; }
+
+        public GroupOfStudentsDTO GroupOfStudents { get; set; }
     }
 }

@@ -21,9 +21,6 @@ namespace ZRdemoData.Models
 
         public string LastName { get; set; }
 
-        // change to experiance in years
-        public int Age { get; set; }
-
         public DateTime BirthDate { get; set; }
 
         public string PhoneNumber { get; set; }

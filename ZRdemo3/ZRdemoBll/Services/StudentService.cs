@@ -51,7 +51,7 @@ namespace ZRdemoBll.Services
             //                                                    s => s.LastName == studentDTO.LastName,
             //                                                    s => s.Age == studentDTO.Age);
             var studentEx = await this._unitOfWork.Students.FindOneAsync(s => s.FirstName == studentDTO.FirstName && s.LastName == studentDTO.LastName
-                                                                                                            && s.Age == studentDTO.Age);
+                                                                                                            && s.BirthDate == studentDTO.BirthDate);
             if (studentEx != null)
             {
                 throw new Exception("Allready exist");

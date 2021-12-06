@@ -15,5 +15,7 @@ namespace ZRdemoData.Models
         public bool IsAvailable { get; set; }
 
         public string WorkingHours { get; set; }
+
+        public ICollection<Training> Trainings { get; set; }
     }
 }

@@ -47,9 +47,6 @@ namespace ZRdemoData.Models
 
             // Training
             modelBuilder.Entity<Training>()
-                .HasOne<Gym>(t => t.Gym);
-
-            modelBuilder.Entity<Training>()
                 .HasMany(t => t.GuestTrainigs)
                 .WithOne(gut => gut.Training);
 
@@ -57,6 +54,11 @@ namespace ZRdemoData.Models
             modelBuilder.Entity<Guest>()
                 .HasMany(gu => gu.GuestTrainings)
                 .WithOne(gut => gut.Guest);
+
+            // Gym
+            modelBuilder.Entity<Gym>()
+                .HasMany(g => g.Trainings)
+                .WithOne(t => t.Gym);
 
             // Join tables keys
             modelBuilder.Entity<GuestTraining>()

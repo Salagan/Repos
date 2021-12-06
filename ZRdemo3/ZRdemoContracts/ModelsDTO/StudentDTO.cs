@@ -17,8 +17,6 @@ namespace ZRdemoContracts.ModelsDTO
 
         public string LastName { get; set; }
 
-        public int Age { get; set; }
-
         public DateTime BirthDate { get; set; }
 
         public string PhoneNumber { get; set; }

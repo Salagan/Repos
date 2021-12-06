@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ZRdemoContracts.ModelsDTO.TrainingDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Schedule</h1>
+
+@foreach (var item in Model.GroupBy(i => i.Gym.Address))
+{
+    <table class="table">
+        <thead>
+            @item.Key
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Coach.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GroupOfStudents.GroupType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TimeStart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Uniform)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeOfTraining)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var modelItem in item)
+            {
+                <tr>
+                    <td>
+                        @modelItem.Coach.LastName
+                    </td>
+                    <td>
+                        @modelItem.GroupOfStudents.GroupType
+                    </td>
+                    <td>
+                        @modelItem.TimeStart
+                    </td>
+                    <td>
+                        @modelItem.Uniform
+                    </td>
+                    <td>
+                        @modelItem.TypeOfTraining
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

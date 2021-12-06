@@ -14,5 +14,7 @@ namespace ZRdemoContracts.ModelsDTO
         public bool IsAvailable { get; set; }
 
         public string WorkingHours { get; set; }
+
+        public List<TrainingDTO> Trainings { get; set; }
     }
 }
