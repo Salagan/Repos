@@ -23,7 +23,7 @@ namespace ZRdemoBll.Infrastructure
 
             this.CreateMap<GuestTraining, GuestTrainingDTO>().ReverseMap();
 
-            this.CreateMap<Gym, GymDTO>().ForMember(g => g.Trainings, opt => opt.MapFrom(src => src.Trainings)).ReverseMap();
+            this.CreateMap<Gym, GymDTO>().ReverseMap();
 
             this.CreateMap<Student, StudentDTO>().ForMember(s => s.GroupOfStudentsDTO, opt => opt.MapFrom(src => src.GroupOfStudents)).ReverseMap();
 

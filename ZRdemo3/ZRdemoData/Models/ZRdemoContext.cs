@@ -55,11 +55,6 @@ namespace ZRdemoData.Models
                 .HasMany(gu => gu.GuestTrainings)
                 .WithOne(gut => gut.Guest);
 
-            // Gym
-            modelBuilder.Entity<Gym>()
-                .HasMany(g => g.Trainings)
-                .WithOne(t => t.Gym);
-
             // Join tables keys
             modelBuilder.Entity<GuestTraining>()
                 .HasKey(gut => new { gut.GuestId, gut.TrainingId });

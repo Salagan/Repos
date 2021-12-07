@@ -15,20 +15,5 @@ namespace ZRdemoData.Repositories
             : base(context)
         {
         }
-
-        public async override Task<Gym> GetById(int id)
-        {
-            return await this._context.Gyms
-                .Where(g => g.Id == id)
-                .Include(g => g.Trainings)
-                .FirstOrDefaultAsync();
-        }
-
-        public async override Task<IEnumerable<Gym>> GetAll()
-        {
-            return await this._context.Gyms
-                .Include(g => g.Trainings)
-                .ToListAsync();
-        }
     }
 }
