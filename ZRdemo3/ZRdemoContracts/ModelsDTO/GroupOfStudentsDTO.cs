@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,12 @@ namespace ZRdemoContracts.ModelsDTO
     {
         public int Id { get; set; }
 
+        [Display(Name ="Type of Group")]
+        [Required]
         public GroupType GroupType { get; set; }
 
+        [Display(Name = "Age of Group")]
+        [Required]
         public string GroupAge { get; set; }
 
         public List<StudentDTO> Students { get; set; }

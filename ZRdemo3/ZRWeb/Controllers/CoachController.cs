@@ -115,5 +115,15 @@ namespace ZRWeb.Controllers
 
             return this.View(coach);
         }
+
+        // check ID
+        public async Task<JsonResult> CheckID(int id)
+        {
+            var coach = await this._coachApi.GetCoach(id);
+
+            var result = coach != null;
+
+            return this.Json(result);
+        }
     }
 }

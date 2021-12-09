@@ -25,7 +25,7 @@ namespace ZRdemo3.Controllers
         public async Task<ActionResult<IEnumerable<TrainingDTO>>> GetAll()
         {
             var trainings = await this._trainigService.GetTrainings();
-            var trainingGroups = trainings.GroupBy(t => t.Gym.Address); 
+            var trainingGroups = trainings.GroupBy(t => t.Gym.Address);
             return this.Ok(trainings);
         }
 

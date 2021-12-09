@@ -20,28 +20,28 @@
 
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name</label>
-                @Html.EditorFor(g => g.Name)
-                <span asp-validation-for="Name" class="text-danger"></span>
+                @Html.EditorFor(g => g.Name)<br />
+                @Html.ValidationMessageFor(g => g.Name)
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label">Last Name</label>
-                @Html.EditorFor(g => g.LastName)
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="LastName" class="control-label">Last name</label>
+                @Html.EditorFor(g => g.LastName)<br />
+                @Html.ValidationMessageFor(g => g.LastName)
             </div>
             <div class="form-group">
                 <label asp-for="Belt" class="control-label">Belt</label>
-                @Html.DropDownListFor(g => g.Belt, new SelectList(Enum.GetValues(typeof(Belts))))
-                <span asp-validation-for="Belt" class="text-danger"></span>
+                @Html.DropDownListFor(g => g.Belt, new SelectList(Enum.GetValues(typeof(Belts))), "Select belt")<br />
+                @Html.ValidationMessageFor(g => g.Belt)
             </div>
             <div class="form-group">
                 <label asp-for="SchoolName" class="control-label">School Name</label>
-                @Html.EditorFor(g => g.SchoolName)
-                <span asp-validation-for="SchoolName" class="text-danger"></span>
+                @Html.EditorFor(g => g.SchoolName)<br />
+                @Html.ValidationMessageFor(g => g.SchoolName)
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">Email</label>
-                @Html.EditorFor(g => g.Email)
-                <span asp-validation-for="Email" class="text-danger"></span>
+                @Html.EditorFor(g => g.Email)<br />
+                @Html.ValidationMessageFor(g => g.Email)
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

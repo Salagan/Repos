@@ -20,33 +20,33 @@
             </div>
             <div class="form-group">
                 <label asp-for="GymId" class="control-label">Gym Id</label>
-                @Html.EditorFor(t => t.GymId)
-                <span asp-validation-for="GymId" class="text-danger"></span>
+                @Html.EditorFor(t => t.GymId)<br />
+                @Html.ValidationMessageFor(t => t.GymId)
             </div>
             <div class="form-group">
                 <label asp-for="CoachId" class="control-label">Coach Id</label>
-                @Html.EditorFor(t => t.CoachId)
-                <span asp-validation-for="CoachId" class="text-danger"></span>
+                @Html.EditorFor(t => t.CoachId)<br />
+                @Html.ValidationMessageFor(t => t.CoachId)
             </div>
             <div class="form-group">
                 <label asp-for="GroupOfStudentsId" class="control-label"> Group Id</label>
-                @Html.EditorFor(t => t.GroupOfStudentsId)
-                <span asp-validation-for="GroupOfStudentsId" class="text-danger"></span>
+                @Html.EditorFor(t => t.GroupOfStudentsId)<br />
+                @Html.ValidationMessageFor(t => t.GroupOfStudentsId)
             </div>
             <div class="form-group">
                 <label asp-for="TimeStart" class="control-label"> Time start</label>
-                @Html.EditorFor(t => t.TimeStart)
-                <span asp-validation-for="TimeStart" class="text-danger"></span>
+                @Html.EditorFor(t => t.TimeStart)<br />
+                @Html.ValidationMessageFor(t => t.TimeStart)
             </div>
             <div class="form-group">
                 <label asp-for="Uniform" class="control-label">Unifor</label>
-                @Html.DropDownListFor(t => t.Uniform, new SelectList(Enum.GetValues(typeof(Uniform))), "Select uniform")
-                <span asp-validation-for="Uniform" class="text-danger"></span>
+                @Html.DropDownListFor(t => t.Uniform, new SelectList(Enum.GetValues(typeof(Uniform))), "Select uniform")<br />
+                @Html.ValidationMessageFor(t => t.Uniform)
             </div>
             <div class="form-group">
                 <label asp-for="TypeOfTraining" class="control-label"> Type of training</label>
-                @Html.DropDownListFor(t => t.TypeOfTraining, new SelectList(Enum.GetValues(typeof(TypeOfTraining))), "Select type of training")
-                <span asp-validation-for="TypeOfTraining" class="text-danger"></span>
+                @Html.DropDownListFor(t => t.TypeOfTraining, new SelectList(Enum.GetValues(typeof(TypeOfTraining))), "Select type of training")<br />
+                @Html.ValidationMessageFor(t => t.TypeOfTraining)
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

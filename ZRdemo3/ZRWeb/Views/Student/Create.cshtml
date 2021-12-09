@@ -20,39 +20,38 @@
             </div>
             <div class="form-group">
                 <label asp-for="GroupOfStudentsId" class="control-label">Group Of Students Id</label>
-                @Html.EditorFor(model => model.GroupOfStudentsId)
-                <span asp-validation-for="GroupOfStudentsId" class="text-danger"></span>
+                @Html.EditorFor(model => model.GroupOfStudentsId)<br />
+                @Html.ValidationMessageFor(model => model.GroupOfStudentsId)
             </div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label">Firs tName</label>
-                @Html.EditorFor(model => model.FirstName)
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                @Html.EditorFor(model => model.FirstName)<br />
+                @Html.ValidationMessageFor(model => model.FirstName)
             </div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label">Last Name</label>
-                @Html.EditorFor(model => model.LastName)
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                @Html.EditorFor(model => model.LastName)<br />
+                @Html.ValidationMessageFor(model => model.LastName)
             </div>
             <div class="form-group">
                 <label asp-for="BirthDate" class="control-label">Birth Date</label>
-                @Html.EditorFor(model => model.BirthDate)
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                @Html.EditorFor(model => model.BirthDate)<br />
+                @Html.ValidationMessageFor(model => model.BirthDate)
             </div>
             <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
-                @Html.EditorFor(model => model.PhoneNumber)
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                @Html.EditorFor(model => model.PhoneNumber)<br />
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">Email</label>
-                @Html.EditorFor(model => model.Email)
-                <span asp-validation-for="Email" class="text-danger"></span>
+                @Html.EditorFor(model => model.Email)<br />
+                @Html.ValidationMessageFor(model => model.Email)
             </div>
             <div class="form-group">
                 <label asp-for="Gender" class="control-label"> Gender</label>
-                @Html.DropDownListFor(model => model.Gender, new SelectList(Enum.GetValues(typeof(Gender))),
-                                        "Select gender")
-                <span asp-validation-for="Gender" class="text-danger"></span>
+                @Html.DropDownListFor(model => model.Gender, new SelectList(Enum.GetValues(typeof(Gender))), "Select gender") <br />
+                @Html.ValidationMessageFor(model => model.Gender)
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -61,9 +60,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Belt" class="control-label">Belt</label>
-                @Html.DropDownListFor(model => model.Belt, new SelectList(Enum.GetValues(typeof(Belts))),
-                                        "Select belt")
-                <span asp-validation-for="Belt" class="text-danger"></span>
+                @Html.DropDownListFor(model => model.Belt, new SelectList(Enum.GetValues(typeof(Belts))), "Select belt")<br />
+                @Html.ValidationMessageFor(model => model.Belt)
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

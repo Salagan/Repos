@@ -19,13 +19,13 @@
             @Html.HiddenFor(model => model.Id)
             <div class="form-group">
                 <label asp-for="GroupType" class="control-label">Group Type</label>
-                @Html.DropDownListFor(model => model.GroupType, new SelectList(Enum.GetValues(typeof(GroupType))), "Select type")
-                <span asp-validation-for="GroupType" class="text-danger"></span>
+                @Html.DropDownListFor(model => model.GroupType, new SelectList(Enum.GetValues(typeof(GroupType))), "Select type")<br />
+                @Html.ValidationMessageFor(model => model.GroupType)
             </div>
             <div class="form-group">
                 <label asp-for="GroupAge" class="control-label"> Group Age</label>
-                @Html.EditorFor(model => model.GroupAge)
-                <span asp-validation-for="GroupAge" class="text-danger"></span>
+                @Html.EditorFor(model => model.GroupAge) <br />
+                @Html.ValidationMessageFor(model => model.GroupAge)
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
