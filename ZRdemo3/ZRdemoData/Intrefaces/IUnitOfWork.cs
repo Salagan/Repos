@@ -20,6 +20,8 @@ namespace ZRdemoData.Intrefaces
 
         IGuestRepository Guests { get; }
 
+        IAnnouncemetRepository Announcemet { get; }
+
         Task<int> Complete();
     }
 }

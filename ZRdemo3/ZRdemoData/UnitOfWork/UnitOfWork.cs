@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using ZRdemoData.Intrefaces;
@@ -28,6 +29,8 @@ namespace ZRdemoData.UnitOfWork
             this.Trainings = new TrainingRepository(this._context);
 
             this.Guests = new GuestRepository(this._context);
+
+            this.Announcemet = new AnnouncementRepository(this._context);
         }
 
         public ICoachRepository Coaches { get; private set; }
@@ -41,6 +44,8 @@ namespace ZRdemoData.UnitOfWork
         public ITrainingRepository Trainings { get; private set; }
 
         public IGuestRepository Guests { get; private set; }
+
+        public IAnnouncemetRepository Announcemet { get; private set; }
 
         public async Task<int> Complete()
         {

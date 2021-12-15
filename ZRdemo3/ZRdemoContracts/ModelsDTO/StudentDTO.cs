@@ -35,6 +35,11 @@ namespace ZRdemoContracts.ModelsDTO
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        public string Role { get; set; }
+
         public Gender Gender { get; set; }
 
         public bool Injury { get; set; }

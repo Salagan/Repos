@@ -51,6 +51,7 @@ namespace ZRdemo3
             services.AddTransient<IGroupOfStudentsRepository, GroupOfStudentsRepository>();
             services.AddTransient<ITrainingRepository, TrainingRepository>();
             services.AddTransient<IGuestRepository, GuestRepository>();
+            services.AddTransient<IAnnouncemetRepository, AnnouncementRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IGymService, GymService>();
             services.AddTransient<ICoachService, CoachService>();
@@ -58,6 +59,7 @@ namespace ZRdemo3
             services.AddTransient<IGuestService, GuestService>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<ITrainingService, TrainingService>();
+            services.AddTransient<IAnnouncementService, AnnouncementService>();
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutomapperProfile());

@@ -84,7 +84,7 @@ namespace ZRdemo3.Controllers
         {
             await this._gymService.Delete(id);
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
         }
     }
 }

@@ -28,6 +28,8 @@ namespace ZRdemoData.Models
 
         public DbSet<GuestTraining> GuestTrainings { get; set; }
 
+        public DbSet<Announcement> Announcements { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Student
@@ -54,6 +56,11 @@ namespace ZRdemoData.Models
             modelBuilder.Entity<Guest>()
                 .HasMany(gu => gu.GuestTrainings)
                 .WithOne(gut => gut.Guest);
+
+            // Announcement
+            modelBuilder.Entity<Announcement>()
+                .HasOne<Coach>(a => a.Coach)
+                .WithMany(c => c.Announcements);
 
             // Join tables keys
             modelBuilder.Entity<GuestTraining>()

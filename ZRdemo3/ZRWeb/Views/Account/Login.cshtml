@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    string method = string.Empty;
+}
+@model ZRdemoContracts.ModelsDTO.LoginModel
+
+<h2>Login</h2>
+
+<a href="/account/register">Register</a>
+
+<div>
+    @Html.HiddenFor(x => method)
+    <p>Login as  a Student @Html.RadioButtonFor(x => method, "LoginStudent")</p>
+    <p>Login as  a Coach @Html.RadioButtonFor(x => method, "LoginCoach")</p>
+</div>
+@using (Html.BeginForm(method, "account"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div>
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            @Html.EditorFor(model => model.Email)<br />
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Enter" class="btn" />
+        </div>
+    </div>
+}

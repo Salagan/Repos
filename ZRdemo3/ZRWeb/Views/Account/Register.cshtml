@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@model ZRdemoContracts.ModelsDTO.RegisterModel
+
+<h2>Registration</h2>
+
+@using (Html.BeginForm("RegisterStudent", "account"))
+{
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+     <div>
+        <div>
+            <label asp-for="Email">Email</label><br />
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+        <div>
+            <label asp-for="Password">Password</label><br />
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <div>
+            <label asp-for="ConfirmPassword">Confirm password</label><br />
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+        <div>
+            <input type="submit" value="Register" />
+        </div>
+    </div>
+}

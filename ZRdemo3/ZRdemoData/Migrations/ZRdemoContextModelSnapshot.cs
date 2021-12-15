@@ -16,8 +16,34 @@ namespace ZRdemoData.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ZRdemoData.Models.Announcement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CoachId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Theme")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CoachId");
+
+                    b.ToTable("Announcements");
+                });
 
             modelBuilder.Entity("ZRdemoData.Models.Coach", b =>
                 {
@@ -47,7 +73,13 @@ namespace ZRdemoData.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CoachId");
@@ -167,7 +199,13 @@ namespace ZRdemoData.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StudentId");
@@ -211,6 +249,15 @@ namespace ZRdemoData.Migrations
                     b.HasIndex("GymId");
 
                     b.ToTable("Trainings");
+                });
+
+            modelBuilder.Entity("ZRdemoData.Models.Announcement", b =>
+                {
+                    b.HasOne("ZRdemoData.Models.Coach", "Coach")
+                        .WithMany("Announcements")
+                        .HasForeignKey("CoachId");
+
+                    b.Navigation("Coach");
                 });
 
             modelBuilder.Entity("ZRdemoData.Models.GuestTraining", b =>
@@ -270,6 +317,8 @@ namespace ZRdemoData.Migrations
 
             modelBuilder.Entity("ZRdemoData.Models.Coach", b =>
                 {
+                    b.Navigation("Announcements");
+
                     b.Navigation("Trainings");
                 });
 

@@ -39,6 +39,11 @@ namespace ZRdemoContracts.ModelsDTO
 
         public Belts Belt { get; set; }
 
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        public string Role { get; set; }
+
         public List<TrainingDTO> Trainings { get; set; }
     }
 }

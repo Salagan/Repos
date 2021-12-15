@@ -54,7 +54,7 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
         }
 
         // PUT api/<StudentsController>/5
@@ -75,7 +75,7 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction(nameof(this.GetAll));
+            return this.Ok();
         }
 
         // DELETE api/<StudentsController>/5
@@ -84,7 +84,15 @@ namespace ZRdemo3.Controllers
         {
             await this._studentService.Delete(id);
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
+        }
+
+        [HttpGet("email")]
+        public async Task<ActionResult<StudentDTO>> FindStudentUserAsync(string email, string password)
+        {
+            var result = await this._studentService.FindStudentUserAsync(email, password);
+
+            return this.Ok(result);
         }
     }
 }

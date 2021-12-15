@@ -30,6 +30,8 @@ namespace ZRdemoBll.Infrastructure
             this.CreateMap<Training, TrainingDTO>().ForMember(t => t.Gym, opt => opt.MapFrom(src => src.Gym))
                                                    .ForMember(t => t.Coach, opt => opt.MapFrom(src => src.Coach))
                                                    .ForMember(t => t.GroupOfStudents, opt => opt.MapFrom(src => src.GroupOfStudents)).ReverseMap();
+
+            this.CreateMap<Announcement, AnnouncementDTO>().ForMember(a => a.Coach, opt => opt.MapFrom(src => src.Coach)).ReverseMap();
         }
     }
 }

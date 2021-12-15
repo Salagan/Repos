@@ -56,7 +56,7 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
         }
 
         // PUT api/<GroupOfStudentsController>/5
@@ -82,7 +82,7 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
         }
 
         // DELETE api/<GroupOfStudentsController>/5
@@ -91,7 +91,7 @@ namespace ZRdemo3.Controllers
         {
             await this._groupService.Delete(id);
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
         }
     }
 }

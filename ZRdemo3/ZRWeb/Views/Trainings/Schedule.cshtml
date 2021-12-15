@@ -5,7 +5,7 @@
 }
 
 <h1>Schedule</h1>
-
+<a href="/trainings/create">Add training</a>
 @foreach (var item in Model.GroupBy(i => i.Gym.Address))
 {
     <table class="table">
@@ -50,9 +50,9 @@
                         @modelItem.TypeOfTraining
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Edit", "Edit", new { id = modelItem.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = modelItem.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = modelItem.Id })
                     </td>
                 </tr>
             }

@@ -23,5 +23,8 @@ namespace ZRWeb.HttpClients
 
         [Delete("/api/coaches/{id}")]
         Task Delete(int id);
+
+        [Get("/api/coaches/email")]
+        Task<CoachDTO> FindCoachUserAsync(string email, string password);
     }
 }

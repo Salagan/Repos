@@ -60,7 +60,7 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
         }
 
         // Update api/<CoachesController>/1
@@ -86,7 +86,7 @@ namespace ZRdemo3.Controllers
                 return this.BadRequest(ex.Message);
             }
 
-            return this.RedirectToAction("GetAll");
+            return this.Ok();
         }
 
         // DELETE api/<CoachesController>/5
@@ -96,6 +96,14 @@ namespace ZRdemo3.Controllers
             await this._coachService.Delete(id);
 
             return this.Ok();
+        }
+
+        [HttpGet("email")]
+        public async Task<ActionResult<CoachDTO>> CoachUser(string email, string password)
+        {
+            var result = await this._coachService.FindCoachUserAsync(email, password);
+
+            return this.Ok(result);
         }
     }
 }

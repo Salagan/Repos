@@ -18,5 +18,7 @@ namespace ZRdemoBll.Interfaces
         Task Edit(int id, StudentDTO studentDTO);
 
         Task Delete(int id);
+
+        Task<StudentDTO> FindStudentUserAsync(string email, string password);
     }
 }

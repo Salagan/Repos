@@ -1,0 +1,48 @@
+﻿@model ZRdemoContracts.ModelsDTO.AnnouncementDTO
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>AnnouncementDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                <label class="control-label">Theme</label>
+                @Html.EditorFor(model => model.Theme)
+                @Html.ValidationMessageFor(model => model.Theme)
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label">Text</label>
+                @Html.TextAreaFor(model => model.Text)
+                @Html.ValidationMessageFor(model => model.Text)
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                @Html.EditorFor(model => model.Date.TimeOfDay)
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

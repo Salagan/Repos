@@ -97,5 +97,14 @@ namespace ZRdemoBll.Services
 
             await this._unitOfWork.Complete();
         }
+
+        public async Task<CoachDTO> FindCoachUserAsync(string email, string password)
+        {
+            var coach = await this._unitOfWork.Coaches.FindOneAsync(c => c.Email == email && c.Password == password);
+
+            var c = this._mapper.Map<CoachDTO>(coach);
+
+            return c;
+        }
     }
 }

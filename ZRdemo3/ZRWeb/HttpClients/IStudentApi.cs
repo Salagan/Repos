@@ -23,5 +23,8 @@ namespace ZRWeb.HttpClients
 
         [Delete("/api/students/{id}")]
         Task Delete(int id);
+
+        [Options("/api/Students/email")]
+        Task<StudentDTO> FindStudentUserAsync(string email, string password);
     }
 }

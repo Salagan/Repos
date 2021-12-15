@@ -29,6 +29,10 @@ namespace ZRdemoData.Models
 
         public Belts Belt { get; set; }
 
+        public string Password { get; set; }
+
+        public string Role { get; set; }
+
         public virtual GroupOfStudents GroupOfStudents { get; set; }
     }
 }

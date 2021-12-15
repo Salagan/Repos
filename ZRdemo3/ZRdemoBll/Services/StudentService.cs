@@ -98,5 +98,14 @@ namespace ZRdemoBll.Services
 
             await this._unitOfWork.Complete();
         }
+
+        public async Task<StudentDTO> FindStudentUserAsync(string email, string password)
+        {
+            var student = await this._unitOfWork.Students.FindOneAsync(s => s.Email == email && s.Password == password);
+
+            var stud = this._mapper.Map<StudentDTO>(student);
+
+            return stud;
+        }
     }
 }

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ZRdemoContracts.ModelsDTO.AnnouncementDTO>
+@{
+    ViewData["Title"] = "Home page";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1 style="align-content:center">ZR TEAM Lviv</h1>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">ZR WEb Demo</h1>
+        <p class="lead">Welcome to demo application witch is going to help organize youre training process .</p>
+    </div>
+</div>
+<a href="/home/create/">Make an announcement</a>
+<h2>Announcments</h2>
+@foreach (var item in Model)
+{
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">@Html.DisplayFor(modelItem => item.Theme)</h4>
+        <p>@Html.DisplayFor(modelItem => item.Text)</p>
+        <hr>
+        <p class="mb-0">@Html.DisplayFor(modelItem => item.Coach.LastName)</p>
+    </div>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
+        <br />
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        <br />
+}
+
